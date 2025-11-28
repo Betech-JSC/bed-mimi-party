@@ -1,0 +1,53 @@
+<?php
+
+use App\Models\Post\Post;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePostsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+
+            $table->json('image')->nullable();
+            $table->json('banner')->nullable();
+
+            $table->json('images')->nullable();
+            $table->json('images_banner')->nullable();
+
+            $table->json('banner_mobile')->nullable();
+            $table->date('published_at')->nullable();
+
+            $table->boolean('is_home')->nullable()->default(0);
+            $table->boolean('show_table_of_contents')->nullable()->default(0);
+            $table->boolean('is_featured')->nullable()->default(0);
+            $table->integer('position')->nullable();
+            $table->integer('home_position')->nullable();
+
+            $table->string('status', 30)->default(Post::STATUS_ACTIVE);
+            $table->string('type')->default(Post::TYPE_POST);
+
+            $table->integer('view_count')->default(0);
+            $table->addInjectCode();
+            $table->addTimestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('posts');
+    }
+}

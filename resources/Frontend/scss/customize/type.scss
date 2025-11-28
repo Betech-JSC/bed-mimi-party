@@ -1,0 +1,172 @@
+.h1,
+.h2,
+.h3 {
+    @apply leading-[120%];
+}
+
+.display-1 {
+    @apply font-third;
+}
+
+.display-2,
+.display-3,
+.headline-1,
+.headline-2,
+.headline-3,
+.title-1,
+.title-2,
+.title-3,
+.title-4,
+.label-1,
+.label-2,
+.label-3 {
+    @apply font-display;
+}
+
+.body-1,
+.body-2,
+.body-3 {
+    @apply font-sans;
+}
+
+.display-1 {
+    @apply text-[40px] font-bold leading-[56px] tracking-[-2%];
+}
+
+.display-2 {
+    @apply text-[32px] font-medium leading-[38px] tracking-[-2%];
+}
+
+.display-3 {
+    @apply text-[28px] font-bold leading-[33px] tracking-[-2%];
+}
+
+.headline-1 {
+    @apply text-[24px] font-bold leading-[30px];
+}
+
+.headline-2 {
+    @apply text-[22px] font-bold leading-[26px];
+}
+
+.headline-3 {
+    @apply text-[20px] font-bold leading-[24px];
+}
+
+.title-1 {
+    @apply text-[18px] font-semibold leading-[26px];
+}
+
+.title-2 {
+    @apply text-[16px] font-semibold leading-[24px];
+}
+
+.title-3 {
+    @apply text-[13px] font-semibold leading-[19px];
+}
+
+.title-4 {
+    @apply text-[12px] leading-[19px];
+}
+
+.button-1 {
+    @apply text-[16px] leading-[24px] tracking-[0.32px];
+}
+
+.button-2 {
+    @apply text-[12px] leading-[18px];
+}
+
+.body-0 {
+    @apply text-[16px] leading-[140%];
+}
+
+.body-1 {
+    @apply text-[14px] leading-[20px];
+}
+
+.body-2 {
+    @apply text-[12px] leading-[18px];
+}
+
+.body-3 {
+    @apply text-[10px] leading-[14px];
+}
+
+.label-1 {
+    @apply text-[14px] font-semibold leading-[19.6px];
+}
+
+.label-2 {
+    @apply text-[12px] font-semibold leading-[12px];
+}
+
+.label-3 {
+    @apply text-[10px] font-semibold leading-[14px];
+}
+
+@screen md {
+    .display-1 {
+        @apply text-[56px] xl:text-[100px] font-medium leading-[140%] tracking-[-2%];
+    }
+
+    .display-2 {
+        @apply text-[40px] xl:text-[48px] font-medium leading-[120%] tracking-[-2%];
+    }
+
+    .display-3 {
+        @apply text-[36px] font-medium leading-[122%] tracking-[-2%];
+    }
+
+    .headline-1 {
+        @apply text-[32px] font-medium leading-[120%];
+    }
+
+    .headline-2 {
+        @apply text-[28px] font-medium leading-[120%];
+    }
+
+    .headline-3 {
+        @apply text-[24px] font-medium leading-[125%];
+    }
+
+    .title-1 {
+        @apply text-[22px] font-medium leading-[145%];
+    }
+
+    .title-2 {
+        @apply text-[18px] font-medium leading-[145%];
+    }
+
+    .title-3 {
+        @apply text-[16px] font-medium leading-[150%];
+    }
+
+    .title-4 {
+        @apply text-[14px] font-medium leading-[140%];
+    }
+
+    .body-1 {
+        @apply text-[16px] font-light leading-[150%];
+    }
+
+    .body-2 {
+        @apply text-[14px] font-light leading-[140%];
+    }
+
+    .body-3 {
+        @apply text-[12px] font-light leading-[150%];
+    }
+
+    .label-1 {
+        @apply text-[16px] font-medium leading-[150%];
+    }
+
+    .label-2 {
+        @apply text-[14px] font-medium leading-[140%];
+    }
+
+    .label-3 {
+        @apply text-[12px] font-medium leading-[150%];
+    }
+}

@@ -1,0 +1,79 @@
+<template>
+    <span class="hidden">
+        {{ $page.props.route.name }}
+    </span>
+    <Link
+        v-if="can('admin.rooms.index')"
+        :href="route('admin.rooms.index')"
+        :class="{ active: isUrl('admin.rooms.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.rooms') }}</span>
+    </Link>
+    <Link
+        v-if="can('admin.promotions.index')"
+        :href="route('admin.promotions.index')"
+        :class="{ active: isUrl('admin.promotions.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.promotions') }}</span>
+    </Link>
+    <Link
+        v-if="can('admin.galleries.index')"
+        :href="route('admin.galleries.index')"
+        :class="{ active: isUrl('admin.galleries.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.galleries') }}</span>
+    </Link>
+    <Link
+        v-if="can('admin.contacts.index')"
+        :href="route('admin.contacts.index')"
+        :class="{ active: isUrl('admin.contacts.*') }"
+        class="item"
+    >
+        <material-symbols:connect-without-contact />
+        <span>{{ tt('models.table_list.contacts') }}</span>
+        <span class="badge badge-danger" v-if="newContact">{{ newContact }}</span>
+    </Link>
+
+    <Link
+        v-if="can('admin.sliders.index')"
+        :href="route('admin.sliders.index')"
+        :class="{ active: isUrl('admin.sliders.*') }"
+        class="item"
+    >
+        <bi:sliders2 />
+        <span>{{ tt('models.table_list.sliders') }}</span>
+    </Link>
+</template>
+
+<script>
+export default {
+    computed: {
+        newContact() {
+            return this.$page.props.data.new_contact_count
+        },
+        newApply() {
+            return this.$page.props.data.new_apply_count
+        },
+        newOrder() {
+            return this.$page.props.data.new_order_count
+        },
+    },
+}
+</script>
+<style scoped>
+.badge {
+    @apply px-2 py-1 text-xs font-medium rounded;
+}
+.badge-success {
+    @apply text-green-700 bg-green-200;
+}
+.badge-danger {
+    @apply text-red-600 bg-red-200;
+}
+</style>

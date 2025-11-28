@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /nova/
+Disallow: /telescope/
+Disallow: /horizon/
+Disallow: /api/
+Disallow: /login
+Disallow: /register
+Disallow: /password
+Disallow: /logout
+Disallow: /*.php$
+Disallow: /storage/
+Disallow: /vendor/
+
+Sitemap: http://90shouse.vn/sitemap.xml

@@ -1,0 +1,96 @@
+.btn {
+    @apply inline-flex items-center text-center px-8 py-4 rounded-full min-h-[32px] md:min-h-[48px] title-3;
+}
+
+.btn.is-icon {
+    @apply md:text-[1rem] text-[0.875rem] leading-[150%];
+}
+
+.btn.primary {
+    @apply h-8 md:h-12 duration-300 ease-in-out;
+    background: linear-gradient(180deg, #FFFFFF 0%, #C9C9C9 100%);
+
+    // background: linear-gradient(93.05deg, rgba(0, 0, 0, 0) 1.87%, rgba(255, 255, 255, 0.3) 101.59%);
+
+
+
+    svg {
+        @apply text-primary-800
+    }
+}
+
+.btn.btn-show-more {
+    @apply inline-flex items-center justify-between;
+
+    svg {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+        transform: translateX(5px);
+    }
+}
+
+.btn.secondary {
+    @apply bg-primary-800 border border-primary-800 text-primary-100 lg:hover:border-primary-900 lg:hover:bg-primary-900 tracking-[0.15px] h-8 md:h-12 duration-300 ease-in-out;
+}
+
+.btn.third {
+    @apply bg-white text-gray-700 lg:hover:bg-primary-100 duration-300 ease-in-out min-w-[240px] min-h-[51px];
+}
+
+.btn.four {
+    @apply bg-transparent border border-gray-300 text-gray-700 h-8 xl:h-12 lg:hover:bg-primary-100 lg:hover:border-primary-400 duration-300 ease-in-out;
+    svg {
+        @apply text-primary-800;
+    }
+}
+
+.btn.tertiary {
+    @apply text-gray-600 bg-white md:hover:bg-black border border-gray-300  md:hover:text-white md:hover:border-black tracking-[0.2px] h-8 md:h-9;
+}
+
+.btn.label {
+    @apply text-gray-600 bg-white hover:bg-white  border border-gray-300 hover:border-primary-500 md:hover:text-green-400 tracking-[0.2px] h-6 md:h-10;
+
+    // SIZE
+    @apply md:text-[1rem] text-[0.875rem] leading-[150%];
+
+    &.active {
+        @apply text-green-400 border-primary-500;
+    }
+}
+
+.btn.disable {
+    // TODO: Update #E2E8F0 vs #94A3B8
+    @apply bg-gray-200 text-gray-400 pointer-events-none;
+}
+
+.btn-slide {
+    @apply md:flex hidden absolute top-1/2 -translate-y-1/2 z-20 w-[40px] h-[40px] bg-white items-center justify-center shadow-sm rounded-full opacity-70 hover:opacity-100 duration-150;
+
+    &.btn-prev {
+        @apply left-0  md:-translate-x-1/3 xl:-translate-x-1/2;
+    }
+
+    &.btn-next {
+        @apply right-0  md:translate-x-1/3 xl:translate-x-1/2;
+    }
+
+    &.btn-prev.sub-banner {
+        @apply left-0 md:-translate-x-1/3;
+    }
+    &.btn-next.sub-banner {
+        @apply right-0 md:translate-x-1/3;
+    }
+
+    @media screen and (min-width: 1440px) {
+        &.btn-prev {
+            @apply -left-5 -translate-x-full;
+        }
+
+        &.btn-next {
+            @apply -right-5 translate-x-full;
+        }
+    }
+}

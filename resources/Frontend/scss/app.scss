@@ -1,0 +1,183 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import './customize/content.scss';
+
+@layer base {
+    body {
+        @apply cursor-default overflow-x-hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    svg,
+    img {
+        @apply max-w-full max-h-full;
+    }
+
+    textarea {
+        @apply resize-none;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    @font-face {
+        font-family: 'LC-BlairITC';
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+        src: url('/public/assets/fonts/LC-BlairITC-Medium.otf');
+    }
+    @font-face {
+        font-family: 'LC-PPFragment';
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+        src: url('/public/assets/fonts/LC-PPFragment-GlareLight.otf');
+    }
+    @font-face {
+        font-family: 'LC-PPPlayground';
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+        src: url('/public/assets/fonts/LC-PPPlayground-Medium.otf');
+    }
+}
+
+// @import '@core/scss/base';
+@import 'customize/button.scss';
+@import 'banner.scss';
+@import 'customize/card-blog.scss';
+@import 'customize/content.scss';
+@import 'customize/type.scss';
+
+.check-control {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    @apply relative;
+
+    .checkmark {
+        @apply absolute top-1/2 left-0 overflow-hidden bg-white transform -translate-y-1/2 w-[18px] h-[18px] border-gray-400 border rounded-sm;
+
+        &:before {
+            content: '';
+            @apply block absolute w-full h-full inset-0 z-10 bg-no-repeat bg-center;
+            background-image: url('/assets/images/icons/tick.png');
+            background-size: contain;
+        }
+    }
+
+    .label-check {
+        @apply text-gray-600 cursor-pointer block w-full pl-[26px] relative z-10;
+    }
+
+    &:hover {
+        .label-check {
+            @apply font-medium;
+        }
+
+        .checkmark {
+            @apply border-primary-600;
+        }
+    }
+
+    input {
+        @apply absolute opacity-0 top-0 left-0;
+
+        &:checked {
+            ~ .label-check {
+                @apply font-medium;
+            }
+
+            ~ .checkmark {
+                @apply bg-primary-600 border-primary-600;
+
+                &:before {
+                    @apply opacity-100;
+                }
+            }
+        }
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+    height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: black;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
+
+.page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.page-leave {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-leave-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.skiptranslate {
+    display: none !important;
+}
+.bg-linear-hero {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+
+.circle-orange {
+    @apply absolute xl:w-[515px] xl:h-[515px] md:w-[400px] md:h-[400px] w-[300px] h-[300px];
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #eb5128 100%);
+    filter: blur(150px);
+}
+
+.circle-orange-2 {
+    @apply absolute xl:w-[515px] xl:h-[688px] w-[400px] h-[500px];
+    background: linear-gradient(180deg, #eb5128 13.04%, rgba(0, 0, 0, 0) 100%);
+    filter: blur(150px);
+}
+
+.paginate-room-border {
+    @apply relative rounded-full p-px;
+    box-shadow: 4px 4px 10px rgba(203, 21, 10, 0.6);
+    background: linear-gradient(200deg, rgba(0, 0, 0, 0.72) 1.87%, rgba(255, 255, 255, 0.8) 101.59%);
+
+    .paginate-room {
+        @apply relative z-10 rounded-full w-max py-2 px-4;
+        background: linear-gradient(93.05deg, rgba(0, 0, 0, 0.72) 1.87%, rgba(255, 255, 255, 0.8) 101.59%);
+    }
+}
