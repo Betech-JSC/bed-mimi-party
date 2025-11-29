@@ -4,12 +4,14 @@
         <SectionService :services="services" />
         <section class="mt-[120px] py-20">
             <div class="container">
-                <div v-for="(item, index) in items" :key="index" class="card-service grid grid-cols-12 gap-6">                    
+                <div
+                    v-for="(item, index) in items"
+                    :key="index"
+                    class="card-service grid grid-cols-12 gap-6 border border-white/50"
+                >
                     <div class="col-span-4 w-full space-y-8">
-                         <h2 class="title-linear display-3 uppercase font-extrabold">{{ item.title }}</h2>
-                         <button class="btn btn-primary">
-                            Xem thêm
-                         </button>
+                        <h2 class="title-linear display-3 uppercase font-extrabold">{{ item.title }}</h2>
+                        <button class="btn btn-primary" @click="openModal(index)">Xem thêm</button>
                     </div>
                     <div class="col-span-8">
                         <Thumbnails :product="item" />
@@ -18,18 +20,53 @@
             </div>
         </section>
 
-        <!-- LightBox Component -->
-        <!-- <LightBox :images="lightboxImages" :index="lightboxIndex" @change="onLightboxChange" @close="closeLightbox" /> -->
+        <!-- Modal -->
+        <div v-if="isModalOpen" class="fixed inset-0 bg-[#000E27] bg-opacity-[63%] flex items-center justify-center z-[9999] p-5" @click.self="closeModal">
+            <div
+                class="relative max-w-[90vw] w-full max-h-[90vh] flex flex-col border border-white/20 bg-linear-modal p-8"
+            >
+                <button
+                    class="absolute -top-14 -right-4 w-10 h-10 rounded-lg bg-white lg:hover:bg-primary-500 lg:hover:text-white duration-300 ease-in-out text-black flex items-center justify-center"
+                    @click="closeModal"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="grid grid-cols-12 gap-6">
+                    <div class="col-span-7">
+                        <div class="modal-body">
+                            <ThumbnailModal :product="selectedItem"  />
+                        </div>
+                    </div>
+                    <div class="col-span-5 space-y-8">
+                            <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
+                            <p class="body-2 text-white">{{ selectedItem.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 </template>
 
 <script>
 import SectionService from '@/Components/SectionService.vue'
 import Thumbnails from '@/Components/Service/Thumbnails.vue'
+import ThumbnailModal from '@/Components/ThumbnailModal.vue';
 
 export default {
     components: { SectionService, Thumbnails },
-    // props: ['services', 'banner'],
     data() {
         return {
             banner: {
@@ -91,13 +128,25 @@ export default {
                     ],
                 },
             ],
+            isModalOpen: false,
+            selectedItem: null,
             lightboxIndex: null,
             lightboxImages: [],
             currentItemIndex: null,
-            currentImageIndex: {}, // Track current image for each item
+            currentImageIndex: {},
         }
     },
     methods: {
+        openModal(index) {
+            this.selectedItem = this.items[index]
+            this.isModalOpen = true
+            document.body.style.overflow = 'hidden'
+        },
+        closeModal() {
+            this.isModalOpen = false
+            this.selectedItem = null
+            document.body.style.overflow = ''
+        },
         setCurrentImage(itemIndex, imageIndex) {
             this.$set(this.currentImageIndex, itemIndex, imageIndex)
         },
@@ -117,6 +166,9 @@ export default {
             this.lightboxImages = []
             this.currentItemIndex = null
         },
+    },
+    beforeDestroy() {
+        document.body.style.overflow = ''
     },
 }
 </script>
@@ -145,4 +197,9 @@ export default {
     background: linear-gradient(180deg, rgba(189, 189, 189, 0.3) 0%, rgba(52, 51, 51, 0.3) 100%);
     @apply relative p-8;
 }
+
+.bg-linear-modal {
+    background: linear-gradient(180deg, rgba(189, 189, 189, 0.3) 0%, rgba(52, 51, 51, 0.3) 100%);
+}
+
 </style>
