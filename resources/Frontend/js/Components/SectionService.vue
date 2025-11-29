@@ -8,7 +8,7 @@
                 <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
             </div>
 
-            <div class="flex items-center justify-center">
+            <div v-if="showButton" class="flex items-center justify-center">
                 <button class="btn btn-primary">dịch vụ của chúng tôi</button>
             </div>
         </section>
@@ -18,7 +18,7 @@ import CardService from '@/Components/Card/CardService.vue'
 
 export default {
     components: { CardService },
-    props: ['services'],
+    props: ['services', 'showButton'],
     data() {
         return {
             services: [

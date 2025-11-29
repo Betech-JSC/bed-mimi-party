@@ -23,7 +23,7 @@
                             ]"
                             @click="navigate(index)"
                         >
-                            <div v-if="checkIsVideo(image.url)" class="cursor-pointer">
+                            <!-- <div v-if="checkIsVideo(image.url)" class="cursor-pointer">
                                 <div class="absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 w-[50%] z-10">
                                     <JPicture src="/assets/images/icons/play-video.png" class="picture-cover" />
                                 </div>
@@ -33,10 +33,9 @@
                                         class="picture-cover object-fit object-cover"
                                     />
                                 </div>
-                            </div>
+                            </div> -->
 
                             <JPicture
-                                v-else
                                 :src="image.url"
                                 class="picture-cover"
                                 alt="product detail title"

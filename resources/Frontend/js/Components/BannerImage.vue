@@ -11,14 +11,7 @@
     </section>
 </template>
 <script>
-import JamBreadcrumb from '@/Components/Jam/Breadcrumb.vue'
-import LogoSymbol from '@/Components/Icons/LogoSymbol.vue'
-
 export default {
-    components: {
-        JamBreadcrumb,
-        LogoSymbol,
-    },
     props: ['banner', 'classBanner'],
 }
 </script>

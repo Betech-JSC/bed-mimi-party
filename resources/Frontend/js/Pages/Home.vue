@@ -1,7 +1,7 @@
 <template>
     <main class="bg-primary-900 overflow-hidden">
         <SectionHero />
-        <SectionService :services="services" />
+        <SectionService :showButton="true" :services="services" />
         <Marquee :marquee="marquees" />
         <SectionMissionValue :values="values" />
         <div class="bg-dark">
