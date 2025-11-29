@@ -63,7 +63,6 @@
 <script>
 import SectionService from '@/Components/SectionService.vue'
 import Thumbnails from '@/Components/Service/Thumbnails.vue'
-import ThumbnailModal from '@/Components/ThumbnailModal.vue';
 
 export default {
     components: { SectionService, Thumbnails },
