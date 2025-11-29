@@ -1,21 +1,11 @@
 <template>
-    <Link
-        :href="
-            route('rooms.show', {
-                slug: item.slug ?? '',
-            })
-        "
-        class="relative duration-300 ease-in-out block card-room"
-    >
-        <div class="image-wrapper aspect-w-7 aspect-h-5 relative">
-            <img
+    <Link href="/" class="relative duration-300 ease-in-out block card-room">
+        <div class="image-wrapper aspect-w-16 aspect-h-9 relative">
+            <JPicture
                 :src="item.image.url"
                 :alt="item.image.alt || item.title || 'image room'"
                 class="w-full h-full object-cover"
             />
-        </div>
-        <div class="absolute bottom-0 left-0 pb-2 md:pb-4 px-3 md:px-5 w-full">
-            <div class="max-md:text-[14px] headline-2 text-white">{{ item.title }}</div>
         </div>
     </Link>
 </template>
@@ -25,37 +15,22 @@ export default {
     props: ['item'],
 }
 </script>
-
-<style scoped>
-.image-wrapper {
-    position: relative;
-    z-index: 0;
-}
-
-.image-wrapper::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    box-shadow: 0 10px 20px rgba(217, 45, 32, 0.66);
-    animation: shadowLoop 4s linear infinite; /* Continuous loop with 4s duration */
-}
-
+<style lang="scss" scoped>
 @keyframes shadowLoop {
     0% {
-        box-shadow: 0 10px 20px rgba(217, 45, 32, 0.66); /* Bottom shadow */
+        box-shadow: 0px 0px 12px rgba(154, 188, 255, 0.55);
     }
     25% {
-        box-shadow: 10px 0 20px rgba(217, 45, 32, 0.66); /* Right shadow */
+        box-shadow: 10px 0 20px rgba(154, 188, 255, 0.55);
     }
     50% {
-        box-shadow: 0 -10px 20px rgba(217, 45, 32, 0.66); /* Top shadow */
+        box-shadow: 0 -10px 20px rgba(154, 188, 255, 0.55);
     }
     75% {
-        box-shadow: -10px 0 20px rgba(217, 45, 32, 0.66); /* Left shadow */
+        box-shadow: -10px 0 20px rgba(154, 188, 255, 0.55);
     }
     100% {
-        box-shadow: 0 10px 20px rgba(217, 45, 32, 0.66); /* Back to bottom */
+        box-shadow: 0px 0px 12px rgba(154, 188, 255, 0.55);
     }
 }
 
@@ -71,59 +46,51 @@ export default {
     initial-value: 0deg;
 }
 .card-room {
-    background: none;
-    border: none;
-    position: relative;
-    z-index: 0;
+    @apply relative border-none cursor-pointer;
     transition: 0.3s;
-    cursor: pointer;
-}
-.card-room:before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    padding: 2px;
-    background: conic-gradient(
-        from var(--d, 0deg),
-        #eb5128,
-        #0000 30deg 120deg,
-        #eb5128 150deg 180deg,
-        #0000 210deg 300deg,
-        #eb5128 330deg
-    );
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: intersect;
-}
-.card-room:after {
-    content: '';
-    position: absolute;
-    inset: -90px;
-    background: radial-gradient(60px at left 150px top 120px, #eb5128 98%, #0000),
-        radial-gradient(60px at right 150px bottom 120px, #eb5128 98%, #0000);
-    filter: blur(60px);
-    opacity: 0.5;
-    transform: rotate(3600deg);
-    transition: 0.5s, 60s linear --d;
-}
 
-.card-room:before,
-.card-room:after {
-    transition: 0.5s, 99999s 99999s transform, 99999s 99999s --d;
-}
-/* .card-room:hover {
-    box-shadow: 0 0 0 1px #666;
-} */
-
-.card-room:hover:after {
-    transform: rotate(3600deg);
-    transition: 0.5s, 60s linear transform;
-}
-.card-room:hover:before {
-    --d: 3600deg;
-    transition: 0.5s, 60s linear --d;
-}
-.card-room:hover:before {
-    background-color: #222;
+    &:hover {
+        .image-wrapper {
+            @apply relative z-0;
+            &::before {
+                @apply content-[''] absolute inset-0 z-[-1];
+                box-shadow: 0px 0px 12px rgba(154, 188, 255, 0.55);
+                animation: shadowLoop 4s linear infinite;
+            }
+        }
+        &::before {
+            @apply content-[''] absolute inset-[-2px] p-0.5;
+            background: conic-gradient(
+                from var(--d, 0deg),
+                #74a3ff,
+                #0000 30deg 120deg,
+                #74a3ff 150deg 180deg,
+                #0000 210deg 300deg,
+                #74a3ff 330deg
+            );
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: intersect;
+        }
+        &::after {
+            @apply content-[''] absolute inset-[-90px] opacity-5 blur-[60px];
+            background: radial-gradient(60px at left 150px top 120px, #74a3ff 98%, #0000),
+                radial-gradient(60px at right 150px bottom 120px, #74a3ff 98%, #0000);
+            transform: rotate(3600deg);
+            transition: 0.5s, 60s linear --d;
+        }
+        &::before,
+        &::after {
+            transition: 0.5s, 99999s 99999s transform, 99999s 99999s --d;
+        }
+        &::after {
+            transform: rotate(3600deg);
+            transition: 0.5s, 60s linear transform;
+        }
+        &::before {
+            --d: 3600deg;
+            transition: 0.5s, 60s linear --d;
+        }
+    }
 }
 </style>

@@ -1,0 +1,54 @@
+<template>
+    <section class="py-20 relative">
+        <div class="absolute inset-0">
+            <JPicture src="/assets/images/home/bg-mission-value.jpg" alt="background mission value"
+                class="w-full h-full" />
+        </div>
+        <div class="relative">
+            <div class="container space-y-20">
+                <div class="space-y-12">
+                    <div class="space-y-3">
+                        <div class="max-w-[150px] md:max-w-[200px] lg:max-w-[442px] max-h-[97px] mx-auto">
+                            <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
+                                class="w-full h-full" />
+                        </div>
+                        <div class="title-4 text-white text-center">
+                            MIMI PARTY là agency tổ chức tiệc “All in One”, cung cấp trọn gói từ concept, décor, biểu
+                            diễn đến sản xuất hình ảnh.<br />
+                            Với đội ngũ sáng tạo và vận hành chuyên nghiệp, chúng tôi mang đến giải pháp tối ưu cho các
+                            buổi tiệc cá nhân, doanh nghiệp và thương hiệu cao cấp.
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 px-20">
+                        <div v-for="(itemValue, indexValue) in values" :key="indexValue"
+                            class="space-y-3 p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out min-h-[332px]">
+                            <div class="w-max h-11">
+                                <JPicture :src="itemValue.image.url" :alt="itemValue.image.alt || itemValue.title"
+                                    class="w-full h-full" />
+                            </div>
+                            <h3 class="title-2 font-bold uppercase text-white">{{ itemValue.title }}</h3>
+                            <div class="title-4 text-white">{{ itemValue.description }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto">
+                    Những giá trị này không chỉ là tiêu chí hoạt động mà còn là <br /> phương châm sống của mỗi thành
+                    viên trong đội ngũ của chúng tôi.
+                </div>
+                <div class="max-w-[574px] w-full mx-auto">
+                    <JPicture src="/assets/images/home/image-what-we-do.png" alt="image what we do"
+                        class="picture-cover" />
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+export default {
+    props: ['values'],
+    data() {
+        return {}
+    },
+}
+</script>

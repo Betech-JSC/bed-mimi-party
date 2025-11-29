@@ -252,21 +252,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .input-form {
-    @apply block w-full py-2.5 text-gray-700 border-b border-gray-300 bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary-800 h-[44px] uppercase font-display;
+    @apply block w-full py-2.5 text-white border-b border-gray-300 bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary h-[28px] font-display;
     &:focus {
         @apply duration-200;
     }
 }
 
 .input-cart {
-    @apply block w-full px-3.5 py-2.5 text-gray-500 border border-gray-300 rounded-lg bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary-800 h-[44px];
+    @apply block w-full px-3.5 py-2.5 text-white border border-gray-300 rounded-lg bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary h-[44px];
     &:focus {
         @apply duration-200;
     }
 }
 
 .input-area {
-    @apply min-h-[134px] block w-full py-2.5 xl:px-3.5 px-2.5 text-gray-700 border border-gray-300  bg-white  focus:bg-white focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-blue-500;
+    @apply min-h-[134px] block w-full py-2.5 xl:px-3.5 px-2.5 text-white border border-gray-300  bg-white  focus:bg-white focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-blue-500;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
     &:focus {
         @apply duration-200;
@@ -274,7 +274,7 @@ export default {
 }
 
 .input-area-cart {
-    @apply min-h-[134px] block w-full py-2.5 xl:px-3.5 px-2.5 text-gray-500 border border-gray-300 rounded-lg  bg-white  focus:bg-white focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary-800;
+    @apply min-h-[134px] block w-full py-2.5 xl:px-3.5 px-2.5 text-white border border-gray-300 rounded-lg  bg-white  focus:bg-white focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary;
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
     &:focus {
         @apply duration-200;
@@ -288,7 +288,7 @@ export default {
     }
 }
 ::placeholder {
-    @apply text-gray-300;
+    @apply text-white/60;
 }
 .input-form:focus::placeholder {
     @apply duration-300;

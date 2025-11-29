@@ -1,30 +1,30 @@
 <template>
     <footer>
-        <div class="relative pt-6 pb-8 bg-black">
+        <div class="relative py-20 bg-linear-footer">
             <div class="container">
-            <div class="flex max-lg:flex-wrap items-start justify-between gap-10 xl:gap-[89px] md:pr-[52px]">
-                <div class="py-4 lg:py-8 space-y-3 lg:space-y-[18px] max-lg:mx-auto">
-                    <div class="max-w-[200px] max-h-[133px]">
+            <div class="flex max-lg:flex-wrap items-start justify-between gap-10 xl:gap-[125px]">
+                <div class="space-y-6 max-lg:mx-auto">
+                    <div class="max-w-[300px] max-h-[40px]">
                         <Link :href="route('home')">
                             <JPicture src="/assets/images/logo.png" alt="logo" class="w-full h-full" />
                         </Link>
                     </div>
-                    <div class="flex items-center justify-center gap-4">
+                    <div class="flex items-center gap-[18px]">
                         <div v-for="(itemSocial, indexSocial) in socials" :key="indexSocial">
                             <JPicture :src="itemSocial.icon" :alt="itemSocial.alt" class="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
-                <div class="space-y-[14px] max-lg:w-full xl:w-[450px]">
+                <div class="space-y-[14px] max-lg:w-full xl:w-[460px]">
                     <div
                         v-for="(itemInfo, indexInfo) in infos"
                         :key="indexInfo"
                         class="flex items-start gap-3 xl:gap-4"
                     >
                         <div
-                            class="max-w-[130px] md:max-w-[160px] w-full text-white/60 body-3 uppercase !font-display flex-shrink-0 mt-1"
+                            class="flex-shrink-0 w-7 h-7 -mt-0.5"
                         >
-                            {{ itemInfo.title }}
+                            <JPicture :src="itemInfo.icon" alt="icon info" class="picture-cover"/>
                         </div>
                         <div class="flex-1 w-full body-1 text-white lg:hover:text-primary duration-300 ease-in-out">
                             <a
@@ -37,21 +37,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="max-w-full lg:max-w-[300px] xl:max-w-[454px] w-full relative">
-                    <!-- <VideoFooter videoSrc="/assets/video/video-hero.mp4" poster="/assets/placeholder.jpg" /> -->
-                    <iframe
-                        width="100%"
-                        height="252"
-                        style="border: 0"
-                        loading="lazy"
-                        allowfullscreen
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62714.704!2d106.6910905!3d10.7714301!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f00505a9f23%3A0xb2b25e0376cd3dde!2s90S%20HOUSE%20-%20PRIVATE%20LOUNGE%20BAR!5e1!3m2!1svi!2s!4v1696939200000">                    >
-                    </iframe>
+                <div class="max-w-full lg:max-w-[281px] w-full relative">
+                   <FooterContact @success="handleSuccess" />
                 </div>
             </div>
         </div>
         </div>
-        <div>
+        <!-- <div>
             <div class="container">
                 <div class="flex justify-between space-x-4 items-center py-2.5 body-3 xl:px-6">
                     <div>
@@ -61,42 +53,39 @@
                 </div>
             </div>
                 
-        </div>
+        </div> -->
     </footer>
 </template>
 <script>
+import FooterContact from '@/Components/FooterContact.vue'
+
 export default {
+    components: { FooterContact },
     data() {
         return {
             infos: [
                 {
-                    title: this.tt('Address'),
-                    content: this.$page.props.global.address ?? '',
+                    icon: '/assets/images/image-footer-address.png',
+                    content: this.$page.props.global.address ?? '90 Lê Thị Riêng, Phường Phạm Ngũ Lão, TP Ho Chi Minh, Vietnam',
                     href: this.$page.props.global.link_address ?? '',
                     target: '_blank',
                 },
                 {
-                    title: this.tt('Phone'),
-                    content: this.$page.props.global.general_phone ?? '',
-                    href: `tel:${this.$page.props.global.general_phone}`,
+                    icon: '/assets/images/image-footer-contact.png',
+                    content: this.$page.props.global.general_phone ?? '090 678 35 78',
+                    href: `tel:${this.$page.props.global.general_phone ?? '090 678 35 78'}`,
                     target: '_self',
                 },
                 {
-                    title: this.tt('Mail-Marketing'),
-                    content: this.$page.props.global.mail_marketing ?? '',
-                    href: `mailto:${this.$page.props.global.mail_marketing}`,
+                    icon: '/assets/images/image-footer-mail.png',
+                    content: this.$page.props.global.mail_marketing ?? 'MIMIPARTY@gmail.com',
+                    href: `mailto:${this.$page.props.global.mail_marketing ?? 'MIMIPARTY@gmail.com'}`,
                     target: '_self',
                 },
                 {
-                    title: this.tt('Mail-Sale'),
-                    content: this.$page.props.global.mail_sale ?? '',
-                    href: `mailto:${this.$page.props.global.mail_sale}`,
-                    target: '_self',
-                },
-                {
-                    title: this.tt('Website'),
-                    content: this.tt('90shouse.vn'),
-                    href: this.tt('https://90shouse.vn'),
+                    icon: '/assets/images/image-footer-website.png',
+                    content: this.tt('MIMIPARTY.com'),
+                    href: this.tt('https://miniparty.com'),
                     target: '_blank',
                 },
             ],
@@ -142,6 +131,11 @@ export default {
     created: function () {
         this.currentYear = new Date().getFullYear()
     },
+    methods: {
+        handleSuccess() {
+            // Hiển thị modal thành công hoặc xử lý khác
+        }
+    }    
 }
 </script>
 <style lang="scss" scoped>
@@ -154,5 +148,8 @@ export default {
         background: url('/assets/images/footer/background.webp');
         @apply bg-cover bg-no-repeat;
     }
+}
+.bg-linear-footer {
+    background: linear-gradient(92.52deg, #020C1F 2.35%, #031537 60.87%, #073385 102.5%);
 }
 </style>
