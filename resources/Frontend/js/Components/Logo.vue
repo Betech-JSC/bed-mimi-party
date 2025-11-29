@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-[100px] md:max-w-[140px] lg:max-w-[131px] max-h-[86px]">
+    <div class="max-w-[150px] md:max-w-[200px] lg:max-w-[300px] max-h-[40px]">
         <Link :href="route('home')">
             <JPicture src="/assets/images/logo.png" alt="logo" class="w-full h-full" />
         </Link>

@@ -1,48 +1,57 @@
 <template>
-    <main class="bg-black overflow-hidden">
+    <main class="bg-primary-900 overflow-hidden">
         <SectionHero />
-        <section class="relative py-16 md:py-[100px] xl:py-[170px] z-10">
-            <div class="absolute inset-0">
-                <JPicture
-                    src="/assets/images/home/bg-about.jpg"
-                    alt="background about"
-                    class="w-full h-full object-cover"
-                />
+        <section class="py-[60px] space-y-10">
+            <div class="container">
+                <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dịch vụ</h2>
             </div>
-            <div class="circle-orange left-[-230px] top-[-66px]"></div>
-            <div class="circle-orange right-[-230px] top-[505px]"></div>
-            <div class="relative">
-                <div class="container">
-                    <div class="max-w-[600px] w-full mx-auto text-white space-y-5">
-                        <div class="flex items-center justify-center">
-                            <h2 class="display-2">{{ tt('About') }}</h2>
-                            <div class="max-w-[120px] md:max-w-[150px] xl:max-w-[200px]">
-                                <JPicture
-                                    src="/assets/images/home/image-90s.png"
-                                    alt="image 90s"
-                                    class="w-full h-full object-cover"
-                                />
-                            </div>
-                        </div>
-                        <AnimateAppear class="body-2 text-center">
-                            <div v-html="$page.props.global.the_homepage_90s_content"></div>
-                        </AnimateAppear>
-                    </div>
-                </div>
+
+            <div class="grid grid-cols-3 gap-4">
+                <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
+            </div>
+
+            <div class="flex items-center justify-center">
+                <button class="btn btn-primary">dịch vụ của chúng tôi</button>
             </div>
         </section>
-        <SectionRooms :items="rooms_featured" />
-        <SectionPromotion :textFirst="tt('Promotion ')" :textSecond="tt('& events')" :items="promotions" />
     </main>
 </template>
 <script>
-import CardRoom from '@/Components/Card/CardRoom.vue'
-import Arrow from '@/Components/Icons/Arrow.vue'
 import SectionHero from '@/Components/SectionHero.vue'
-import SectionPromotion from '@/Components/SectionPromotion.vue'
+import CardService from '@/Components/Card/CardService.vue'
 
 export default {
-    components: { Arrow, SectionPromotion, SectionHero, CardRoom },
+    components: { SectionHero, CardService },
     props: ['rooms_featured', 'promotions'],
+    data() {
+        return {
+            services: [
+                {
+                    image: {
+                        url: '/assets/images/demo/image-service-1.jpg',
+                        alt: 'image service 1',
+                    },
+                    title: 'Decor trang trí bong bóng nghệ thuật',
+                    slug: 'demo-1',
+                },
+                {
+                    image: {
+                        url: '/assets/images/demo/image-service-2.jpg',
+                        alt: 'image service 2',
+                    },
+                    title: 'Decor Tiệc theo yêu cầu',
+                    slug: 'demo-2',
+                },
+                {
+                    image: {
+                        url: '/assets/images/demo/image-service-3.jpg',
+                        alt: 'image service 3',
+                    },
+                    title: 'Decor quán mùa lễ',
+                    slug: 'demo-3',
+                },
+            ],
+        }
+    },
 }
 </script>

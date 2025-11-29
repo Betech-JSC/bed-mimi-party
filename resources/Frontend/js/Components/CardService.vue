@@ -1,54 +1,41 @@
 <template>
-    <div v-if="item.slug" class="flex flex-col group">
+    <article v-if="item.slug" class="flex relative flex-col justify-center items-start w-full">
         <Link
             :href="
                 route('services.show', {
                     slug: item.slug,
                 })
             "
-            class="block overflow-hidden notranslate"
+            class="block relative overflow-hidden md:aspect-w-4 md:aspect-h-5 aspect-w-2 aspect-h-1 w-full h-full"
         >
-            <div class="aspect-w-3 aspect-h-2">
-                <JPicture
-                    :src="item.image?.url || '/assets/images/cover.jpg'"
-                    wrapperClass="picture-cover h-full lg:group-hover:scale-105 lg:duration-150"
-                    :alt="item.alt || item.title"
-                />
-            </div>
+            <JPicture
+                :src="item.image.url || '/cover.jpg'"
+                :alt="item.image.alt || item.title || 'image card service'"
+                wrapperClass="picture-cover"
+                class="w-full h-full object-cover lg:group-hover:scale-105 duration-300 ease-in-out"
+            />
         </Link>
-        <div
-            class="flex-1 xl:py-6 md:py-[18px] py-2 xl:px-8 md:px-[22px] px-3 bg-gradient-blue relative overflow-hidden"
-        >
-            <Link
-                :href="
-                    route('services.show', {
-                        slug: item.slug,
-                    })
-                "
-                class="text-white title-1 line-clamp-2 xl:h-[64px] md:h-14 h-10 lg:group-hover:text-green-default lg:duration-150 relative z-30 notranslate"
-            >
-                <h3>{{ item.title }}</h3></Link
-            >
-            <div
-                class="w-[221px] h-[221px] absolute right-0 top-0 translate-x-full lg:group-hover:translate-x-[21%] lg:duration-150 z-10"
-            >
-                <JPicture src="/assets/images/home/shape-big.png" :alt="tt('shape-big')" />
-            </div>
-            <div
-                class="w-[221px] h-[221px] absolute right-0 top-0 translate-x-full lg:group-hover:translate-x-[43%] lg:duration-150 z-20"
-            >
-                <JPicture src="/assets/images/home/shape-small.png" :alt="tt('shape-small')" />
-            </div>
+        <div class="relative py-6 px-4 w-full">
+            <div class="absolute inset-0 bg-linear w-full h-full"></div>
+            <h3 class="relative title-2 font-bold text-white w-full">
+                {{ item.title }}
+            </h3>
         </div>
-    </div>
+    </article>
 </template>
+
 <script>
 export default {
     props: {
         item: {
             type: Object,
-            default: () => {},
+            required: true,
         },
     },
 }
 </script>
+<style lang="scss" scoped>
+.bg-linear {
+    background: linear-gradient(91.96deg, #032665 0%, #01050e 100%);
+}
+</style>

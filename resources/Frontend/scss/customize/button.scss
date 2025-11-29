@@ -1,22 +1,14 @@
 .btn {
-    @apply inline-flex items-center text-center px-8 py-4 rounded-full min-h-[32px] md:min-h-[48px] title-3;
+    @apply inline-flex items-center text-center px-8 py-3 rounded-full min-h-[32px] md:min-h-[48px] button-1 font-semibold w-max;
 }
 
 .btn.is-icon {
     @apply md:text-[1rem] text-[0.875rem] leading-[150%];
 }
 
-.btn.primary {
-    @apply h-8 md:h-12 duration-300 ease-in-out;
-    background: linear-gradient(180deg, #FFFFFF 0%, #C9C9C9 100%);
-
-    // background: linear-gradient(93.05deg, rgba(0, 0, 0, 0) 1.87%, rgba(255, 255, 255, 0.3) 101.59%);
-
-
-
-    svg {
-        @apply text-primary-800
-    }
+.btn-primary {
+    background: linear-gradient(94.44deg, #ffedfe 1.32%, #d8bdff 52.94%, #5891ff 102.61%);
+    @apply rounded-full text-purple uppercase;
 }
 
 .btn.btn-show-more {

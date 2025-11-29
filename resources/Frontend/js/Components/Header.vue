@@ -3,18 +3,18 @@
         <div
             class="relative bg-black md:h-[var(--header-height-md)] h-[var(--header-height-sm)] lg:h-[var(--header-height-lg)] xl:h-[var(--header-height-xl)] flex items-center justify-center"
         >
-            <div class="container flex items-center justify-between">
+            <div class="px-4 md:px-8 xl:px-12 flex items-center justify-between w-full">
                 <Logo />
                 <div class="max-lg:hidden space-y-[12px]">
-                    <ul class="flex items-center space-x-3 title-4">
+                    <ul class="flex items-center space-x-6 body-0 uppercase">
                         <li>
                             <a
                                 href="/"
-                                class="p-2 border-b relative block"
+                                class="p-1.5 border-b relative block"
                                 :class="
                                     $page.props.route.path === '/'
-                                        ? 'text-white/100 border-primary text-shadow-glow-white'
-                                        : 'border-transparent text-white/80'
+                                        ? 'text-white/100 border-primary text-shadow-glow-white font-semibold'
+                                        : 'border-transparent text-white/80 font-medium'
                                 "
                             >
                                 {{ tt('Trang chủ') }}
@@ -28,11 +28,11 @@
                             >
                                 <Link
                                     :href="menu.slug"
-                                    class="p-2 border-b relative block"
+                                    class="p-1.5 border-b relative block"
                                     :class="
                                         fullPath.includes(menu.slug) && $page.props.route.path !== '/'
-                                            ? 'text-white/100 border-primary text-shadow-glow-white'
-                                            : 'border-transparent text-white/80'
+                                            ? 'text-white/100 border-primary text-shadow-glow-white font-semibold'
+                                            : 'border-transparent text-white/80 font-medium'
                                     "
                                     @click="menuSelected = null"
                                 >
@@ -42,27 +42,8 @@
                         </template>
                     </ul>
                 </div>
-                <div class="flex items-center gap-4">
-                    <!-- <div class="flex items-center gap-1 title-4 notranslate">
-                        <div class="flex items-center gap-0.5 text-white">
-                            <button
-                                :class="$page.props.locale.current == 'vi' ? '' : 'opacity-30'"
-                                type="button"
-                                @click="switchLang('vi')"
-                            >
-                                VI
-                            </button>
-                            <span class="opacity-80">/</span>
-                            <button
-                                :class="$page.props.locale.current == 'en' ? '' : 'opacity-30'"
-                                type="button"
-                                @click="switchLang('en')"
-                            >
-                                EN
-                            </button>
-                        </div>
-                    </div> -->
-                    <div class="lg:hidden flex items-center justify-center">
+                <div class="lg:hidden flex items-center gap-4">
+                    <div class="flex items-center justify-center">
                         <button @click="onToggleMenu()">
                             <Hamburger :isToggleMenu="isToggleMenu" />
                         </button>
@@ -80,14 +61,14 @@
                     :class="isToggleMenu ? 'right-0' : '-right-full'"
                     style="transition: right 0.5s"
                 >
-                    <ul class="space-y-4">
-                        <li class="flex items-center justify-between py-2 title-4">
+                    <ul class="space-y-4 body-0 uppercase">
+                        <li class="flex items-center justify-between py-2 font-medium">
                             <a
                                 href="/"
                                 class="block w-full"
                                 :class="
                                     $page.props.route.path === '/'
-                                        ? 'text-white/100  text-shadow-glow-white'
+                                        ? 'text-white/100 text-shadow-glow-white'
                                         : 'text-white/80'
                                 "
                             >
@@ -96,7 +77,7 @@
                         </li>
                         <li
                             v-for="(menuMb, menuMbIndex) in menus"
-                            class="flex items-center justify-between py-2 title-4"
+                            class="flex items-center justify-between py-2"
                             :class="fullPath.includes(menuMb.slug) && $page.props.route.path !== '/' ? 'text-white/100 text-shadow-glow-white' : 'text-white/80'"
                             :key="menuMbIndex"
                         >
@@ -164,25 +145,25 @@ export default {
             isOpenSearch: false,
             menus: [
                 {
-                    title: this.tt(`About 90's`),
+                    title: this.tt(`Về chúng tôi`),
                     slug: this.route('histories.index'),
                     type: 'histories',
                     subMenu: [],
                 },
                 {
-                    title: this.tt('Vip room'),
+                    title: this.tt('Dịch vụ'),
                     slug: this.route('rooms.index'),
                     type: 'rooms',
                     subMenu: [],
                 },
                 {
-                    title: this.tt('Sự kiện'),
+                    title: this.tt('Dự án'),
                     slug: this.route('promotions.index'),
                     type: 'promotions',
                     subMenu: [],
                 },
                 {
-                    title: this.tt('Thư viện'),
+                    title: this.tt('Tin tức'),
                     slug: this.route('galleries.index'),
                     type: 'galleries',
                     subMenu: [],

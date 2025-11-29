@@ -397,21 +397,21 @@ module.exports = {
             colors: {
                 ...colors,
                 primary: {
-                    DEFAULT: "#EB5128",
+                    DEFAULT: "#74A3FF",
                     25: "#FFFBEF",
                     50: "#FEF8E4",
                     100: "#F9EDD0",
                     200: "#EBDFC4",
                     300: "#EDC38A",
                     400: "#DAA959",
-                    500: "#EB5128",
+                    500: "#74A3FF",
                     600: "#D78750",
                     700: "#B56B34",
                     800: "#A15D26",
-                    900: "#5E320E"
+                    900: "#001233"
                 },
                 purple: {
-                    DEFAULT: "#6B3BF5",
+                    DEFAULT: "#3E3183",
                 }
             },
             boxShadow: {
@@ -442,9 +442,9 @@ module.exports = {
             }),
 
             fontFamily: {
-                display: ['LC-BlairITC', 'sans-serif'],
+                display: ['Montserrat', 'sans-serif'],
                 sans: [
-                    'LC-PPFragment',
+                    'Montserrat',
                     'ui-sans-serif',
                     'system-ui',
                     '-apple-system',
