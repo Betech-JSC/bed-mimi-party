@@ -1,7 +1,7 @@
 <template>
-    <header class="sticky inset-x-0 top-0 z-[1000]" @mouseleave="menuSelected = null">
+    <header class="fixed inset-x-0 top-0 z-[1000]" @mouseleave="menuSelected = null">
         <div
-            class="relative bg-black md:h-[var(--header-height-md)] h-[var(--header-height-sm)] lg:h-[var(--header-height-lg)] xl:h-[var(--header-height-xl)] flex items-center justify-center"
+            class="relative bg-header md:h-[var(--header-height-md)] h-[var(--header-height-sm)] lg:h-[var(--header-height-lg)] xl:h-[var(--header-height-xl)] flex items-center justify-center"
         >
             <div class="px-4 md:px-8 xl:px-12 flex items-center justify-between w-full">
                 <Logo />
@@ -642,16 +642,15 @@ body {
 }
 </style>
 <style lang="scss" scoped>
+.bg-header {
+ background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+}
 .header-shadow {
     box-shadow: 0 0 3px #1018280f, 0 1px 2px #1018280f;
 }
 
 .language-box {
     box-shadow: 0px 1px 2px 0px #1018280d;
-}
-
-.bg-header {
-    clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
 }
 
 @media screen and (min-width: 375px) {

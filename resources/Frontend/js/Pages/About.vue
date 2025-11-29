@@ -1,108 +1,50 @@
 <template>
     <main class="bg-black">
-        <section class="relative pt-12 md:pb-[80px] pb-[64px] xl:pb-[120px]">
+        <BannerImage :banner="banner" classBanner="h-[574px]" />
+        <SectionMissionValue :values="values" />
+        <section class="py-20 relative">
             <div class="absolute inset-0">
-                <JPicture
-                    src="/assets/images/about/bg-about.jpg"
-                    alt="background about"
-                    class="w-full h-full object-cover"
-                />
+                <JPicture src="/assets/images/about/bg-commit.jpg" alt="background commit" class="w-full h-full" />
             </div>
             <div class="relative">
-                <div class="container md:space-y-[80px] space-y-[64px] xl:space-y-[120px]">
-                    <div
-                        class="max-w-[660px] w-full mx-auto text-white md:space-y-[80px] space-y-[28px] xl:space-y-[120px]"
-                    >
-                        <div class="flex items-center justify-center">
-                            <h2 class="display-2">{{ tt('About') }}</h2>
-                            <div class="max-w-[110px] md:max-w-[150px] xl:max-w-[200px]">
-                                <JPicture
-                                    src="/assets/images/home/image-90s.png"
-                                    alt="image 90s"
-                                    class="w-full h-full object-cover"
-                                />
+                <div class="container space-y-[120px]">
+                    <div class="space-y-8">
+                        <div class="space-y-3 text-center">
+                            <h2 class="title-linear display-2 uppercase font-extrabold">Chúng tôi cam kết</h2>
+                            <div class="body-1 text-white">
+                                Tại MIMI PARTY, mỗi buổi tiệc không chỉ là một dự án – mà là lời hứa về sự hoàn hảo
+                                trong từng khoảnh khắc. <br />
+                                Chúng tôi cam kết mang đến trải nghiệm trọn vẹn, cảm xúc thật và dịch vụ đẳng cấp, từ
+                                khâu sáng tạo ý tưởng đến giây phút cuối cùng của bữa tiệc
                             </div>
                         </div>
-                        <div class="max-md:text-[12px] title-2 !font-sans text-center">
-                            <div v-html="$page.props.global.the_about_90s_content"></div>
-                        </div>
-                        <div class="lg:hidden max-md:mt-4">
-                            <JPicture
-                                src="/assets/images/about/image-about.jpg"
-                                alt="image about"
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
-                    </div>
-                    <div class="flex lg:flex-row flex-col items-start md:gap-[64px] gap-[64px] xl:gap-[120px]">
-                        <div
-                            class="flex-shrink-0 max-w-full lg:max-w-[424px] xl:py-10 w-full flex items-center justify-center"
-                        >
-                            <div class="md:space-y-12 space-y-8 xl:space-y-16">
-                                <div class="md:space-y-4 space-y-3 xl:space-y-5 text-white">
-                                    <div class="headline-3 uppercase">{{ tt('The Venue') }}</div>
-                                    <div class="body-2 md:space-y-3 space-y-2 xl:space-y-4">
-                                        <div v-html="$page.props.global.the_venue_content"></div>
-                                    </div>
+                        <div class="grid grid-cols-4">
+                            <div
+                                v-for="(itemCommit, indexCommit) in commits"
+                                :key="indexCommit"
+                                class="space-y-12 p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out py-8 px-6 text-center"
+                            >
+                                <div class="w-max h-[72px] mx-auto">
+                                    <JPicture :src="itemCommit.icon" :alt="itemCommit.title" class="w-full h-full" />
                                 </div>
-                                <div class="md:space-y-4 space-y-3 xl:space-y-5 text-white">
-                                    <div class="headline-3 uppercase">{{ tt('Experience') }}</div>
-                                    <div class="body-2 md:space-y-3 space-y-2 xl:space-y-4">
-                                        <div v-html="$page.props.global.experience_content"></div>
-                                    </div>
+                                <div class="space-y-3">
+                                    <h3 class="title-2 font-bold text-white">{{ itemCommit.title }}</h3>
+                                    <div class="title-4 text-white">{{ itemCommit.description }}</div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <JPicture
-                                src="/assets/images/about/image-about.jpg"
-                                alt="image about"
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <section class="pb-12 md:pb-[80px] xl:pb-[120px]">
-            <div class="container">
-                <VideoAbout
-                    videoSrc="https://drive.google.com/file/d/1MPVhg_UnCPNqxHvMf44M9aSfrNiWRJ9p/view?usp=sharing"
-                    poster="/placeholder-col.png"
-                    :autoplay="false"
-                />
-
-                <!-- <div class="grid md:grid-cols-3 gap-3 md:gap-5 xl:gap-[30px]"> -->
-                <!-- <div v-for="(itemVideo, indexVideo) in videos" :key="indexVideo">
-                        <VideoAbout :videoSrc="itemVideo.link" poster="/placeholder-col.png" :autoplay="false" />
-                    </div> -->
-                <!-- </div> -->
-            </div>
-        </section>
-        <section class="md:pb-16 pb-12 xl:pb-20 relative overflow-hidden">
-            <div class="circle-orange right-[-340px] top-[180px]"></div>
-            <div class="relative">
-                <div class="container md:space-y-[80px] space-y-[64px] xl:space-y-[120px]">
-                    <div
-                        v-for="(itemRoom, indexRoom) in items"
-                        :key="indexRoom"
-                        class="grid md:grid-cols-2 gap-4 md:gap-5 xl:gap-[120px]"
-                    >
-                        <div
-                            class="flex items-center justify-center"
-                            :class="indexRoom % 2 !== 0 ? 'order-2 md:order-1' : 'order-2'"
-                        >
-                            <div class="text-center text-white space-y-5">
-                                <div class="display-3">{{ itemRoom.title }}</div>
-                                <div class="body-2" v-html="itemRoom.description"></div>
-                            </div>
+                    <div class="flex items-start gap-12">
+                        <div class="max-w-[282px] w-full">
+                            <h2 class="title-linear display-3 uppercase font-extrabold">Vì sao chọn Mini Party?</h2>
                         </div>
-                        <div :class="indexRoom % 2 !== 0 ? 'order-1 md:order-2' : 'order-1'">
-                            <JPicture
-                                :src="itemRoom.image"
-                                :alt="itemRoom.title || 'image'"
-                                class="w-full h-full object-cover"
-                            />
+                        <div class="flex-1 w-full">
+                            <div class="grid grid-cols-2">
+                                <div v-for="(itemReason, indexReason) in reasons" :key="indexReason" class="p-6 space-y-3 text-white">
+                                    <div class="title-2">{{ itemReason.title }}</div>
+                                    <div class="body-2">{{ itemReason.description }}</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,38 +53,92 @@
     </main>
 </template>
 <script>
-import Star from '@/Components/Icons/Star.vue'
-import BannerIcon from '@/Components/BannerIcon.vue'
+import SectionMissionValue from '@/Components/SectionMissionValue.vue'
 
 export default {
     props: ['posts'],
-    components: {
-        Star,
-        BannerIcon,
-    },
+    components: { SectionMissionValue },
     data() {
         return {
-            videos: [
+            banner: {
+                image: '/assets/images/about/bg-banner.jpg',
+            },
+            values: [
                 {
-                    link: 'https://drive.google.com/file/d/1aCTWCSKx5Yplz6pNZFNfEshcOXwTfogL/view?usp=sharing',
+                    image: {
+                        url: '/assets/images/home/image-value-1.png',
+                        alt: 'image value 1',
+                    },
+                    title: 'Tầm nhìn',
+                    description:
+                        'MIMI PARTY hướng đến trở thành đơn vị tổ chức tiệc cá nhân và doanh nghiệp hàng đầu, nơi mỗi sự kiện không chỉ là một buổi tiệc – mà là một trải nghiệm mang dấu ấn riêng biệt, chuẩn mực và đáng nhớ. Chúng tôi không chạy theo xu hướng, chúng tôi tạo nên chuẩn mực mới cho nghệ thuật tổ chức tiệc riêng tư.',
                 },
                 {
-                    link: 'https://drive.google.com/file/d/1UMWdrgUo4ydnOy94W4KCueTFEDJjg_XM/view?usp=sharing',
+                    image: {
+                        url: '/assets/images/home/image-value-2.png',
+                        alt: 'image value 2',
+                    },
+                    title: 'Sứ mệnh',
+                    description:
+                        'Tại MIMI PARTY, chúng tôi tin rằng mọi khoảnh khắc đáng nhớ đều xứng đáng được tôn vinh bằng sự chỉn chu và cảm xúc chân thật. Bằng đội ngũ sáng tạo và chuyên nghiệp, MIMI PARTY mang đến những bữa tiệc mang đậm cá tính, trọn vẹn trải nghiệm, và phản ánh đúng giá trị của khách hàng – dù đó là cá nhân, doanh nghiệp hay thương hiệu.',
                 },
                 {
-                    link: 'https://drive.google.com/file/d/1MPVhg_UnCPNqxHvMf44M9aSfrNiWRJ9p/view?usp=sharing',
+                    image: {
+                        url: '/assets/images/home/image-value-3.png',
+                        alt: 'image value 3',
+                    },
+                    title: 'Mục tiêu',
+                    description: `
+                        Xây dựng hệ sinh thái dịch vụ tiệc “All in One”: từ ý tưởng, thiết kế, trang trí, âm nhạc, biểu diễn cho đến vận hành. Đặt Minh bạch – Chất lượng – Riêng tư làm nền tảng trong mọi hoạt động.  Không ngừng hoàn thiện quy trình để mang đến sự hài lòng tuyệt đối – nơi tiêu chuẩn duy nhất mà chúng tôi hướng đến, chính là tiêu chuẩn của khách hàng.
+                    `,
                 },
             ],
-            items: [
+            commits: [
                 {
-                    image: this.tt('/assets/images/about/image-private-room.jpg'),
-                    title: this.tt('PRIVATE Room'),
-                    description: this.$page.props.global.private_room_content,
+                    icon: '/assets/images/about/image-commit-1.png',
+                    title: 'Chất lượng & Sự chỉn chu',
+                    description:
+                        'Mỗi hạng mục – từ décor, biểu diễn đến kỹ thuật – đều được kiểm soát tỉ mỉ, đảm bảo chuẩn mực cao nhất trong ngành tổ chức tiệc.',
                 },
                 {
-                    image: this.tt('/assets/images/about/image-special-show.jpg'),
-                    title: this.tt('SPECIAL Shows'),
-                    description: this.$page.props.global.special_show_content,
+                    icon: '/assets/images/about/image-commit-2.png',
+                    title: 'Minh bạch & Uy tín',
+                    description:
+                        'Mọi chi phí, quy trình và hạng mục đều rõ ràng – giúp khách hàng an tâm và tin tưởng tuyệt đối.',
+                },
+                {
+                    icon: '/assets/images/about/image-commit-3.png',
+                    title: 'Đúng hẹn – Đúng chuẩn – Đúng cảm xúc',
+                    description:
+                        'Từ khâu setup, vận hành đến biểu diễn, chúng tôi cam kết mang lại sự trọn vẹn và đúng kỳ vọng đã đặt ra.',
+                },
+                {
+                    icon: '/assets/images/about/image-commit-4.png',
+                    title: 'Cá nhân hoá trải nghiệm',
+                    description:
+                        'Mỗi bữa tiệc mang dấu ấn riêng, được thiết kế theo gu thẩm mỹ, tính cách và thông điệp của khách hàng.',
+                },
+            ],
+            reasons: [
+                {
+                    title: 'Trọn gói – Đồng bộ – Tiện lợi',
+                    description:
+                        'Mimi Party mang đến giải pháp tổ chức tiệc toàn diện (All in One) – nơi mọi yếu tố từ décor, biểu diễn, âm nhạc đến hình ảnh đều được kết nối trong một tổng thể thống nhất. Chúng tôi không chỉ giúp khách hàng tiết kiệm thời gian và chi phí, mà còn biến quá trình chuẩn bị tiệc thành một trải nghiệm đầy cảm hứng.',
+                },
+                {
+                    title: 'Đội ngũ chuyên nghiệp & tận tâm',
+                    description:
+                        'Mỗi thành viên của Mimi Party đều có kinh nghiệm sâu trong lĩnh vực décor, performance và event management. Chúng tôi làm việc bằng trách nhiệm, đam mê và sự chỉn chu, để mọi khoảnh khắc trong buổi tiệc đều diễn ra hoàn hảo – đúng chuẩn mực mà khách hàng mong đợi.',
+                },
+                {
+                    title: 'Kinh nghiệm đa dạng',
+                    description:
+                        'Chúng tôi đã thực hiện nhiều loại hình tiệc: cá nhân, doanh nghiệp, thương hiệu, nhà hàng – lounge – KTV VIP. Chính kinh nghiệm thực chiến này giúp Mimi Party luôn linh hoạt sáng tạo concept và giải pháp phù hợp với từng ngân sách, không gian và đối tượng khách hàng.',
+                },
+                {
+                    title: 'Quản lý & Giám sát chuyên nghiệp',
+                    description:
+                        'Không chỉ lên ý tưởng, chúng tôi đi cùng khách hàng đến phút cuối của buổi tiệc. Từ setup, vận hành, điều phối nhân sự, kiểm soát tiến độ đến tổng kết – mọi quy trình đều được giám sát chặt chẽ để đảm bảo một sự kiện trọn vẹn, trơn tru và đẳng cấp.',
                 },
             ],
         }
