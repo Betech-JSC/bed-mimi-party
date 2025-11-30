@@ -5,8 +5,7 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-4">
-                {{ services }}
-                <!-- <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" /> -->
+                <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
             </div>
 
             <div v-if="showButton" class="flex items-center justify-center">
