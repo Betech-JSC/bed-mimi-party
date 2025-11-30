@@ -13,7 +13,7 @@
             <!-- <span v-if="isRequired" class="text-red-600">*</span> -->
         </label>
         <input
-            :class="isCart ? 'input-cart' : 'input-form'"
+            :class="isContact ? 'input-contact' : 'input-form'"
             :name="field.name"
             :id="field.name"
             :type="field.type ?? 'text'"
@@ -37,7 +37,7 @@
             <!-- <span v-if="isRequired" class="text-red-600">*</span> -->
         </label>
         <input
-            :class="isCart ? 'input-cart' : 'input-form'"
+            :class="isContact ? 'input-contact' : 'input-form'"
             :type="field.type ?? 'text'"
             :name="field.name"
             :id="field.name"
@@ -68,7 +68,7 @@
             :rows="field.rows ?? 3"
             :placeholder="field.placeholder ?? (!field.readonly && field.label ? `${field.label.toLowerCase()}` : '')"
             class=""
-            :class="isCart ? 'input-area-cart' : 'input-area'"
+            :class="isContact ? 'input-area-contact' : 'input-area'"
             :readonly="field.readonly ?? false"
             :value="modelValue"
             autocomplete="off"
@@ -258,8 +258,8 @@ export default {
     }
 }
 
-.input-cart {
-    @apply block w-full px-3.5 py-2.5 text-white border border-gray-300 rounded-lg bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary h-[44px];
+.input-contact {
+    @apply block w-full py-2.5 text-white border-b border-gray-300 bg-transparent focus:bg-transparent focus:ring-0 outline-none focus:outline-none focus:duration-200 focus:border-primary h-[56px] font-display;
     &:focus {
         @apply duration-200;
     }
