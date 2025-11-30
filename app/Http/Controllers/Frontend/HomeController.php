@@ -15,7 +15,6 @@ class HomeController extends Controller
             $services = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_SERVICE)
-                ->IsFeatured()
                 ->get()
                 ->map(fn($item) => $item->transform());
 
