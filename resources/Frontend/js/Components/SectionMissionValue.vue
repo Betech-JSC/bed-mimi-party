@@ -1,14 +1,14 @@
 <template>
-    <section class="py-20 relative">
+    <section class="md:py-16 py-12 xl:py-20 relative">
         <div class="absolute inset-0">
             <JPicture src="/assets/images/home/bg-mission-value.jpg" alt="background mission value"
                 class="w-full h-full" />
         </div>
         <div class="relative">
-            <div class="container space-y-20">
-                <div class="space-y-12">
+            <div class="container space-y-12 md:space-y-16 xl:space-y-20">
+                <div class="md:space-y-8 space-y-6 xl:space-y-12">
                     <div class="space-y-3">
-                        <div class="max-w-[150px] md:max-w-[200px] lg:max-w-[442px] max-h-[97px] mx-auto">
+                        <div class="max-w-[250px] md:max-w-[320px] lg:max-w-[442px] max-h-[97px] mx-auto">
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
                                 class="w-full h-full" />
                         </div>
@@ -19,9 +19,9 @@
                             buổi tiệc cá nhân, doanh nghiệp và thương hiệu cao cấp.
                         </div>
                     </div>
-                    <div class="grid grid-cols-3 px-20">
+                    <div class="grid md:grid-cols-3 xl:px-20">
                         <div v-for="(itemValue, indexValue) in values" :key="indexValue"
-                            class="space-y-3 p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out min-h-[332px]">
+                            class="space-y-3 p-3 md:p-4 xl:p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:min-h-[332px]">
                             <div class="w-max h-11">
                                 <JPicture :src="itemValue.image.url" :alt="itemValue.image.alt || itemValue.title"
                                     class="w-full h-full" />

@@ -3,7 +3,7 @@
     <div class="container space-y-10">
         <div class="flex items-center justify-between">
             <h2 class="title-linear display-2 uppercase font-extrabold text-center">Tin tức</h2>
-            <button class="btn btn-primary">All events</button>
+            <Link :href="route('posts')" class="btn btn-primary">All events</Link>
         </div>
         <div class="grid grid-cols-3 gap-8">
             <CardPost v-for="(itemPost, indexPost) in posts" :key="indexPost" :item="itemPost" />

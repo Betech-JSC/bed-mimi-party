@@ -6,7 +6,7 @@
                     slug: item.slug,
                 })
             "
-            class="block relative overflow-hidden md:aspect-w-4 md:aspect-h-5 aspect-w-2 aspect-h-1 w-full h-full"
+            class="block relative overflow-hidden aspect-w-4 aspect-h-5 w-full h-full"
         >
             <JPicture
                 :src="item.image.url || '/cover.jpg'"
@@ -17,7 +17,7 @@
         </Link>
         <div class="relative py-6 px-4 w-full">
             <div class="absolute inset-0 bg-linear w-full h-full"></div>
-            <h3 class="relative title-2 font-bold text-white w-full">
+            <h3 class="relative title-2 font-bold text-white w-full line-clamp-1">
                 {{ item.title }}
             </h3>
         </div>

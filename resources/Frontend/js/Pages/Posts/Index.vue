@@ -178,23 +178,6 @@ export default {
                     },
                 },
             ],
-            post: {
-                content: `
-                    <h2>Ứng dụng công nghệ</h2>
-                    <p>Khái niệm "công nghệ" không chỉ được giải nghĩa ở những liệt kê cố định, vì thế không thể "tái sử dụng" lại dàn bài của một bản kế hoạch cũ nào đó mà không có sự cập nhập, chỉnh sửa mới. Nếu VR (Virtual Reality- thực tế ảo) đã không còn xa lạ trong các sự kiện, thì AR (Augmented Reality - thực tế tăng cường) - tương tác kết hợp thực và ảo, khai phóng không gian hiện thực đang được quan tâm.</p>
-                    <p>Khái niệm "công nghệ" không chỉ được giải nghĩa ở những liệt kê cố định, vì thế không thể "tái sử dụng" lại dàn bài của một bản kế hoạch cũ nào đó mà không có sự cập nhập, chỉnh sửa mới. Nếu VR (Virtual Reality- thực tế ảo) đã không còn xa lạ trong các sự kiện, thì AR (Augmented Reality - thực tế tăng cường) - tương tác kết hợp thực và ảo, khai phóng không gian hiện thực đang được quan tâm.</p>
-                    <img src="/assets/images/demo/image-blog-demo.jpg" alt="image demo" />
-                    <i>Ghi chú hình ảnh: Một sự kiện thành công được kết hợp bởi rất nhiều yếu tố, trong sự suy xét thấu đáo của nhà tổ chức, cùng sự phối hợp của địa điểm tổ chức nền tảng.</i>
-                    <h2>Yếu tố giải trí</h2>
-                    <p>Không chỉ là nét điểm xuyến phụ họa cho dòng chương trình, các yếu tố giải trí còn được mượn làm công cụ chính để quảng bá trong giai đoạn trước khi diễn ra sự kiện, lẫn gia tăng tương tác, đưa sản phẩm, dịch vụ, thông điệp đến gần hơn với người tham dự.</p>
-                    <p>Màn trình diễn của những ngôi sao, biến sân khấu thành một sàn khiêu vũ khởi động trước hội nghị, những cái bắt tay phối hợp với đối tác, thương hiệu khác đem đến sự kiện nhiều hoạt động, gian hàng, quà tặng hơn...</p>
-                    <img src="/assets/images/demo/image-blog-demo.jpg" alt="image demo" />
-                    <i>Ghi chú hình ảnh: Live band chuyên nghiệp</i>
-                    <h2>Yếu tố giải trí</h2>
-                    <p>Không chỉ là nét điểm xuyến phụ họa cho dòng chương trình, các yếu tố giải trí còn được mượn làm công cụ chính để quảng bá trong giai đoạn trước khi diễn ra sự kiện, lẫn gia tăng tương tác, đưa sản phẩm, dịch vụ, thông điệp đến gần hơn với người tham dự.</p>
-                    <p>Màn trình diễn của những ngôi sao, biến sân khấu thành một sàn khiêu vũ khởi động trước hội nghị, những cái bắt tay phối hợp với đối tác, thương hiệu khác đem đến sự kiện nhiều hoạt động, gian hàng, quà tặng hơn...</p>
-                `,
-            },
         }
     },
 }
