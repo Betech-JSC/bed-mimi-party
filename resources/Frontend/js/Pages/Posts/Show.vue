@@ -1,92 +1,130 @@
 <template>
-    <main class="bg-primary-25">
-        <section>
-            <div class="h-[436px] relative bg-primary-700">
-                <div class="relative h-full">
-                    <div class="container h-full flex items-center justify-center">
-                        <div class="grid grid-cols-12 gap-4 md:gap-6 xl:gap-8">
-                            <div
-                                class="col-span-full md:col-span-10 md:col-start-2 space-y-5 flex flex-col justify-center items-center"
-                            >
-                                <JamBreadcrumb :isWhite="true" :items="breadcrumbs" />
-                                <div class="space-y-3">
-                                    <h1
-                                        class="text-primary-100 display-2 inline-block uppercase text-center"
-                                        v-html="post.title"
-                                    ></h1>
-                                    <div class="max-w-[254px] w-full mx-auto text-primary-100 flex items-center gap-3">
-                                        <div class="w-full h-px bg-primary-100"></div>
-                                        <LogoSymbol class="flex-shrink-0" />
-                                        <div class="w-full h-px bg-primary-100"></div>
-                                    </div>
-                                    <div
-                                        class="body-0 text-center mx-auto w-full max-w-[700px] !font-sans !font-normal text-primary-100"
-                                    >
-                                        {{ post.description }}
-                                    </div>
-                                    <div class="body-1 text-primary-100/70 text-center">{{ post.published_at }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="py-12">
+    <main class="bg-primary-900">
+        <section class="md:pt-[150px] pt-[120px] xl:pt-[200px] md:pb-16 pb-12 xl:pb-20">
             <div class="container">
-                <div class="max-w-[800px] w-full mx-auto space-y-8">
-                    <JPicture
-                        :src="post.image.url"
-                        alt="image sign 1"
-                        wrapperClass="picture-cover"
-                        class="w-full h-full object-cover"
-                    />
-                    <div class="prose prose-blog" v-html="post.content"></div>
-
-                    <div class="border-t border-gray-200 pt-6">
-                        <div class="flex items-center justify-end space-x-[16px]">
-                            <div class="flex items-center max-md:justify-end">
-                                <div class="relative">
+                <div class="grid grid-cols-12 md:gap-6 gap-4 xl:gap-8">
+                    <div class="xl:col-span-10 xl:col-start-2 md:space-y-8 space-y-6 xl:space-y-12 col-span-full">
+                        <div class="md:space-y-5 space-y-4 xl:space-y-6">
+                            <div class="md:flex md:items-center md:justify-between">
+                                <div class="flex items-center gap-3">
                                     <div
-                                        @click="copyLink()"
-                                        class="text-gray-300 duration-150 cursor-pointer hover:text-green-500"
+                                        class="body-3 py-1 px-2.5 bg-primary text-white w-max flex items-center justify-center uppercase"
                                     >
-                                        <Share />
+                                        <span>Tin tức</span>
                                     </div>
-                                    <input id="input-copy" type="hidden" />
-                                    <div
-                                        class="absolute lg:top-[110%] top-[120%] bg-primary-800 rounded-lg text-white duration-300 py-[4px] px-[12px] w-max lg:left-[40%] left-[-200%]"
-                                        :class="copySuccess ? 'opacity-100' : 'opacity-0'"
-                                    >
-                                        {{ tt('Đã copy link') }}
+                                    <div class="flex items-center gap-3 text-white">
+                                        <span class="title-1">Ten tác giả</span>
+                                        <span>|</span>
+                                        <span class="button-1 font-semibold">20PM 20.8.2025</span>
+                                    </div>
+                                </div>
+                                <div class="hidden md:flex items-center gap-3">
+                                    <span class="title-2 font-bold text-white">Chia sẻ</span>
+                                    <div class="flex items-center justify-end gap-4">
+                                        <div class="flex items-center max-md:justify-end">
+                                            <div class="relative">
+                                                <div
+                                                    @click="copyLink()"
+                                                    class="text-gray-300 duration-150 cursor-pointer lg:hover:text-primary"
+                                                >
+                                                    <Share />
+                                                </div>
+                                                <input id="input-copy" type="hidden" />
+                                                <div
+                                                    class="absolute lg:top-[110%] top-[120%] bg-primary rounded-lg text-white duration-300 py-[4px] px-[12px] w-max lg:left-[40%] left-[-200%]"
+                                                    :class="copySuccess ? 'opacity-100' : 'opacity-0'"
+                                                >
+                                                    {{ tt('Đã copy link') }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a
+                                            :href="facebookUrl ?? '/'"
+                                            target="_blank"
+                                            class="inline-block text-gray-300 lg:hover:text-primary duration-150"
+                                        >
+                                            <Facebook />
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <a :href="twitterUrl" target="_blank" class="inline-block">
-                                <Twitter />
-                            </a>
-                            <a :href="facebookUrl" target="_blank" class="inline-block">
-                                <Facebook />
-                            </a>
-                            <a :href="instagramUrl" target="_blank" class="inline-block">
-                                <LinkedIn />
-                            </a>
+
+                            <h1 class="display-3 font-extrabold uppercase text-white">
+                                TỔ CHỨC SỰ KIỆN ĐƯỢC HIỆU MỘT CÁCH ĐƠN GIẢN LÀ QUÁ TRÌNH LÊN Ý TƯỞNG SỰ KIỆN
+                            </h1>
+
+                            <div class="flex md:hidden items-center gap-3">
+                                <span class="title-2 font-bold text-white">Chia sẻ</span>
+                                <div class="flex items-center justify-end gap-4">
+                                    <div class="flex items-center max-md:justify-end">
+                                        <div class="relative">
+                                            <div
+                                                @click="copyLink()"
+                                                class="text-gray-300 duration-150 cursor-pointer lg:hover:text-primary"
+                                            >
+                                                <Share />
+                                            </div>
+                                            <input id="input-copy" type="hidden" />
+                                            <div
+                                                class="absolute lg:top-[110%] top-[120%] bg-primary rounded-lg text-white duration-300 py-[4px] px-[12px] w-max lg:left-[40%] left-[-200%]"
+                                                :class="copySuccess ? 'opacity-100' : 'opacity-0'"
+                                            >
+                                                {{ tt('Đã copy link') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a
+                                        :href="facebookUrl ?? '/'"
+                                        target="_blank"
+                                        class="inline-block text-gray-300 lg:hover:text-primary duration-150"
+                                    >
+                                        <Facebook />
+                                    </a>
+                                </div>
+                            </div>
+
+                            <p class="title-2 font-bold text-white">
+                                Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối
+                                tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và
+                                gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó
+                                quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo...
+                            </p>
                         </div>
+                        <div class="aspect-w-8 aspect-h-5">
+                            <JPicture
+                                src="/assets/images/demo/image-blog-demo.jpg"
+                                alt="image blog"
+                                wrapperClass="picture-cover"
+                                class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div class="prose prose-blog" v-html="post.content"></div>
                     </div>
                 </div>
             </div>
         </section>
-        <SectionRelatedPosts :items="related_posts" />
+
+        <section class="py-12 md:py-16 xl:py-20 border-t border-white">
+            <div class="container space-y-5 md:space-y-8 xl:space-y-10">
+                <div class="md:flex-row flex-col gap-4 flex justify-center items-center md:justify-between">
+                    <h2 class="title-linear display-2 uppercase font-extrabold">Tin tức khác</h2>
+                    <button class="btn btn-primary">Xem tất cả</button>
+                </div>
+                <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 md:gap-6 gap-4 xl:gap-8">
+                    <CardPost v-for="(itemPost, indexPost) in posts.slice(0, 3)" :key="indexPost" :item="itemPost" />
+                </div>
+            </div>
+        </section>
     </main>
 </template>
 
 <script>
 import Facebook from '@/Components/Icon/Facebook.vue'
-import Twitter from '@/Components/Icon/Twitter.vue'
-import LinkedIn from '@/Components/Icon/LinkedIn.vue'
 import Share from '@/Components/Icon/Share.vue'
+import CardPost from '@/Components/Card/CardPost.vue'
+
 export default {
-    components: { Facebook, Share, Twitter, LinkedIn },
+    components: { Facebook, Share, CardPost },
     props: ['post', 'related_posts', 'breadcrumbs'],
     data() {
         return {
@@ -96,8 +134,8 @@ export default {
     },
     mounted() {
         this.facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`
-        this.instagramUrl = `http://twitter.com/share?text=${window.location.href}`
-        this.twitterUrl = `http://twitter.com/share?text=${window.location.href}`
+        // this.instagramUrl = `http://twitter.com/share?text=${window.location.href}`
+        // this.twitterUrl = `http://twitter.com/share?text=${window.location.href}`
         const isScreenPC = window.matchMedia('(min-width: 768px)').matches
         if (isScreenPC) {
             this.isShowTOC = true
@@ -123,5 +161,3 @@ export default {
     },
 }
 </script>
-
-<style></style>
