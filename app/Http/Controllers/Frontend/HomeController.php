@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Inertia\Inertia;
 use Illuminate\Routing\Controller;
 use App\Models\Post\Post;
+use App\Models\Service;
 
 class HomeController extends Controller
 {
@@ -12,9 +13,9 @@ class HomeController extends Controller
     {
         try {
 
-            $services = Post::query()
+            $services = Service::query()
                 ->active()
-                ->where('type', Post::TYPE_SERVICE)
+                ->sortByPosition()
                 ->get()
                 ->map(fn($item) => $item->transform());
 
