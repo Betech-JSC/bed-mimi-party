@@ -1,15 +1,27 @@
 <template>
-    <main class="bg-black">
+    <main class="bg-primary-900">
+        <section class="relative z-10 h-[252px]">
+            <div class="absolute inset-0">
+                <JPicture
+                    src="/assets/images/contact/bg-banner.jpg"
+                    loading="eager"
+                    class="object-fit h-full w-full object-cover"
+                    alt="image demo"
+                />
+            </div>
+            <div class="absolute inset-0 w-full h-full bg-[#010A1C] bg-opacity-[56%]"></div>
+            <div class="relative pb-12 h-full">
+                <div class="container flex items-end mt-auto h-full">
+                    <h2 class="title-linear display-2 uppercase font-extrabold">Liên hệ ngay</h2>
+
+                </div>
+            </div>
+        </section>
+
         <section class="pt-12 md:pb-16 pb-12 xl:pb-20 relative overflow-hidden">
             <div class="circle-orange !h-[350px] left-[-350px] top-[100px]"></div>
             <div class="relative z-10">
                 <div class="container md:space-y-12 space-y-8 xl:space-y-[120px]">
-                    <TextAnimation
-                        className="text-center"
-                        :textFirst="tt('Get in touch ')"
-                        :textSecond="tt('with us')"
-                    />
-
                     <div class="grid grid-cols-12 gap-y-4 md:gap-6 xl:gap-8">
                         <div class="col-span-full lg:col-span-4 xl:col-span-5">
                             <div class="space-y-8 py-6">
@@ -93,7 +105,7 @@
                                             :target="itemInfo.target"
                                             rel="noopener noreferrer nofollow"
                                             v-html="itemInfo.content"
-                                        >                                    
+                                        >
                                         </a>
                                     </div>
                                 </div>

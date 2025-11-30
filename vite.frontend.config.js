@@ -74,8 +74,8 @@ export default defineConfig({
 
     server: {
         port: 5174,
-        host: true,
-        strictPort: true,
-        hmr: false, // TẮT HMR khi dùng ngrok
+        // host: true,
+        // strictPort: true,
+        // hmr: false, // TẮT HMR khi dùng ngrok
     },
 })
