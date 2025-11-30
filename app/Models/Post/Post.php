@@ -246,9 +246,7 @@ class Post extends BaseModel
 
     public function scopeActive($query)
     {
-        return $query->whereLocaleActive()
-            ->where('status', self::STATUS_ACTIVE)
-            ->where('published_at', '<=', now());
+        return $query->where('status', self::STATUS_ACTIVE);
     }
 
     public function getIsActiveAttribute()
