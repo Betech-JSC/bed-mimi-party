@@ -21,10 +21,10 @@
                 <div
                     class="body-3 py-1 px-2.5 bg-primary-900/90 w-max flex items-center justify-center uppercase"
                 >
-                    <span>{{ item.category.title }}</span>
+                    <span>Tin tức</span>
                 </div>
                 <div class="body-3">
-                    {{ item.created_at }}
+                    {{ formatDate(item.published_at) }}
                 </div>
             </div>
             <div class="space-y-1">
@@ -46,12 +46,27 @@
     </div>
 </template>
 
-<script setup>
-import ArrowCircle from '@/Components/Icons/ArrowCircle.vue'
-defineProps({
-    item: {
-        type: Object,
-        default: true,
+<script>
+export default {
+    props: ['item'],
+    methods: {
+        formatDate(dateString) {
+            // Convert '2025-09-05' to '05.09.2025'
+            if (!dateString) return ''
+            const [year, month, day] = dateString.split('-')
+            return `${day.padStart(2, '0')}-${month.padStart(2, '0')}-${year}`
+        },
+        // getDayOfWeek(dateString) {
+        //     // Get day of week in English from date string
+        //     if (!dateString) return ''
+        //     const date = new Date(dateString)
+        //     return date.toLocaleDateString('en-US', { weekday: 'long' })
+        // },
+        // formatTime(timeString) {
+        //     // Convert '20:00:00' to '20:00'
+        //     if (!timeString) return ''
+        //     return timeString.slice(0, 5) // Takes the first 5 characters (HH:mm)
+        // },           
     },
-})
+}
 </script>

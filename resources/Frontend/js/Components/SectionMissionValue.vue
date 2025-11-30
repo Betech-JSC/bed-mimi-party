@@ -10,7 +10,7 @@
                     <div class="space-y-3">
                         <div class="max-w-[250px] md:max-w-[320px] lg:max-w-[442px] max-h-[97px] mx-auto">
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
-                                class="w-full h-full" />
+                                class="w-full h-full mix-blend-plus-lighter" />
                         </div>
                         <div class="title-4 text-white text-center">
                             MIMI PARTY là agency tổ chức tiệc “All in One”, cung cấp trọn gói từ concept, décor, biểu
@@ -24,7 +24,7 @@
                             class="space-y-3 p-3 md:p-4 xl:p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:min-h-[332px]">
                             <div class="w-max h-11">
                                 <JPicture :src="itemValue.image.url" :alt="itemValue.image.alt || itemValue.title"
-                                    class="w-full h-full" />
+                                    class="w-full h-full mix-blend-plus-lighter" />
                             </div>
                             <h3 class="title-2 font-bold uppercase text-white">{{ itemValue.title }}</h3>
                             <div class="title-4 text-white">{{ itemValue.description }}</div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="max-w-[574px] w-full mx-auto">
                     <JPicture src="/assets/images/home/image-what-we-do.png" alt="image what we do"
-                        class="picture-cover" />
+                        class="picture-cover mix-blend-plus-lighter" />
                 </div>
             </div>
         </div>

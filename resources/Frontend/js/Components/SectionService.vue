@@ -5,7 +5,8 @@
             </div>
 
             <div class="grid md:grid-cols-3 gap-4">
-                <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
+                {{ services }}
+                <!-- <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" /> -->
             </div>
 
             <div v-if="showButton" class="flex items-center justify-center">
@@ -19,35 +20,5 @@ import CardService from '@/Components/Card/CardService.vue'
 export default {
     components: { CardService },
     props: ['services', 'showButton'],
-    data() {
-        return {
-            services: [
-                {
-                    image: {
-                        url: '/assets/images/demo/image-service-1.jpg',
-                        alt: 'image service 1',
-                    },
-                    title: 'Decor trang trí bong bóng nghệ thuật',
-                    slug: 'demo-1',
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-service-2.jpg',
-                        alt: 'image service 2',
-                    },
-                    title: 'Decor Tiệc theo yêu cầu',
-                    slug: 'demo-2',
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-service-3.jpg',
-                        alt: 'image service 3',
-                    },
-                    title: 'Decor quán mùa lễ',
-                    slug: 'demo-3',
-                },
-            ],
-        }
-    },
 }
 </script>
