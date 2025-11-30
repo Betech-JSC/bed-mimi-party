@@ -1,9 +1,8 @@
 {
-  "buildCommand": "yarn build",
+  "buildCommand": "yarn install && yarn route && yarn frontend:build && yarn backend:build",
   "installCommand": "yarn install",
   "framework": null,
   "outputDirectory": "public",
-  "devCommand": "yarn dev",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
+  "devCommand": "yarn dev"
 }
 
