@@ -1,4 +1,4 @@
-# Wecan
+# Mini Party
 
 1. [Cài đặt PHP 8.x](#cài-đặt-php-8x)
 2. [Cài đặt Composer 2.x](#cài-đặt-composer-2x)
