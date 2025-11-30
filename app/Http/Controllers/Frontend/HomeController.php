@@ -12,23 +12,23 @@ class HomeController extends Controller
     {
         try {
 
-            $rooms_featured = Post::query()
+            $services = Post::query()
                 ->active()
-                ->whereRoom()
+                ->where('type', Post::TYPE_SERVICE)
                 ->IsFeatured()
                 ->get()
                 ->map(fn($item) => $item->transform());
 
-            $promotions = Post::query()
+            $posts = Post::query()
                 ->active()
-                ->wherePromotion()
+                ->where('type', Post::TYPE_POST)
                 ->IsFeatured()
                 ->get()
                 ->map(fn($item) => $item->transform());
 
             $data = [
-                'rooms_featured' => $rooms_featured,
-                'promotions' => $promotions,
+                'services' => $services,
+                'posts' => $posts,
             ];
 
             return Inertia::render('Home', $data);
