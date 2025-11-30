@@ -9,8 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->date('date');
-            $table->time('time');
+            $table->date('date')->nullable();
+            $table->time('time')->nullable();
             $table->string('location')->nullable()->after('time');
             $table->string('weekday')->nullable()->after('location');
         });

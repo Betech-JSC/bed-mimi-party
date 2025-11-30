@@ -73,19 +73,6 @@
             <div class="card">
                 <div class="card-body">
                     <Field
-                        v-model="form.categories"
-                        :field="{
-                            type: 'select_multiple',
-                            name: 'categories',
-                            labelBy: 'title',
-                            source: {
-                                model: 'App\\Models\\Post\\PostCategory',
-                                method: 'get',
-                                only: ['id', 'title'],
-                            },
-                        }"
-                    />
-                    <Field
                         v-model="form.related_posts"
                         :field="{
                             type: 'select_multiple',
