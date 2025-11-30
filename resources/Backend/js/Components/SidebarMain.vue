@@ -30,6 +30,24 @@
         <span>{{ tt('models.table_list.galleries') }}</span>
     </Link>
     <Link
+        v-if="can('admin.posts.index')"
+        :href="route('admin.posts.index')"
+        :class="{ active: isUrl('admin.posts.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.posts') }}</span>
+    </Link>
+    <Link
+        v-if="can('admin.services.index')"
+        :href="route('admin.services.index')"
+        :class="{ active: isUrl('admin.services.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.services') }}</span>
+    </Link>
+    <Link
         v-if="can('admin.contacts.index')"
         :href="route('admin.contacts.index')"
         :class="{ active: isUrl('admin.contacts.*') }"
