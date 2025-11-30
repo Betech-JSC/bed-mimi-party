@@ -13,117 +13,114 @@
             <div class="relative pb-12 h-full">
                 <div class="container flex items-end mt-auto h-full">
                     <h2 class="title-linear display-2 uppercase font-extrabold">Liên hệ ngay</h2>
-
                 </div>
             </div>
         </section>
 
         <section class="pt-12 md:pb-16 pb-12 xl:pb-20 relative overflow-hidden">
-            <div class="circle-orange !h-[350px] left-[-350px] top-[100px]"></div>
+            <div class="absolute inset-0">
+                <JPicture
+                    src="/assets/images/contact/bg-contact.jpg"
+                    loading="eager"
+                    class="object-fit h-full w-full object-cover"
+                    alt="image contact"
+                />
+            </div>
             <div class="relative z-10">
-                <div class="container md:space-y-12 space-y-8 xl:space-y-[120px]">
-                    <div class="grid grid-cols-12 gap-y-4 md:gap-6 xl:gap-8">
-                        <div class="col-span-full lg:col-span-4 xl:col-span-5">
-                            <div class="space-y-8 py-6">
-                                <h2 class="headline-3 text-white uppercase">{{ tt('Contact us') }}</h2>
-                                <div class="md:space-y-5 space-y-4 xl:space-y-6 body-1">
-                                    <JamFieldSet
-                                        v-model="form.contact.data.Name"
-                                        :field="{
-                                            rules: rules,
-                                            errors: errors,
-                                            type: 'text',
-                                            placeholder: tt('Name'),
-                                            name: 'Họ và tên',
-                                            fieldName: 'Name',
-                                            errorText: tt('Họ tên không hợp lệ'),
-                                        }"
-                                        :isSubmit="isSubmit"
-                                        @setIsSubmit="setIsSubmit"
-                                        :isContact="true"
-                                    />
-                                    <JamFieldSet
-                                        v-model="form.contact.data.Email"
-                                        :field="{
-                                            rules: rules,
-                                            errors: errors,
-                                            type: 'email',
-                                            placeholder: tt('Email'),
-                                            name: 'Email',
-                                            fieldName: 'Email',
-                                            errorText: tt('Email không hợp lệ'),
-                                        }"
-                                        :isSubmit="isSubmit"
-                                        @setIsSubmit="setIsSubmit"
-                                        :isContact="true"
-                                    />
-                                    <JamFieldSet
-                                        v-model="form.contact.data.Phone"
-                                        :field="{
-                                            rules: rules,
-                                            errors: errors,
-                                            type: 'number',
-                                            placeholder: tt('Số điện thoại'),
-                                            name: 'Số điện thoại',
-                                            fieldName: 'Phone',
-                                            errorText: tt('Số điện thoại không hợp lệ'),
-                                        }"
-                                        :isSubmit="isSubmit"
-                                        @setIsSubmit="setIsSubmit"
-                                        :isContact="true"
-                                    />
-                                    <JamFieldSet
-                                        v-model="form.contact.data['Nội dung yêu cầu']"
-                                        :field="{
-                                            rules: rules,
-                                            errors: errors,
-                                            type: 'text',
-                                            placeholder: tt('Lời nhắn'),
-                                            name: 'Nội dung yêu cầu',
-                                            fieldName: 'note',
-                                            errorText: tt('Họ tên không hợp lệ'),
-                                        }"
-                                        :isSubmit="isSubmit"
-                                        @setIsSubmit="setIsSubmit"
-                                        :isContact="true"
-                                    />
-                                </div>
-                                <div>
-                                    <ButtonSubmit @click="contact">{{ tt('Gửi yêu cầu') }}</ButtonSubmit>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-span-full md:col-span-6 lg:col-span-4 xl:col-span-3">
-                            <div class="space-y-[14px] py-8">
-                                <div v-for="(itemInfo, indexInfo) in infos" :key="indexInfo" class="space-y-4">
-                                    <div class="w-full text-white/60 body-3 uppercase !font-display flex-shrink-0 mt-1">
-                                        {{ itemInfo.title }}
-                                    </div>
-                                    <div class="body-1 text-white lg:hover:text-primary duration-300 ease-in-out">
-                                        <a
-                                            :href="itemInfo.href"
-                                            :target="itemInfo.target"
-                                            rel="noopener noreferrer nofollow"
-                                            v-html="itemInfo.content"
-                                        >
-                                        </a>
+                <div class="container space-y-8 py-6">
+                    <h3 class="headline-3 font-extrabold text-white uppercase">{{ tt('Thông tin cá nhân') }}</h3>
+                    <div class="grid grid-cols-2 gap-x-12 gap-y-6 body-1">
+                        <JamFieldSet
+                            v-model="form.contact.data.Name"
+                            :field="{
+                                rules: rules,
+                                errors: errors,
+                                type: 'text',
+                                placeholder: tt('Name'),
+                                name: 'Họ và tên',
+                                fieldName: 'Name',
+                                errorText: tt('Họ tên không hợp lệ'),
+                            }"
+                            :isSubmit="isSubmit"
+                            @setIsSubmit="setIsSubmit"
+                            :isContact="true"
+                        />
+                        <JamFieldSet
+                            v-model="form.contact.data.Email"
+                            :field="{
+                                rules: rules,
+                                errors: errors,
+                                type: 'email',
+                                placeholder: tt('Email'),
+                                name: 'Email',
+                                fieldName: 'Email',
+                                errorText: tt('Email không hợp lệ'),
+                            }"
+                            :isSubmit="isSubmit"
+                            @setIsSubmit="setIsSubmit"
+                            :isContact="true"
+                        />
+                        <JamFieldSet
+                            v-model="form.contact.data.Phone"
+                            :field="{
+                                rules: rules,
+                                errors: errors,
+                                type: 'number',
+                                placeholder: tt('Số điện thoại'),
+                                name: 'Số điện thoại',
+                                fieldName: 'Phone',
+                                errorText: tt('Số điện thoại không hợp lệ'),
+                            }"
+                            :isSubmit="isSubmit"
+                            @setIsSubmit="setIsSubmit"
+                            :isContact="true"
+                        />
+                        <JamFieldSet
+                            v-model="form.contact.data['Nội dung yêu cầu']"
+                            :field="{
+                                rules: rules,
+                                errors: errors,
+                                type: 'text',
+                                placeholder: tt('Lời nhắn'),
+                                name: 'Nội dung yêu cầu',
+                                fieldName: 'note',
+                                errorText: tt('Họ tên không hợp lệ'),
+                            }"
+                            :isSubmit="isSubmit"
+                            @setIsSubmit="setIsSubmit"
+                            :isContact="true"
+                        />
+                    </div>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="col-span-2">
+                            <h3 class="headline-3 font-extrabold text-white uppercase mb-6">{{ tt('Dịch vụ') }}</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div 
+                                    v-for="(service, index) in services" 
+                                    :key="index"
+                                    class="flex items-start"
+                                >
+                                    <div class="checkbox">
+                                        <input
+                                            type="checkbox"
+                                            :id="`service_${index}`"
+                                            :name="`service_${index}`"
+                                            v-model="selectedServices[index]"
+                                        />
+                                        <span></span>
+                                        <label :for="`service_${index}`" class="text-white">
+                                            {{ service }}
+                                        </label>                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-span-full md:col-span-6 lg:col-span-4">
-                            <JPicture
-                                src="/assets/images/contact/image-contact.jpg"
-                                alt="image contact"
-                                class="w-full h-full object-cover"
-                            />
+                        <div class="flex items-end justify-end">
+                            <button class="btn btn-primary !w-full !justify-center" @click="contact">{{ tt('Gửi yêu cầu') }}</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section class="w-full h-[250px] md:h-[400px] xl:h-[600px] relative overflow-hidden">
-            <VideoFullScreen videoSrc="/assets/video/video-hero.mp4" poster="/assets/placeholder.jpg" />
         </section>
         <ModalSuccess
             @close="closePopup"
@@ -156,9 +153,7 @@ export default {
         'click-outside': {
             beforeMount: (el, binding) => {
                 el.clickOutsideEvent = (event) => {
-                    // here I check that click was outside the el and his children
                     if (!(el == event.target || el.contains(event.target))) {
-                        // and if it did, call method provided in attribute value
                         binding.value()
                     }
                 }
@@ -230,6 +225,18 @@ export default {
             typeServiceActive: null,
             isEmptyService: false,
             screenWidth: 0,
+            services: [
+                'Decor Tiệc theo yêu cầu',
+                'Dancer Feel & Performace',
+                'Decor quán mùa lễ',
+                'Liveband',
+                'Decor trang trí bong bóng nghệ thuật',
+                'Gói giải trí trọn gói',
+                'Decor sinh nhật & concept',
+                'Dịch vụ chụp ảnh, quay phim',
+                'DJ & MC Hype'
+            ],
+            selectedServices: []
         }
     },
     mounted() {
@@ -245,12 +252,22 @@ export default {
             if (Object.keys(this.errors).length > 0) {
                 return false
             }
+            
+            // Lấy danh sách dịch vụ được chọn
+            const selectedServicesList = this.services.filter((service, index) => this.selectedServices[index])
+            
+            // Thêm vào form data
+            if (selectedServicesList.length > 0) {
+                this.form.contact.data['Dịch vụ'] = selectedServicesList.join(', ')
+            }
+            
             this.isLoading = true
 
             this.$inertia.post('contacts', this.form, {
                 preserveScroll: true,
                 onSuccess: () => {
                     this.form.contact.data = { ...emptyForm }
+                    this.selectedServices = []
                     this.typeServiceActive = null
                     this.isEmptyService = false
                     this.isSuccess = true
@@ -346,5 +363,58 @@ export default {
     img {
         @apply max-md:w-full max-md:h-full max-md:object-cover;
     }
+}
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox span {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 2px solid #cbd5e1;
+    border-radius: 4px;
+    margin-right: 12px;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.checkbox input[type="checkbox"]:checked ~ span {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.checkbox span:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox input[type="checkbox"]:checked ~ span:after {
+    display: block;
+}
+
+.checkbox label {
+    cursor: pointer;
+    line-height: 1.4;
 }
 </style>
