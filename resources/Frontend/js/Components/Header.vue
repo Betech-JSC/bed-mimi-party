@@ -164,8 +164,8 @@ export default {
                 },
                 {
                     title: this.tt('Tin tức'),
-                    slug: this.route('galleries.index'),
-                    type: 'galleries',
+                    slug: this.route('posts'),
+                    type: 'posts',
                     subMenu: [],
                 },
                 {

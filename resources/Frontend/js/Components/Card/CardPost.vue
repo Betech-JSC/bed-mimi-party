@@ -3,7 +3,7 @@
         <Link
             :href="
                 route('posts.show', {
-                    slug: item.slug,
+                    slug: item.slug || 'demo-slug',
                 })
             "
             class="aspect-w-7 aspect-h-5 relative overflow-hidden block"
@@ -31,7 +31,7 @@
                 <Link
                     :href="
                         route('posts.show', {
-                            slug: item.slug,
+                            slug: item.slug || 'demo-slug',
                         })
                     "
                     class="title-1 text-white !font-sans lg:group-hover:text-primary duration-300 ease-in-out line-clamp-5"
