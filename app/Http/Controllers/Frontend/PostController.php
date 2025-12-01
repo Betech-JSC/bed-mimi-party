@@ -17,6 +17,7 @@ class PostController extends Controller
         try {
             $posts = Post::query()
                 ->active()
+                ->where('type', Post::TYPE_POST)
                 ->filter(request()->all())
                 ->paginate(12)
                 ->onEachSide(0)
@@ -25,13 +26,7 @@ class PostController extends Controller
                 })
                 ->withQueryString();
 
-            $categories = PostCategory::query()
-                ->active()
-                ->get()
-                ->map(fn($item) => $item->transform());
-
             $data = [
-                'categories' => $categories,
                 'posts' => $posts,
             ];
 
