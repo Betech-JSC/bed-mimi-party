@@ -16,7 +16,7 @@
                         <Link
                             :href="
                                 route('posts.show', {
-                                    slug: item.slug || 'demo-slug',
+                                    slug: posts.data[0].slug || 'demo-slug',
                                 })
                             "
                             class="display-3 font-extrabold uppercase line-clamp-2"
