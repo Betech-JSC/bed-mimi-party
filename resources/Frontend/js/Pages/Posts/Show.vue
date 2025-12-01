@@ -13,9 +13,9 @@
                                         <span>Tin tức</span>
                                     </div>
                                     <div class="flex items-center gap-3 text-white">
-                                        <span class="title-1">Ten tác giả</span>
+                                        <span class="title-1">Tên tác giả</span>
                                         <span>|</span>
-                                        <span class="button-1 font-semibold">20PM 20.8.2025</span>
+                                        <span class="button-1 font-semibold">{{ formatDate(post.published_at) }}</span>
                                     </div>
                                 </div>
                                 <div class="hidden md:flex items-center gap-3">
@@ -104,14 +104,14 @@
             </div>
         </section>
 
-        <section class="py-12 md:py-16 xl:py-20 border-t border-white">
+        <section v-if="related_posts && related_posts.length > 0" class="py-12 md:py-16 xl:py-20 border-t border-white">
             <div class="container space-y-5 md:space-y-8 xl:space-y-10">
                 <div class="md:flex-row flex-col gap-4 flex justify-center items-center md:justify-between">
                     <h2 class="title-linear display-2 uppercase font-extrabold">Tin tức khác</h2>
                     <button class="btn btn-primary">Xem tất cả</button>
                 </div>
                 <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 md:gap-6 gap-4 xl:gap-8">
-                    <CardPost v-for="(itemPost, indexPost) in posts.slice(0, 3)" :key="indexPost" :item="itemPost" />
+                    <CardPost v-for="(itemPost, indexPost) in related_posts" :key="indexPost" :item="itemPost" />
                 </div>
             </div>
         </section>
@@ -158,6 +158,12 @@ export default {
                 this.copySuccess = false
             }, 1000)
         },
+      formatDate(dateString) {
+            // Convert '2025-09-05' to '05.09.2025'
+            if (!dateString) return ''
+            const [year, month, day] = dateString.split('-')
+            return `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year}`
+        },        
     },
 }
 </script>

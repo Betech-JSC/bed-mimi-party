@@ -32,10 +32,11 @@
                 </div>
             </div>
         </section>
+        <!-- {{ posts }} -->
         <section class="md:py-16 py-12 xl:py-20">
             <div class="container">
                 <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 md:gap-6 gap-4 xl:gap-8">
-                    <CardPost v-for="(itemPost, indexPost) in posts" :key="indexPost" :item="itemPost" />
+                    <CardPost v-for="(itemPost, indexPost) in posts.data" :key="indexPost" :item="itemPost" />
                 </div>
             </div>
         </section>
@@ -48,137 +49,5 @@ import CardPost from '@/Components/Card/CardPost.vue'
 export default {
     components: { CardPost },
     props: ['categories', 'posts', 'banner'],
-    data() {
-        return {
-            posts: [
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Tổ chức sự kiện được hiểu một cách đơn giản là quá trình lên ý tưởng sự kiện, chuẩn bị hậu cần, thực hiện và giám sát sự kiện',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Tổ chức sự kiện được hiểu một cách đơn giản là quá trình lên ý tưởng sự kiện, chuẩn bị hậu cần, thực hiện và giám sát sự kiện',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Tổ chức sự kiện được hiểu một cách đơn giản là quá trình lên ý tưởng sự kiện, chuẩn bị hậu cần, thực hiện và giám sát sự kiện',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-event-1.jpg',
-                        alt: 'image demo',
-                    },
-                    created_at: '20pm 20.8.2025',
-                    title: 'Top 10+ Ý tưởng Gala Dinner ấn tượng và độc đáo nhất',
-                    slug: 'demo-blog-1',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    category: {
-                        title: 'Tin tức',
-                    },
-                },
-            ],
-        }
-    },
 }
 </script>
