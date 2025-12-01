@@ -70,23 +70,6 @@
                     />
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body">
-                    <Field
-                        v-model="form.related_posts"
-                        :field="{
-                            type: 'select_multiple',
-                            name: 'related_posts',
-                            labelBy: 'title',
-                            source: {
-                                model: 'App\\Models\\Post\\Post',
-                                method: 'get',
-                                only: ['id', 'title'],
-                            },
-                        }"
-                    />
-                </div>
-            </div>
         </template>
     </Form>
 </template>
@@ -98,6 +81,7 @@ export default {
             formData: {
                 status: this.item.status ?? 'ACTIVE',
                 type: 'PROJECT',
+                view_count: 0,
                 ...this.item,
             },
         }
@@ -107,6 +91,7 @@ export default {
             this.formData = {
                 status: this.item.status ?? 'ACTIVE',
                 type: 'PROJECT',
+                view_count: 0,
                 ...this.item,
             }
         },
