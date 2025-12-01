@@ -117,23 +117,41 @@ class Service extends BaseModel
 
     public function transform()
     {
+        $sliders = collect($this->sliders)
+            ->map(function ($item) {
+                return [
+                    'url' => static_url($item['path']) ?? null,
+                    'alt' => $item['alt'] ?? $this->title
+                ];
+            });
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->seo_slug ?? $this->slug,
             'description' => $this->description,
             'image' => $this->getImageDetail($this->image),
+            'sliders' => $sliders,
         ];
     }
 
     public function transformDetails()
     {
+        $sliders = collect($this->sliders)
+            ->map(function ($item) {
+                return [
+                    'url' => static_url($item['path']) ?? null,
+                    'alt' => $item['alt'] ?? $this->title
+                ];
+            });
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->seo_slug ?? $this->slug,
             'description' => $this->description,
             'content' => transform_richtext($this->content),
+            'sliders' => $sliders,
         ];
     }
 

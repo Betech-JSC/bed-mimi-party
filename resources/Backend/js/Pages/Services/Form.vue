@@ -64,7 +64,17 @@
                         :field="{
                             type: 'file_upload',
                             name: 'image',
+                            label: 'Ảnh đại diện',
                             multiple: false,
+                        }"
+                    />
+                    <Field
+                        v-model="form.sliders"
+                        :field="{
+                            label: 'Danh sách ảnh',
+                            type: 'file_upload',
+                            name: 'sliders',
+                            multiple: true,
                         }"
                     />
                 </div>
