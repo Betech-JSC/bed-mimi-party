@@ -34,7 +34,7 @@ export default {
         Marquee,
         MarqueeWhite,
     },
-    props: ['posts', 'services'],
+    props: ['posts', 'services', 'projects'],
     data() {
         return {
             marquees: [
@@ -74,62 +74,6 @@ export default {
                     description: `
                         Xây dựng hệ sinh thái dịch vụ tiệc “All in One”: từ ý tưởng, thiết kế, trang trí, âm nhạc, biểu diễn cho đến vận hành. Đặt Minh bạch – Chất lượng – Riêng tư làm nền tảng trong mọi hoạt động.  Không ngừng hoàn thiện quy trình để mang đến sự hài lòng tuyệt đối – nơi tiêu chuẩn duy nhất mà chúng tôi hướng đến, chính là tiêu chuẩn của khách hàng.
                     `,
-                },
-            ],
-            projects: [
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
-                },
-                {
-                    image: {
-                        url: '/assets/images/demo/image-product.jpg',
-                        alt: 'image 1',
-                    },
                 },
             ],
             partners: [

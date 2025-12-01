@@ -1,5 +1,5 @@
 <template>
-    <Link href="/" class="relative duration-300 ease-in-out block card-room">
+    <div class="relative duration-300 ease-in-out block card-room">
         <div class="image-wrapper aspect-w-16 aspect-h-9 relative">
             <JPicture
                 :src="item.image.url"
@@ -7,7 +7,7 @@
                 class="w-full h-full object-cover"
             />
         </div>
-    </Link>
+    </div>
 </template>
 
 <script>
