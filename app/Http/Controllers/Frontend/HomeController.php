@@ -20,6 +20,13 @@ class HomeController extends Controller
                 ->get()
                 ->map(fn($item) => $item->transform());
 
+            $projects = Post::query()
+                ->active()
+                ->where('type', Post::TYPE_PROJECT)
+                ->take(9)
+                ->get()
+                ->map(fn($item) => $item->transform());
+
             $posts = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_POST)
@@ -30,6 +37,7 @@ class HomeController extends Controller
             $data = [
                 'services' => $services,
                 'posts' => $posts,
+                'projects' => $projects,
             ];
 
             return Inertia::render('Home', $data);

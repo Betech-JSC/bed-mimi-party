@@ -3,20 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\AgencyController;
-use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HistoryController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\GalleryController;
-use App\Http\Controllers\Frontend\OrderController;
-use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\SitemapController;
-use App\Http\Controllers\Frontend\PolicyController;
 use App\Http\Controllers\Frontend\ProjectController;
 use App\Http\Controllers\Frontend\PromotionController;
 use App\Http\Controllers\Frontend\RoomController;
 use App\Http\Controllers\Frontend\ServiceController;
-use Inertia\Inertia;
 
 Route::get('sitemap.xml', [SitemapController::class, 'index']);
 
