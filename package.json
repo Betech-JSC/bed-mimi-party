@@ -64,7 +64,7 @@
         "vuedraggable": "^4.1.0"
     },
     "engines": {
-        "node": "18.x",
+        "node": "^18.x",
         "yarn": "1.x"
     }
 }
