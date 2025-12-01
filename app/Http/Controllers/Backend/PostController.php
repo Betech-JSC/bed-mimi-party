@@ -14,4 +14,15 @@ class PostController extends Controller
     public $with = [
         'form' => ['relatedPosts']
     ];
+
+    private function getTable()
+    {
+        return 'Posts';
+    }
+
+    private function beforeIndex($query)
+    {
+        return $query->where('type', Post::TYPE_POST)
+            ->orderBy('id', 'DESC');
+    }
 }
