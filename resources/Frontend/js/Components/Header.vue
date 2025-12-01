@@ -6,11 +6,11 @@
             <div class="px-4 md:px-8 xl:px-12 flex items-center justify-between w-full">
                 <Logo />
                 <div class="max-lg:hidden space-y-[12px]">
-                    <ul class="flex items-center space-x-6 body-0 uppercase">
+                    <ul class="flex items-center space-x-5 body-0 uppercase">
                         <li>
                             <a
                                 href="/"
-                                class="p-1.5 border-b relative block"
+                                class="p-1 border-b-2 relative block"
                                 :class="
                                     $page.props.route.path === '/'
                                         ? 'text-white/100 border-primary text-shadow-glow-white font-semibold'
@@ -28,7 +28,7 @@
                             >
                                 <Link
                                     :href="menu.slug"
-                                    class="p-1.5 border-b relative block"
+                                    class="p-1 border-b-2 relative block"
                                     :class="
                                         fullPath.includes(menu.slug) && $page.props.route.path !== '/'
                                             ? 'text-white/100 border-primary text-shadow-glow-white font-semibold'
