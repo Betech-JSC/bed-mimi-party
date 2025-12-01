@@ -152,8 +152,8 @@ export default {
                 },
                 {
                     title: this.tt('Dịch vụ'),
-                    slug: this.route('rooms.index'),
-                    type: 'rooms',
+                    slug: this.route('services'),
+                    type: 'services',
                     subMenu: [],
                 },
                 {
