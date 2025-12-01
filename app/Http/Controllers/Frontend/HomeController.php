@@ -30,7 +30,7 @@ class HomeController extends Controller
             $posts = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_POST)
-                ->IsFeatured()
+                ->isFeatured()
                 ->take(3)
                 ->get()
                 ->map(fn($item) => $item->transform());
