@@ -78,10 +78,10 @@
                         }"
                     /> 
                     <Field
-                        v-model="form.banner"
+                        v-model="form.banners"
                         :field="{
                             type: 'file_upload',
-                            name: 'banner',
+                            name: 'banners',
                             multiple: true,
                         }"
                     />
@@ -122,6 +122,8 @@ export default {
         return {
             formData: {
                 status: this.item.status ?? 'ACTIVE',
+                sliders: this.item.sliders ?? [],
+                banners: this.item.banners ?? [],
                 view_count: 0,
                 ...this.item,
                 type: 'POST',
@@ -132,6 +134,8 @@ export default {
         item() {
             this.formData = {
                 status: this.item.status ?? 'ACTIVE',
+                sliders: this.item.sliders ?? [],
+                banners: this.item.banners ?? [],
                 view_count: 0,
                 ...this.item,
                  type: 'PROJECT',
