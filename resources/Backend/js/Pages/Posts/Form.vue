@@ -99,6 +99,7 @@ export default {
                 status: this.item.status ?? 'ACTIVE',
                 view_count: 0,
                 ...this.item,
+                type: 'POST',
             },
         }
     },
@@ -108,6 +109,7 @@ export default {
                 status: this.item.status ?? 'ACTIVE',
                 view_count: 0,
                 ...this.item,
+                 type: 'PROJECT',
             }
         },
     },
