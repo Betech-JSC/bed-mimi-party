@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\ConfigController;
 use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\PromotionController;
 use App\Http\Controllers\Backend\RoomController;
+use App\Http\Controllers\Backend\ProjectController;
 
 Route::localized(function () {
     Route::middleware(['auth:admin'])->name('admin.')->group(function () {
@@ -50,5 +51,6 @@ Route::localized(function () {
         Route::module(RoomController::class);
         Route::module(PromotionController::class);
         Route::module(GalleryController::class);
+        Route::module(ProjectController::class);
     });
 });

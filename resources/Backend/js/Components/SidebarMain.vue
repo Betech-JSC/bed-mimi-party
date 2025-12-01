@@ -21,6 +21,15 @@
         <span>{{ tt('models.table_list.promotions') }}</span>
     </Link>
     <Link
+        v-if="can('admin.projects.index')"
+        :href="route('admin.projects.index')"
+        :class="{ active: isUrl('admin.projects.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.projects') }}</span>
+    </Link>
+    <Link
         v-if="can('admin.galleries.index')"
         :href="route('admin.galleries.index')"
         :class="{ active: isUrl('admin.galleries.*') }"

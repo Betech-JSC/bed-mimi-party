@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Builder;
 
-
-
 class Post extends BaseModel
 {
     use HasFactory, SoftDeletes, Searchable, Translatable;
@@ -25,6 +23,7 @@ class Post extends BaseModel
     public const TYPE_ROOM = 'ROOM';
     public const TYPE_PROMOTION = 'PROMOTION';
     public const TYPE_GALLERY = 'GALLERY';
+    public const TYPE_PROJECT = 'PROJECT';
 
     public const STATUS_LIST = [
         self::STATUS_ACTIVE => 'Kích hoạt',
