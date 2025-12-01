@@ -316,7 +316,7 @@ class Post extends BaseModel
     public function transformDetails($conditions = ['tags' => false])
     {
 
-        $images = $variant['images'] ?? collect($this->images)
+        $images =  collect($this->images)
             ->map(function ($item) {
                 return [
                     'url' => static_url($item['path']) ?? null,
@@ -324,7 +324,7 @@ class Post extends BaseModel
                 ];
             });
 
-        $images_banner = $variant['images_banner'] ?? collect($this->images_banner)
+        $images_banner = collect($this->images_banner)
             ->map(function ($item) {
                 return [
                     'url' => static_url($item['path']) ?? null,

@@ -12,6 +12,14 @@
                             label: 'Tiêu đề',
                         }"
                     />
+                     <Field
+                        v-model="form.author"
+                        :field="{
+                            type: 'text',
+                            name: 'author',
+                            label: 'Tác giả',
+                        }"
+                    />
                     <Field
                         v-model="form.description"
                         :field="{
@@ -65,7 +73,24 @@
                         :field="{
                             type: 'file_upload',
                             name: 'image',
+                            label: 'Ảnh đại diện',
                             multiple: false,
+                        }"
+                    /> 
+                    <Field
+                        v-model="form.banner"
+                        :field="{
+                            type: 'file_upload',
+                            name: 'banner',
+                            multiple: true,
+                        }"
+                    />
+                    <Field
+                        v-model="form.sliders"
+                        :field="{
+                            type: 'file_upload',
+                            name: 'sliders',
+                            multiple: true,
                         }"
                     />
                 </div>
