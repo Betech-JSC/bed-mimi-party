@@ -50,6 +50,7 @@ class PostController extends Controller
         try {
             $post = $this->model::query()
                 ->active()
+                ->where('type', Post::TYPE_POST)
                 ->whereSlug($slug)
                 ->firstOrFail();
 

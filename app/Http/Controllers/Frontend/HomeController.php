@@ -31,6 +31,7 @@ class HomeController extends Controller
                 ->active()
                 ->where('type', Post::TYPE_POST)
                 ->IsFeatured()
+                ->take(3)
                 ->get()
                 ->map(fn($item) => $item->transform());
 
