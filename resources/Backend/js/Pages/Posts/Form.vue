@@ -105,7 +105,7 @@
                             labelBy: 'title',
                             source: {
                                 model: 'App\\Models\\Post\\Post',
-                                method: 'get',
+                                method: 'getPosts',
                                 only: ['id', 'title'],
                             },
                         }"

@@ -199,6 +199,14 @@ class Post extends BaseModel
         return $this->relatedPosts;
     }
 
+    public function getPosts()
+    {
+        return self::query()
+            ->active()
+            ->where('type', Post::TYPE_POST)
+            ->get();
+    }
+
     public function getUrlAttribute(): array
     {
         $urls = [];
