@@ -36,6 +36,7 @@
         <section class="md:py-16 py-12 xl:py-20">
             <div class="container">
                 <div class="grid md:grid-cols-2 grid-cols-1 lg:grid-cols-3 md:gap-6 gap-4 xl:gap-8">
+                    <CardPost v-for="(itemPost, indexPost) in posts.data" :key="indexPost" :item="itemPost" />
                 </div>
             </div>
         </section>
