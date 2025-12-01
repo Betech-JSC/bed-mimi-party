@@ -16,6 +16,7 @@ class HomeController extends Controller
             $services = Service::query()
                 ->active()
                 ->sortByPosition()
+                ->take(3)
                 ->get()
                 ->map(fn($item) => $item->transform());
 
