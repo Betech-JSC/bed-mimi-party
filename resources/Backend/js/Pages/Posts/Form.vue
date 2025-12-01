@@ -77,20 +77,22 @@
                             multiple: false,
                         }"
                     /> 
+                        <Field
+                        v-model="form.images"
+                        :field="{
+                            type: 'file_upload',
+                            name: 'image',
+                            label: 'Danh sách ảnh',
+                            multiple: false,
+                        }"
+                    /> 
                     <Field
                         v-model="form.banners"
                         :field="{
                             type: 'file_upload',
                             name: 'banners',
                             multiple: true,
-                        }"
-                    />
-                    <Field
-                        v-model="form.sliders"
-                        :field="{
-                            type: 'file_upload',
-                            name: 'sliders',
-                            multiple: true,
+                            label: 'Hình ảnh Banner',
                         }"
                     />
                 </div>
@@ -122,8 +124,8 @@ export default {
         return {
             formData: {
                 status: this.item.status ?? 'ACTIVE',
-                sliders: this.item.sliders ?? [],
                 banners: this.item.banners ?? [],
+                images: this.item.images ?? [],
                 view_count: 0,
                 ...this.item,
                 type: 'POST',
@@ -134,8 +136,8 @@ export default {
         item() {
             this.formData = {
                 status: this.item.status ?? 'ACTIVE',
-                sliders: this.item.sliders ?? [],
                 banners: this.item.banners ?? [],
+                images: this.item.images ?? [],
                 view_count: 0,
                 ...this.item,
                  type: 'PROJECT',

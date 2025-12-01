@@ -66,6 +66,25 @@
                             type: 'file_upload',
                             name: 'image',
                             multiple: false,
+                            label: 'Ảnh đại diện',
+                        }"
+                    />
+                    <Field
+                        v-model="form.images"
+                        :field="{
+                            type: 'file_upload',
+                            name: 'images',
+                            multiple: true,
+                            label: 'Danh sách ảnh',
+                        }"
+                    />
+                     <Field
+                        v-model="form.banner"
+                        :field="{
+                            type: 'file_upload',
+                            name: 'banner',
+                            multiple: false,
+                            label: 'Hình ảnh Banner',
                         }"
                     />
                 </div>
@@ -80,6 +99,9 @@ export default {
         return {
             formData: {
                 status: this.item.status ?? 'ACTIVE',
+                image: this.item.image ?? null,
+                images: this.item.images ?? [],
+                banner: this.item.banner ?? null,
                 type: 'PROJECT',
                 view_count: 0,
                 ...this.item,
@@ -90,6 +112,9 @@ export default {
         item() {
             this.formData = {
                 status: this.item.status ?? 'ACTIVE',
+                image: this.item.image ?? null,
+                images: this.item.images ?? [],
+                banner: this.item.banner ?? null,
                 type: 'PROJECT',
                 view_count: 0,
                 ...this.item,
