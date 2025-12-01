@@ -3,24 +3,6 @@
         {{ $page.props.route.name }}
     </span>
     <Link
-        v-if="can('admin.rooms.index')"
-        :href="route('admin.rooms.index')"
-        :class="{ active: isUrl('admin.rooms.*') }"
-        class="item"
-    >
-        <ph-newspaper-clipping-light />
-        <span>{{ tt('models.table_list.rooms') }}</span>
-    </Link>
-    <Link
-        v-if="can('admin.promotions.index')"
-        :href="route('admin.promotions.index')"
-        :class="{ active: isUrl('admin.promotions.*') }"
-        class="item"
-    >
-        <ph-newspaper-clipping-light />
-        <span>{{ tt('models.table_list.promotions') }}</span>
-    </Link>
-    <Link
         v-if="can('admin.projects.index')"
         :href="route('admin.projects.index')"
         :class="{ active: isUrl('admin.projects.*') }"
@@ -28,15 +10,6 @@
     >
         <ph-newspaper-clipping-light />
         <span>{{ tt('models.table_list.projects') }}</span>
-    </Link>
-    <Link
-        v-if="can('admin.galleries.index')"
-        :href="route('admin.galleries.index')"
-        :class="{ active: isUrl('admin.galleries.*') }"
-        class="item"
-    >
-        <ph-newspaper-clipping-light />
-        <span>{{ tt('models.table_list.galleries') }}</span>
     </Link>
     <Link
         v-if="can('admin.posts.index')"
