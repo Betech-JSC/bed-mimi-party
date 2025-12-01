@@ -1,5 +1,5 @@
 <template>
-  <section class="relative max-h-[320px] md:max-h-[400px] lg:max-h-[810px] xl:max-h-full h-[calc(100vh-90px)]">
+  <section class="relative max-h-[320px] md:max-h-[400px] lg:max-h-[810px] xl:max-h-full h-screen">
     <video
       autoplay
       loop
