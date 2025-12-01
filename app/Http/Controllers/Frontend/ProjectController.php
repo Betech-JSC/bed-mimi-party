@@ -15,7 +15,7 @@ class ProjectController extends Controller
         try {
             $projects = Post::query()
                 ->active()
-                ->paginate(3)
+                ->paginate(12)
                 ->onEachSide(0)
                 ->through(function ($item) {
                     return $item->transform();

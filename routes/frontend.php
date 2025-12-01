@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\SitemapController;
 use App\Http\Controllers\Frontend\PolicyController;
+use App\Http\Controllers\Frontend\ProjectController;
 use App\Http\Controllers\Frontend\PromotionController;
 use App\Http\Controllers\Frontend\RoomController;
 use App\Http\Controllers\Frontend\ServiceController;
@@ -50,6 +51,11 @@ Route::middleware(['meta_seo', 'opening'])->group(function () {
         Route::controller(RoomController::class)->group(function () {
             Route::get(Lang::uri('rooms'), 'index')->name('rooms.index');
             Route::get(Lang::uri('rooms') . '/{slug}', 'show')->name('rooms.show');
+        });
+
+        Route::controller(ProjectController::class)->group(function () {
+            Route::get(Lang::uri('projects'), 'index')->name('projects.index');
+            Route::get(Lang::uri('projects') . '/{slug}', 'show')->name('projects.show');
         });
 
         Route::controller(GalleryController::class)->group(function () {
