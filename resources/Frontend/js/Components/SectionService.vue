@@ -9,7 +9,7 @@
             </div>
 
             <div v-if="showButton" class="flex items-center justify-center">
-                <Link :href="route('rooms.index')" class="btn btn-primary">dịch vụ của chúng tôi</Link>
+                <Link :href="route('services')" class="btn btn-primary">dịch vụ của chúng tôi</Link>
             </div>
         </section>
 </template>
