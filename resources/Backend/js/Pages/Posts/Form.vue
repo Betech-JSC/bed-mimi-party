@@ -97,6 +97,7 @@ export default {
         return {
             formData: {
                 status: this.item.status ?? 'ACTIVE',
+                view_count: 0,
                 ...this.item,
             },
         }
@@ -105,6 +106,7 @@ export default {
         item() {
             this.formData = {
                 status: this.item.status ?? 'ACTIVE',
+                view_count: 0,
                 ...this.item,
             }
         },

@@ -65,6 +65,6 @@
     },
     "engines": {
         "node": "^18.x",
-        "yarn": "1.x"
+        "yarn": "^1.x"
     }
 }
