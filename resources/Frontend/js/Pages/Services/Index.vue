@@ -1,6 +1,6 @@
 <template>
     <main class="bg-primary-900">
-        <BannerImage :banner="banner" classBanner="h-[574px]" />
+        <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
         <SectionService :services="services" />
         <section class="md:mt-[80px] mt-[56px] xl:mt-[120px] md:py-16 py-12 xl:py-20">
             <div class="container">
@@ -23,7 +23,7 @@
         <!-- Modal -->
         <div v-if="isModalOpen" class="fixed inset-0 bg-[#000E27] bg-opacity-[63%] flex items-center justify-center z-[9999] p-5" @click.self="closeModal">
             <div
-                class="relative max-w-[90vw] w-full max-h-[90vh] flex flex-col border border-white/20 bg-linear-modal p-8"
+                class="relative max-w-[90vw] w-full max-h-[90vh] flex flex-col border border-white/20 bg-linear-modal md:p-6 p-3 xl:p-8"
             >
                 <button
                     class="absolute -top-14 -right-4 w-10 h-10 rounded-lg bg-white lg:hover:bg-primary-500 lg:hover:text-white duration-300 ease-in-out text-black flex items-center justify-center"
@@ -45,12 +45,12 @@
                     </svg>
                 </button>
                 <div class="grid grid-cols-12 gap-6">
-                    <div class="col-span-7">
+                    <div class="col-span-full lg:col-span-7">
                         <div class="modal-body">
                             <ThumbnailModal :product="selectedItem"  />
                         </div>
                     </div>
-                    <div class="col-span-5 space-y-8">
+                    <div class="col-span-full lg:col-span-5 space-y-8">
                             <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
                             <p class="body-2 text-white">{{ selectedItem.description }}</p>
                     </div>

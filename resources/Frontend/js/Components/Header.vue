@@ -158,8 +158,8 @@ export default {
                 },
                 {
                     title: this.tt('Dự án'),
-                    slug: this.route('promotions.index'),
-                    type: 'promotions',
+                    slug: this.route('projects.index'),
+                    type: 'projects',
                     subMenu: [],
                 },
                 {

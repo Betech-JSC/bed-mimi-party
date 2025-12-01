@@ -4,7 +4,7 @@
                 <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dịch vụ</h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-4">
+            <div v-if="services && services.length > 0" class="grid md:grid-cols-3 gap-4">
                 <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
             </div>
 

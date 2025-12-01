@@ -6,10 +6,10 @@
                 <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dự án</h2>
                 <div class="grid grid-cols-2">
                     <div
-                        v-for="index in 4"
-                        :key="index"
+                        v-for="(itemProject, indexProject) in projects"
+                        :key="indexProject"
                         class="border-b-8 border-primary-500 relative aspect-w-2 aspect-h-1 cursor-pointer"
-                        @click="openModal(index)"
+                        @click="openModal(indexProject)"
                     >
                         <div class="absolute inset-0 w-full h-full">
                             <JPicture
@@ -23,7 +23,9 @@
                             <h3 class="title-2 uppercase font-bold">
                                 BRAND OPENING - TRẢI NGHIỆM TIỆC TRÀ LỚN NHẤT TPHCM
                             </h3>
-                            <div class="body-1">Client: Britea - English Tea House</div>
+                            <div class="body-1">
+                            {{  itemProject }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +75,7 @@
 export default {
     components: {},
 
-    // props: ['categories', 'posts', 'banner', 'promotions_featured', 'promotions'],
+    props: ['projects'],
     data() {
         return {
             banner: {
