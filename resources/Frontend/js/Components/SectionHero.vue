@@ -10,6 +10,6 @@
       <source src="/assets/video/video-hero.mp4" type="video/mp4" />
     </video>
 
-    <div class="absolute bottom-0 left-0 w-full h-[120px] bg-linear-hero z-10"></div>
+    <!-- <div class="absolute bottom-0 left-0 w-full h-[120px] bg-linear-hero z-10"></div> -->
   </section>
 </template>
