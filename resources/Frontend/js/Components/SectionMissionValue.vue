@@ -36,7 +36,7 @@
                     viên trong đội ngũ của chúng tôi.
                 </div>
                 <div class="max-w-[574px] w-full mx-auto">
-                    <JPicture src="/assets/images/home/image-what-we-do.png" alt="image what we do"
+                    <JPicture :src="isHome ? '/assets/images/home/image-what-we-do.png' : '/assets/images/about/image-core-value.png'" alt="image what we do"
                         class="picture-cover mix-blend-plus-lighter" />
                 </div>
             </div>
@@ -46,7 +46,7 @@
 
 <script>
 export default {
-    props: ['values'],
+    props: ['values', 'isHome'],
     data() {
         return {}
     },

@@ -1,14 +1,14 @@
 <template>
     <main class="bg-black">
-        <BannerImage :banner="banner" classBanner="h-[574px]" />
+        <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
         <SectionMissionValue :values="values" />
-        <section class="py-20 relative">
+        <section class="md:py-16 py-12 xl:py-20 relative">
             <div class="absolute inset-0">
                 <JPicture src="/assets/images/about/bg-commit.jpg" alt="background commit" class="w-full h-full" />
             </div>
             <div class="relative">
-                <div class="container space-y-[120px]">
-                    <div class="space-y-8">
+                <div class="container md:space-y-[80px] space-y-16 xl:space-y-[120px]">
+                    <div class="md:space-y-6 space-y-4 xl:space-y-8">
                         <div class="space-y-3 text-center">
                             <h2 class="title-linear display-2 uppercase font-extrabold">Chúng tôi cam kết</h2>
                             <div class="body-1 text-white">
@@ -18,14 +18,14 @@
                                 khâu sáng tạo ý tưởng đến giây phút cuối cùng của bữa tiệc
                             </div>
                         </div>
-                        <div class="grid grid-cols-4">
+                        <div class="grid md:grid-cols-4">
                             <div
                                 v-for="(itemCommit, indexCommit) in commits"
                                 :key="indexCommit"
-                                class="space-y-12 p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out py-8 px-6 text-center"
+                                class="md:space-y-8 space-y-6 xl:space-y-12 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:p-4 p-3 xl:py-8 xl:px-6 text-center"
                             >
-                                <div class="w-max h-[72px] mx-auto">
-                                    <JPicture :src="itemCommit.icon" :alt="itemCommit.title" class="w-full h-full" />
+                                <div class="w-max h-[48px] md:h-[72px] mx-auto">
+                                    <JPicture :src="itemCommit.icon" :alt="itemCommit.title" class="w-full h-full mix-blend-plus-lighter" />
                                 </div>
                                 <div class="space-y-3">
                                     <h3 class="title-2 font-bold text-white">{{ itemCommit.title }}</h3>
@@ -34,13 +34,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-start gap-12">
+                    <div class="flex md:flex-row flex-col items-start gap-6 md:gap-8 xl:gap-12">
                         <div class="max-w-[282px] w-full">
                             <h2 class="title-linear display-3 uppercase font-extrabold">Vì sao chọn Mini Party?</h2>
                         </div>
                         <div class="flex-1 w-full">
                             <div class="grid grid-cols-2">
-                                <div v-for="(itemReason, indexReason) in reasons" :key="indexReason" class="p-6 space-y-3 text-white">
+                                <div v-for="(itemReason, indexReason) in reasons" :key="indexReason" class="md:p-4 p-3 xl:p-6 space-y-3 text-white">
                                     <div class="title-2">{{ itemReason.title }}</div>
                                     <div class="body-2">{{ itemReason.description }}</div>
                                 </div>
