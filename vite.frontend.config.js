@@ -78,4 +78,8 @@ export default defineConfig({
         // strictPort: true,
         // hmr: false, // TẮT HMR khi dùng ngrok
     },
+    optimizeDeps: {
+        include: ['swiper/vue', 'swiper/modules'],
+        exclude: [],
+    },
 })

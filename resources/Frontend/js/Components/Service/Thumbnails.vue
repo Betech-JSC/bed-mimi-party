@@ -124,7 +124,7 @@ defineExpose({
 }
 
 .thumbnail-swiper-container {
-    @apply relative max-w-[720px] mx-auto;
+    @apply relative max-w-[550px] lg:max-w-[720px] mx-auto;
 }
 
 .thumbnail-swiper {
@@ -147,7 +147,7 @@ defineExpose({
     transition: opacity 0.3s ease-in-out;
 }
 .btn-navigation {
-    @apply rounded-lg text-white py-2 px-2.5 absolute top-1/2 -translate-y-1/2 z-10 flex items-center justify-center hover:bg-gray-100 transition;
+    @apply rounded-lg text-white py-2 px-2.5 absolute top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center hover:bg-gray-100 transition;
     background: linear-gradient(90deg, #98cdff 0%, #558dfc 100%);
     box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
 }
