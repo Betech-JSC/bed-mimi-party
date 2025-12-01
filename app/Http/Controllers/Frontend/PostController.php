@@ -55,9 +55,18 @@ class PostController extends Controller
 
             $post->increment('view_count');
 
+            $relatedPosts = $post->relatedPosts()
+                ->active()
+                ->orderByPosition()
+                ->orderBy('id', 'desc')
+                ->take(8)
+                ->get()
+                ->map(fn($item) => $item->transform());
+
             $data = [
                 'post' => $post->transformDetails(),
                 'seo' => $post->transformSeo(),
+                'related_posts' => $relatedPosts,
             ];
 
             if (request()->wantsJson()) {
