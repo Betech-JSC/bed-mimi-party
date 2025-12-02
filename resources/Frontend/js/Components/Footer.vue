@@ -67,7 +67,7 @@ export default {
                 {
                     icon: '/assets/images/image-footer-address.png',
                     content: this.$page.props.global.address ?? '90 Lê Thị Riêng, Phường Phạm Ngũ Lão, TP Ho Chi Minh, Vietnam',
-                    href: this.$page.props.global.link_address ?? '',
+                    href: this.$page.props.global.link_address ?? 'https://maps.app.goo.gl/MgwfTks1FEHyDqdy9',
                     target: '_blank',
                 },
                 {

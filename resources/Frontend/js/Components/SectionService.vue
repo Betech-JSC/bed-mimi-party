@@ -4,9 +4,6 @@
             <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dịch vụ</h2>
         </div>
 
-        <!-- <div v-if="services && services.length > 0" class="grid md:grid-cols-3 gap-4">
-                <CardService v-for="(itemService, indexService) in services" :key="indexService" :item="itemService" />
-            </div> -->
         <swiper
             ref="swiperRef"
             :modules="[Autoplay, Pagination]"
@@ -26,7 +23,9 @@
             class="relative"
         >
             <swiper-slide v-for="(itemService, indexService) in services" :key="indexService" class="py-8 md:py-10 lg:py-16">
-                <CardService :item="itemService" />
+                <div @click="handleCardClick(indexService)" class="cursor-pointer">
+                    <CardService :item="itemService" />
+                </div>
             </swiper-slide>
         </swiper>
 
@@ -35,9 +34,10 @@
         </div>
     </section>
 </template>
+
 <script>
 import CardService from '@/Components/Card/CardService.vue'
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Autoplay, Pagination } from 'swiper/modules'
 import 'swiper/css'
@@ -46,7 +46,8 @@ import 'swiper/css/pagination'
 export default {
     components: { Swiper, SwiperSlide, CardService },
     props: ['services', 'showButton'],
-    setup(props) {
+    emits: ['open-modal'],
+    setup(props, { emit }) {
         const swiperRef = ref(null)
         const swiperInstance = ref(null)
 
@@ -54,25 +55,23 @@ export default {
             swiperInstance.value = swiper
         }
 
-        // Split title into textFirst and textSecond
-        const textFirst = computed(() => {
-            const parts = props.title.split(' ')
-            return parts[0] || '' // First word (e.g., "Luxury")
-        })
-
-        const textSecond = computed(() => {
-            const parts = props.title.split(' ')
-            return parts.slice(1).join(' ') || '' // Remaining words (e.g., "ROOM")
-        })
+        const handleCardClick = (index) => {
+            emit('open-modal', index)
+        }
 
         return {
             Autoplay,
             Pagination,
             swiperRef,
             onSwiperInit,
-            textFirst,
-            textSecond,
+            handleCardClick,
         }
     },
 }
 </script>
+
+<style lang="scss" scoped>
+.bg-linear-modal {
+    background: linear-gradient(180deg, rgba(189, 189, 189, 0.3) 0%, rgba(52, 51, 51, 0.3) 100%);
+}
+</style>
