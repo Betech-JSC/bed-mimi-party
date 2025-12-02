@@ -73,12 +73,12 @@
                         v-model="form.images"
                         :field="{
                             type: 'file_upload',
-                            name: 'images',
+                            name: 'image',
                             multiple: true,
                             label: 'Danh sách ảnh',
                         }"
                     />
-                     <Field
+                    <Field
                         v-model="form.banner"
                         :field="{
                             type: 'file_upload',
@@ -98,26 +98,26 @@ export default {
     data() {
         return {
             formData: {
+                ...this.item,
                 status: this.item.status ?? 'ACTIVE',
                 image: this.item.image ?? null,
                 images: this.item.images ?? [],
                 banner: this.item.banner ?? null,
                 type: 'PROJECT',
                 view_count: 0,
-                ...this.item,
             },
         }
     },
     watch: {
         item() {
             this.formData = {
+                ...this.item,
                 status: this.item.status ?? 'ACTIVE',
                 image: this.item.image ?? null,
                 images: this.item.images ?? [],
                 banner: this.item.banner ?? null,
                 type: 'PROJECT',
                 view_count: 0,
-                ...this.item,
             }
         },
     },

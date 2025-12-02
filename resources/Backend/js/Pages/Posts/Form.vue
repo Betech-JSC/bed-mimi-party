@@ -12,7 +12,7 @@
                             label: 'Tiêu đề',
                         }"
                     />
-                     <Field
+                    <Field
                         v-model="form.author"
                         :field="{
                             type: 'text',
@@ -76,22 +76,22 @@
                             label: 'Ảnh đại diện',
                             multiple: false,
                         }"
-                    /> 
-                        <Field
+                    />
+                    <Field
                         v-model="form.images"
                         :field="{
                             type: 'file_upload',
-                            name: 'image',
+                            name: 'images',
                             label: 'Danh sách ảnh',
-                            multiple: false,
+                            multiple: true,
                         }"
-                    /> 
+                    />
                     <Field
-                        v-model="form.banners"
+                        v-model="form.banner"
                         :field="{
                             type: 'file_upload',
-                            name: 'banners',
-                            multiple: true,
+                            name: 'banner',
+                            multiple: false,
                             label: 'Hình ảnh Banner',
                         }"
                     />
@@ -140,7 +140,7 @@ export default {
                 images: this.item.images ?? [],
                 view_count: 0,
                 ...this.item,
-                 type: 'PROJECT',
+                type: 'PROJECT',
             }
         },
     },
