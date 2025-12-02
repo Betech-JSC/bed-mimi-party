@@ -3,17 +3,17 @@
         <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
         <!-- <SectionService :services="services" /> -->
         <section class="md:mt-[80px] mt-[56px] xl:mt-[120px] md:py-16 py-12 xl:py-20">
-            <div class="container">
+            <div class="container md:space-y-6 space-y-4 xl:space-y-8">
                 <div
-                    v-for="(item, index) in items"
+                    v-for="(item, index) in services"
                     :key="index"
                     class="card-service grid grid-cols-12 gap-6 border border-white/50"
                 >
-                    <div class="col-span-full xl:col-span-4 w-full space-y-8">
+                    <div class="col-span-full xl:col-span-4 w-full space-y-8" :class="index % 2 === 0 ? 'order-1' : 'order-1 xl:order-2'">
                         <h2 class="title-linear display-3 uppercase font-extrabold">{{ item.title }}</h2>
                         <button class="btn btn-primary" @click="openModal(index)">Xem thêm</button>
                     </div>
-                    <div class="col-span-full xl:col-span-8">
+                    <div class="col-span-full xl:col-span-8" :class="index % 2 === 0 ? 'order-2' : 'order-2 xl:order-1'">
                         <Thumbnails :product="item" />
                     </div>
                 </div>
@@ -73,36 +73,6 @@ export default {
             banner: {
                 image: '/assets/images/services/bg-banner.jpg',
             },
-            items: [
-                {
-                    title: 'Decor trang trí bong bóng nghệ thuật',
-                    description:
-                        'Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo.',
-                    images: [
-                        {
-                            url: '/assets/images/services/bg-banner.jpg',
-                        },
-                        {
-                            url: '/assets/images/demo/image-service-1.jpg',
-                        },
-                        {
-                            url: '/assets/images/demo/image-service-2.jpg',
-                        },
-                        {
-                            url: '/assets/images/demo/image-service-3.jpg',
-                        },
-                        {
-                            url: '/assets/images/services/bg-banner.jpg',
-                        },
-                        {
-                            url: '/assets/images/demo/image-service-1.jpg',
-                        },
-                        {
-                            url: '/assets/images/demo/image-service-2.jpg',
-                        },
-                    ],
-                },
-            ],
             isModalOpen: false,
             selectedItem: null,
             lightboxIndex: null,
@@ -113,7 +83,7 @@ export default {
     },
     methods: {
         openModal(index) {
-            this.selectedItem = this.items[index]
+            this.selectedItem = this.$props.services[index]
             this.isModalOpen = true
             document.body.style.overflow = 'hidden'
         },

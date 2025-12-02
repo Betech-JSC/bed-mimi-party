@@ -94,9 +94,7 @@ const modules = [Navigation]
 
 // Lấy images từ product
 const images = computed(() => {
-    console.log('Product data:', props.product)
-    console.log('Images:', props.product?.images)
-    return props.product?.images || []
+    return props.product?.images || props.product?.sliders || []
 })
 
 // Swiper instance
