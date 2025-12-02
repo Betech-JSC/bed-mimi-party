@@ -87,11 +87,11 @@
                         }"
                     />
                     <Field
-                        v-model="form.banners"
+                        v-model="form.banner"
                         :field="{
                             type: 'file_upload',
-                            name: 'banners',
-                            multiple: true,
+                            name: 'banner',
+                            multiple: false,
                             label: 'Hình ảnh Banner',
                         }"
                     />
