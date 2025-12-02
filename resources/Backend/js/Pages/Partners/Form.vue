@@ -12,22 +12,7 @@
                             label: 'Tiêu đề',
                         }"
                     />
-                    <Field
-                        v-model="form.description"
-                        :field="{
-                            type: 'textarea',
-                            name: 'description',
-                            label: 'Mô tả',
-                        }"
-                    />
-                    <Field
-                        v-model="form.content"
-                        :field="{
-                            type: 'richtext',
-                            name: 'content',
-                            label: 'Nội dung',
-                        }"
-                    />
+               
                 </div>
             </div>
             <SeoFields :modelValue="form" @update:modelValue="form = $event" />
@@ -36,55 +21,12 @@
             <div class="card">
                 <div class="card-body">
                     <Field
-                        v-model="form.status"
-                        :field="{
-                            type: 'radio_list',
-                            name: 'status',
-                            label: 'Trạng thái',
-                            options: schema.columns.status.list,
-                        }"
-                    />
-                    <Field
-                        v-model="form.published_at"
-                        :field="{
-                            type: 'date',
-                            name: 'published_at',
-                            label: 'Ngày xuất bản',
-                        }"
-                    />
-                    <Field
-                        v-model="form.is_featured"
-                        :field="{
-                            type: 'checkbox',
-                            name: 'is_featured',
-                            label: 'Nổi bật',
-                        }"
-                    />
-                    <Field
                         v-model="form.image"
                         :field="{
                             type: 'file_upload',
                             name: 'image',
                             multiple: false,
                             label: 'Ảnh đại diện',
-                        }"
-                    />
-                    <Field
-                        v-model="form.images"
-                        :field="{
-                            type: 'file_upload',
-                            name: 'images',
-                            multiple: true,
-                            label: 'Danh sách ảnh',
-                        }"
-                    />
-                     <Field
-                        v-model="form.banner"
-                        :field="{
-                            type: 'file_upload',
-                            name: 'banner',
-                            multiple: false,
-                            label: 'Hình ảnh Banner',
                         }"
                     />
                 </div>
