@@ -3,7 +3,7 @@
         <div
             class="relative bg-header md:h-[var(--header-height-md)] h-[var(--header-height-sm)] lg:h-[var(--header-height-lg)] xl:h-[var(--header-height-xl)] flex items-center justify-center"
         >
-            <div class="px-4 md:px-8 xl:px-12 flex items-center justify-between w-full">
+            <div class="container flex items-center justify-between w-full">
                 <Logo />
                 <div class="max-lg:hidden space-y-[12px]">
                     <ul class="flex items-center space-x-5 body-0 uppercase">
