@@ -73,7 +73,7 @@
                         : 'z-0 border-transparent before:invisible invisible'
                 "
                 @dragleave.prevent="isDragging = false"
-                @drop.prevent=";(isDragging = false), (dragCounter = 0), drop($event)"
+                @drop.prevent=";(isDragging = false), drop($event)"
             ></div>
 
             <!-- Details sidebar -->
@@ -118,12 +118,54 @@
                         <span> {{ tt('models.files.delete_folder') }} </span>
                     </Button>
                 </div>
+                <!-- Loading indicator -->
+                <div v-if="loading" class="flex items-center justify-center h-full min-h-[400px]">
+                    <div class="flex flex-col items-center space-y-4">
+                        <svg
+                            class="animate-spin h-12 w-12 text-gray-700"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                            ></circle>
+                            <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                            ></path>
+                        </svg>
+                        <p class="text-sm text-gray-600">{{ tt('models.files.loading') || 'Đang tải...' }}</p>
+                    </div>
+                </div>
+
+                <!-- Empty state -->
                 <div
-                    v-if="Object.keys(searchFiles).length"
+                    v-else-if="!loading && (!searchFiles || (Array.isArray(searchFiles) ? searchFiles.length === 0 : Object.keys(searchFiles).length === 0))"
+                    class="flex items-center justify-center h-full min-h-[400px]"
+                >
+                    <div class="text-center">
+                        <p class="text-gray-500 text-lg">{{ tt('models.files.no_files') || 'Không có file nào' }}</p>
+                        <Button @click="browse" class="mt-4 space-x-2 btn-primary">
+                            <ph:upload-simple />
+                            <span>{{ tt('models.files.select_file') }}</span>
+                        </Button>
+                    </div>
+                </div>
+
+                <!-- Files list -->
+                <div
+                    v-else-if="!loading && searchFiles && (Array.isArray(searchFiles) ? searchFiles.length > 0 : Object.keys(searchFiles).length > 0)"
                     class="px-4 pt-8 pb-16 mx-auto space-y-4 max-w-7xl sm:px-6 lg:px-8"
                 >
                     <ul role="list" class="grid grid-cols-3 gap-4 lg:grid-cols-4 2xl:grid-cols-6">
-                        <li class="relative" v-if="data" v-for="(file, index) in searchFiles" :key="file.static_url">
+                        <li class="relative" v-for="(file, index) in searchFiles" :key="file.static_url || file.path || index">
                             <div
                                 class="group w-full rounded bg-gray-100 overflow-hidden aspect-[1/1] flex cursor-pointer justify-center items-center border border-transparent hover:border-gray-400 relative outline outline-offset-2 outline-2"
                                 :class="selectedFiles.includes(file) ? 'outline-black' : 'outline-transparent'"
@@ -227,8 +269,8 @@ import Pagination from '@Core/Components/Pagination.vue'
 import Thumbnail from '@Core/Components/Thumbnail.vue'
 import { onMounted, onUnmounted } from 'vue'
 
-const MAX_SIZE_OF_IMAGE = 10
-const MAX_SIZE_OF_VIDEO = 50
+const MAX_SIZE_OF_IMAGE = 999999 // No limit
+const MAX_SIZE_OF_VIDEO = 999999 // No limit
 
 export default {
     components: { Thumbnail, Pagination },
@@ -294,10 +336,15 @@ export default {
             uploading: false,
             uploadProgress: {}, // filename => percent
             globalProgress: null,
+            
+            // loading state
+            loading: false,
         }
     },
 
     created() {
+        // Initialize loading state
+        this.loading = true
         this.getFiles()
     },
 
@@ -336,28 +383,55 @@ export default {
 
     watch: {
         show(value) {
-            if (value && this.data === null) {
+            if (value && (!this.data || !this.data.files)) {
+                this.page = 1
+                this.fetchData = true
                 this.getFiles()
+            }
+        },
+        search(newVal, oldVal) {
+            // When search changes, reset page and fetch data
+            if (newVal !== oldVal) {
+                this.page = 1
+                this.fetchData = true
+                if (newVal) {
+                    // If searching, fetch with keyword
+                    this.getFiles({ keyword: newVal })
+                } else {
+                    // If clearing search, fetch all
+                    this.getFiles()
+                }
             }
         },
     },
 
     computed: {
         searchFiles() {
+            // Ensure data exists
             if (!this.data || !this.data.files) {
-                if (!this.search) {
-                    this.getFiles()
-                    return this.data.files
-                }
                 return []
             }
-            if (!this.search) return this.data.files
+            
+            // Convert to array if needed
+            let files = this.data.files
+            if (!Array.isArray(files)) {
+                files = Object.values(files || {})
+            }
+            
+            // If no search, return all files
+            if (!this.search) {
+                return files
+            }
 
-            this.getFiles({ keyword: this.search })
-
-            this.fetchData = false
-
-            return this.data.files
+            // If searching, filter files
+            const keyword = this.search.toLowerCase()
+            
+            return files.filter((file) => {
+                if (!file) return false
+                const searchName = (file.search_name || file.filename || '').toLowerCase()
+                const filename = (file.filename || '').toLowerCase()
+                return searchName.includes(keyword) || filename.includes(keyword)
+            })
         },
         canDeleteFolder() {
             if (!this.data) return false
@@ -378,37 +452,59 @@ export default {
             this.currentPath = item.path
             this.data.files = []
             this.search = null
-            this.getFiles()
             this.page = 1
             this.fetchData = true
+            this.getFiles()
         },
         getFiles(params = {}, loadTree = false) {
             if (this.fetchData) {
+                // Set loading state
+                this.loading = true
+                
                 this.$axios
                     .get(
                         this.route('admin.files.index', {
-                            page: 1,
+                            page: params.page || this.page,
                             limit: this.limit,
-                            search: null,
+                            search: params.keyword || this.search || null,
                             path: this.currentPath,
                             ...params,
                         })
                     )
                     .then((res) => {
-                        let files = this.data.files
+                        let files = this.data.files || []
                         let new_files = res.data.files ? res.data.files : null
+
+                        // Ensure new_files is an array
+                        if (new_files && !Array.isArray(new_files)) {
+                            // Convert object to array if needed
+                            new_files = Object.values(new_files)
+                        }
 
                         if (Array.isArray(new_files) && new_files.length == 0) {
                             this.fetchData = false
                         } else {
-                            if (this.page == 1) {
-                                files = new_files
+                            if (this.page == 1 || params.page == 1) {
+                                files = Array.isArray(new_files) ? new_files : []
                             } else {
-                                files = { ...files, ...new_files }
+                                // Fix: Use array concat instead of object spread
+                                if (Array.isArray(files) && Array.isArray(new_files)) {
+                                    files = [...files, ...new_files]
+                                } else if (Array.isArray(new_files)) {
+                                    files = new_files
+                                } else {
+                                    files = Array.isArray(files) ? files : []
+                                }
                             }
+                            
+                            // Ensure files is always an array
+                            if (!Array.isArray(files)) {
+                                files = Object.values(files)
+                            }
+                            
                             this.data = {
                                 tree: res.data.tree,
-                                directories: res.data.directories,
+                                directories: res.data.directories || [],
                                 files: files,
                             }
 
@@ -416,6 +512,21 @@ export default {
                                 this.tree = res.data.tree
                             }
                         }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching files:', error)
+                        // Show error message
+                        alert(this.tt('models.files.load_error') || 'Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại.')
+                        // Reset data to empty array on error
+                        this.data = {
+                            tree: this.data.tree,
+                            directories: this.data.directories || [],
+                            files: [],
+                        }
+                    })
+                    .finally(() => {
+                        // Always set loading to false when done
+                        this.loading = false
                     })
             }
         },
@@ -616,11 +727,15 @@ export default {
                     }
                 })
         },
+        isImage(fileName) {
+            if (!fileName) return false
+            const ext = fileName.toLowerCase().split('.').pop()
+            const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'ico']
+            return imageExts.includes(ext)
+        },
         fileCheck(file) {
-            const maxSize = this.isImage(file.name) ? MAX_SIZE_OF_IMAGE : MAX_SIZE_OF_VIDEO
-            const fileSize = file.size / 1024 / 1024
-
-            return { valid: fileSize <= maxSize, maxSize }
+            // Bỏ giới hạn upload - luôn return valid
+            return { valid: true, maxSize: 'unlimited' }
         },
         onChange(event) {
             if (this.timer) {
@@ -632,6 +747,10 @@ export default {
                 this.search = event.target.value
                 this.page = 1
                 this.fetchData = true
+                // Reset files when searching to show loading
+                if (this.search) {
+                    this.data.files = []
+                }
             }, 500)
         },
         createFolder(name) {
@@ -679,3 +798,4 @@ export default {
     left: var(--sidebar-width);
 }
 </style>
+

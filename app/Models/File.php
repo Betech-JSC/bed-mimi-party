@@ -18,10 +18,10 @@ class File
     protected $contents;
 
     public const MAX_SIZE_LIST = [
-        'image' => 5,
-        'video' => 50,
-        'application' => 100,
-        'others' => 10,
+        'image' => 999999, // No limit
+        'video' => 999999, // No limit
+        'application' => 999999, // No limit
+        'others' => 999999, // No limit
     ];
 
     public function __construct($path = '/', $disk = null)
