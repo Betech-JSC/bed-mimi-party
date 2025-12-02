@@ -24,6 +24,7 @@ class Post extends BaseModel
     public const TYPE_PROMOTION = 'PROMOTION';
     public const TYPE_GALLERY = 'GALLERY';
     public const TYPE_PROJECT = 'PROJECT';
+    public const TYPE_PARTNER = 'PARTNER';
 
     public const STATUS_LIST = [
         self::STATUS_ACTIVE => 'Kích hoạt',
