@@ -449,6 +449,8 @@ export default {
             this.getFiles({ page: this.page })
         },
         selectedItem(item) {
+            // Set loading immediately when tree item is clicked
+            this.loading = true
             this.currentPath = item.path
             this.data.files = []
             this.search = null
@@ -457,8 +459,8 @@ export default {
             this.getFiles()
         },
         getFiles(params = {}, loadTree = false) {
+            // Set loading state before checking fetchData to ensure UI shows loading immediately
             if (this.fetchData) {
-                // Set loading state
                 this.loading = true
                 
                 this.$axios
