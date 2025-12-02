@@ -20,8 +20,7 @@
         <div class="flex relative flex-col gap-1.5 justify-center items-start self-stretch px-4 py-6">
             <h3 class="relative self-stretch text-lg font-bold leading-7 text-white">
                 <div class="text-lg font-bold text-white max-sm:text-base">
-                    {{ item.title }}         {{ item.image }}
-
+                    {{ item.title }}
                 </div>
             </h3>
         </div>

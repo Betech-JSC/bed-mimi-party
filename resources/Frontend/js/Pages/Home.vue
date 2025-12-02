@@ -3,7 +3,7 @@
         <SectionHero />
         <SectionService :showButton="true" :services="services" />
         <Marquee :marquee="marquees" />
-        <SectionMissionValue :values="values" />
+        <SectionMissionValue :isHome="true" :values="values" />
         <div class="bg-dark">
             <MarqueeWhite :marquee="marquees" />
             <SectionProject :projects="projects" />
