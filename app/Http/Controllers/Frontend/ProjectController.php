@@ -16,7 +16,7 @@ class ProjectController extends Controller
             $projects = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_PROJECT)
-                ->paginate(12)
+                ->paginate(6)
                 ->onEachSide(0)
                 ->through(function ($item) {
                     return $item->transform();
