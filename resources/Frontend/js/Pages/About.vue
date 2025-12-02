@@ -25,7 +25,11 @@
                                 class="md:space-y-8 space-y-6 xl:space-y-12 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:p-4 p-3 xl:py-8 xl:px-6 text-center"
                             >
                                 <div class="w-max h-[48px] md:h-[72px] mx-auto">
-                                    <JPicture :src="itemCommit.icon" :alt="itemCommit.title" class="w-full h-full mix-blend-plus-lighter" />
+                                    <JPicture
+                                        :src="itemCommit.icon"
+                                        :alt="itemCommit.title"
+                                        class="w-full h-full mix-blend-plus-lighter"
+                                    />
                                 </div>
                                 <div class="space-y-3">
                                     <h3 class="title-2 font-bold text-white">{{ itemCommit.title }}</h3>
@@ -34,13 +38,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex md:flex-row flex-col items-start gap-6 md:gap-8 xl:gap-12">
+                    <div class="flex lg:flex-row flex-col items-start gap-6 md:gap-8 xl:gap-12">
                         <div class="max-w-[282px] w-full">
                             <h2 class="title-linear display-3 uppercase font-extrabold">Vì sao chọn Mini Party?</h2>
                         </div>
                         <div class="flex-1 w-full">
-                            <div class="grid grid-cols-2">
-                                <div v-for="(itemReason, indexReason) in reasons" :key="indexReason" class="md:p-4 p-3 xl:p-6 space-y-3 text-white">
+                            <div
+                                v-for="(itemReason, indexReason) in reasons"
+                                :key="indexReason"
+                                class="space-y-3 text-white pt-4 md:pt-8 pb-4 md:px-6 flex items-start gap-3 md:gap-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out"
+                            >
+                                <div class="w-max h-[48px] md:h-[72px] max-md:mt-3">
+                                    <JPicture
+                                        :src="itemReason.image"
+                                        :alt="itemReason.title"
+                                        class="w-full h-full mix-blend-plus-lighter"
+                                    />
+                                </div>
+                                <div class="space-y-3 flex-1 w-full">
                                     <div class="title-2">{{ itemReason.title }}</div>
                                     <div class="body-2">{{ itemReason.description }}</div>
                                 </div>
@@ -121,21 +136,25 @@ export default {
             ],
             reasons: [
                 {
+                    image: '/assets/images/about/image-m.png',
                     title: 'Trọn gói – Đồng bộ – Tiện lợi',
                     description:
                         'Mimi Party mang đến giải pháp tổ chức tiệc toàn diện (All in One) – nơi mọi yếu tố từ décor, biểu diễn, âm nhạc đến hình ảnh đều được kết nối trong một tổng thể thống nhất. Chúng tôi không chỉ giúp khách hàng tiết kiệm thời gian và chi phí, mà còn biến quá trình chuẩn bị tiệc thành một trải nghiệm đầy cảm hứng.',
                 },
                 {
+                    image: '/assets/images/about/image-i.png',
                     title: 'Đội ngũ chuyên nghiệp & tận tâm',
                     description:
                         'Mỗi thành viên của Mimi Party đều có kinh nghiệm sâu trong lĩnh vực décor, performance và event management. Chúng tôi làm việc bằng trách nhiệm, đam mê và sự chỉn chu, để mọi khoảnh khắc trong buổi tiệc đều diễn ra hoàn hảo – đúng chuẩn mực mà khách hàng mong đợi.',
                 },
                 {
+                    image: '/assets/images/about/image-m.png',
                     title: 'Kinh nghiệm đa dạng',
                     description:
                         'Chúng tôi đã thực hiện nhiều loại hình tiệc: cá nhân, doanh nghiệp, thương hiệu, nhà hàng – lounge – KTV VIP. Chính kinh nghiệm thực chiến này giúp Mimi Party luôn linh hoạt sáng tạo concept và giải pháp phù hợp với từng ngân sách, không gian và đối tượng khách hàng.',
                 },
                 {
+                    image: '/assets/images/about/image-i.png',
                     title: 'Quản lý & Giám sát chuyên nghiệp',
                     description:
                         'Không chỉ lên ý tưởng, chúng tôi đi cùng khách hàng đến phút cuối của buổi tiệc. Từ setup, vận hành, điều phối nhân sự, kiểm soát tiến độ đến tổng kết – mọi quy trình đều được giám sát chặt chẽ để đảm bảo một sự kiện trọn vẹn, trơn tru và đẳng cấp.',
