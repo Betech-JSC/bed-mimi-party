@@ -19,7 +19,9 @@
                             />
                         </div>
                         <div class="bg-overlay absolute inset-0"></div>
-                        <div class="absolute top-1/2 -translate-y-1/2 h-auto px-3 md:px-8 max-w-[280px] w-full space-y-2 md:space-y-4 text-white">
+                        <div
+                            class="absolute top-1/2 -translate-y-1/2 h-auto px-3 md:px-8 max-w-[280px] w-full space-y-2 md:space-y-4 text-white"
+                        >
                             <h3 class="title-2 uppercase font-bold">
                                 {{ itemProject.title }}
                             </h3>
@@ -28,6 +30,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <Pagination :links="projects.links" />
                 </div>
             </div>
         </section>
@@ -77,13 +82,14 @@
 </template>
 
 <script>
-import Thumbnails from '@/Components/Service/Thumbnails.vue';
+import Thumbnails from '@/Components/Service/Thumbnails.vue'
+import Pagination from '@/Components/Paginate.vue'
 
 export default {
-    components: { Thumbnails },
+    components: { Thumbnails, Pagination },
 
     props: ['projects'],
-    
+
     data() {
         return {
             banner: {
@@ -98,41 +104,41 @@ export default {
             ],
         }
     },
-    
+
     computed: {
         modalProduct() {
-            if (!this.selectedItem) return { images: [] };
-            
+            if (!this.selectedItem) return { images: [] }
+
             // Nếu selectedItem có images thì dùng images đó
             if (this.selectedItem.images && this.selectedItem.images.length > 0) {
                 return {
-                    images: this.selectedItem.images
-                };
+                    images: this.selectedItem.images,
+                }
             }
-            
+
             // Nếu không có images, dùng staticImages
             return {
-                images: this.staticImages
-            };
-        }
+                images: this.staticImages,
+            }
+        },
     },
-    
+
     methods: {
         openModal(index) {
-            this.selectedItem = this.projects.data[index];
-            this.isModalOpen = true;
-            document.body.style.overflow = 'hidden';
+            this.selectedItem = this.projects.data[index]
+            this.isModalOpen = true
+            document.body.style.overflow = 'hidden'
         },
-        
+
         closeModal() {
-            this.isModalOpen = false;
-            this.selectedItem = null;
-            document.body.style.overflow = '';
+            this.isModalOpen = false
+            this.selectedItem = null
+            document.body.style.overflow = ''
         },
     },
-    
+
     beforeDestroy() {
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''
     },
 }
 </script>

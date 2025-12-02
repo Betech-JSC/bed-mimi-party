@@ -54,18 +54,20 @@
                 <div v-else :key="key + 1">
                     <div
                         v-if="link.active"
-                        class="body-2 w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] border flex bg-primary-700 border-primary-700 text-white items-center justify-center rounded-full"
+                        class="paginate-item paginate-item--active"
                     >
-                        <div>
+                        <div class="glass-circle"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                             {{ link.label }}
                         </div>
                     </div>
                     <Link
                         v-else
-                        class="body-2 w-[30px] h-[30px] lg:w-[40px] lg:h-[40px] border flex text-gray-700 rounded-full lg:hover:bg-primary-700 lg:hover:border-primary-700 duration-300 ease-in-out lg:hover:text-white items-center justify-center"
+                        class="paginate-item"
                         :href="link.url"
                     >
-                        <div>
+                        <div class="glass-circle"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                             {{ link.label }}
                         </div>
                     </Link>

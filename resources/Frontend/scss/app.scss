@@ -224,3 +224,20 @@
         }
     }
 }
+
+.paginate-item {
+    @apply relative text-white;
+    .glass-circle {
+        @apply w-10 h-10 border-t border-b border-white/20 -rotate-45 rounded-full flex items-center justify-center bg-[#585858]/20 duration-300 ease-in-out;
+    }
+    &:hover {
+        .glass-circle {
+            @apply lg:bg-[#0258FF]/20;
+        }
+    }
+}
+.paginate-item--active {
+    .glass-circle {
+        @apply lg:bg-[#0258FF]/40;
+    }
+}
