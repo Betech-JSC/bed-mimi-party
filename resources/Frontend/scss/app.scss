@@ -210,3 +210,17 @@
     background-clip: text;
     text-fill-color: transparent;
 }
+
+.social-style {
+    .glass-circle {
+    @apply w-14 h-14 border-t border-b border-white/20 -rotate-45 rounded-full flex items-center justify-center bg-[#585858]/20 duration-300 ease-in-out;
+    //   box-shadow: 
+    //     6px 6px 10px 0 rgba(255, 255, 255, 0.1),
+    //     -4px -4px 6px 0 rgba(255, 255, 255, 0.1);
+    }
+    &:hover {
+        .glass-circle {
+            @apply lg:bg-[#0258FF]/30;
+        }
+    }
+}

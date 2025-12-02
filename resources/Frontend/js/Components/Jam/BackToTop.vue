@@ -1,10 +1,13 @@
 <template>
     <div
-        class="w-10 h-10 overflow-hidden cursor-pointer rounded-full bg-primary duration-500 fixed xl:bottom-[28px] bottom-5 xl:right-[26px] right-4 z-[100] text-center flex flex-col items-center justify-center text-white"
+        class="fixed w-14 h-14 flex items-center justify-center xl:bottom-[28px] bottom-5 xl:right-[26px] right-4 z-[100] duration-500 ease-in-out cursor-pointer social-style"
         :class="isShowBtn ? 'translate-y-0' : 'translate-y-[200px]'"
         @click="scrollToTop"
     >
-        <IconArrowUp class="text-white -rotate-90" />
+        <div class="glass-circle"></div>
+        <div class="absolute w-8 h-8 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <IconArrowUp class="text-white -rotate-90" />
+        </div>
     </div>
 </template>
 <script>
