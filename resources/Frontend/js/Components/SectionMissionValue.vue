@@ -27,7 +27,7 @@
                                     class="w-full h-full mix-blend-plus-lighter" />
                             </div>
                             <h3 class="title-2 font-bold uppercase text-white">{{ itemValue.title }}</h3>
-                            <div class="title-4 text-white">{{ itemValue.description }}</div>
+                            <div class="title-4 text-white text-justify">{{ itemValue.description }}</div>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,5 @@
 <script>
 export default {
     props: ['values', 'isHome'],
-    data() {
-        return {}
-    },
 }
 </script>
