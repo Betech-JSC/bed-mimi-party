@@ -1,7 +1,7 @@
 <template>
     <main class="bg-primary-900">
         <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
-        <SectionService :services="services" />
+        <!-- <SectionService :services="services" /> -->
         <section class="md:mt-[80px] mt-[56px] xl:mt-[120px] md:py-16 py-12 xl:py-20">
             <div class="container">
                 <div
