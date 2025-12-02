@@ -20,6 +20,15 @@
         <ph-newspaper-clipping-light />
         <span>{{ tt('models.table_list.posts') }}</span>
     </Link>
+        <Link
+        v-if="can('admin.customers.index')"
+        :href="route('admin.customers.index')"
+        :class="{ active: isUrl('admin.customers.*') }"
+        class="item"
+    >
+        <ph-newspaper-clipping-light />
+        <span>{{ tt('models.table_list.customers') }}</span>
+    </Link>
     <Link
         v-if="can('admin.services.index')"
         :href="route('admin.services.index')"

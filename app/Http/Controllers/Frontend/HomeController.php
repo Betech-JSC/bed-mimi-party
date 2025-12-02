@@ -35,10 +35,19 @@ class HomeController extends Controller
                 ->get()
                 ->map(fn($item) => $item->transform());
 
+            $partners = Post::query()
+                ->active()
+                ->where('type', Post::TYPE_PARTNER)
+                ->orderBy('position', 'ASC')
+                ->orderBy('id', 'DESC')
+                ->get()
+                ->map(fn($item) => $item->transform());
+
             $data = [
                 'services' => $services,
                 'posts' => $posts,
                 'projects' => $projects,
+                'partners' => $partners,
             ];
 
             return Inertia::render('Home', $data);
