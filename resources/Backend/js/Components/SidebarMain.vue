@@ -21,13 +21,13 @@
         <span>{{ tt('models.table_list.posts') }}</span>
     </Link>
         <Link
-        v-if="can('admin.customers.index')"
-        :href="route('admin.customers.index')"
-        :class="{ active: isUrl('admin.customers.*') }"
+        v-if="can('admin.partners.index')"
+        :href="route('admin.partners.index')"
+        :class="{ active: isUrl('admin.partners.*') }"
         class="item"
     >
         <ph-newspaper-clipping-light />
-        <span>{{ tt('models.table_list.customers') }}</span>
+        <span>{{ tt('models.table_list.partners') }}</span>
     </Link>
     <Link
         v-if="can('admin.services.index')"
