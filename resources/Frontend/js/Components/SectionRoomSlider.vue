@@ -1,8 +1,5 @@
 <template>
     <section class="relative">
-        <div class="absolute top-0 left-0 pt-2 pb-8 z-10 w-full">
-            <TextAnimation className="text-center" :textFirst="textFirst" :textSecond="textSecond" />
-        </div>
         <swiper
             ref="swiperRef"
             :modules="[Autoplay, Pagination]"

@@ -1,5 +1,5 @@
 <template>
-    <article v-if="item.slug" class="flex relative flex-col justify-center items-start w-full group">
+    <article class="flex relative flex-col justify-center items-start w-full group lg:hover:scale-105 duration-300 ease-in-out">
         <div class="block relative overflow-hidden aspect-w-4 aspect-h-5 w-full h-full">
             <JPicture
                 :src="item.image.url || '/cover.jpg'"
