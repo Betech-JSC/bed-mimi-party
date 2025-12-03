@@ -29,9 +29,9 @@
             </swiper-slide>
         </swiper>
 
-        <div v-if="showButton" class="flex items-center justify-center">
+        <!-- <div v-if="showButton" class="flex items-center justify-center">
             <Link :href="route('services')" class="btn btn-primary">dịch vụ của chúng tôi</Link>
-        </div>
+        </div> -->
     </section>
 </template>
 

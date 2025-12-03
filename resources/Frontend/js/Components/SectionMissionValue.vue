@@ -22,7 +22,7 @@
                     <div class="grid md:grid-cols-3 xl:px-20">
                         <div v-for="(itemValue, indexValue) in values" :key="indexValue"
                             class="space-y-3 p-3 md:p-4 xl:p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:min-h-[332px]">
-                            <div class="w-max h-11">
+                            <div class="h-11" :class="indexValue === 0 ? 'w-14' : 'w-11'">
                                 <JPicture :src="itemValue.image.url" :alt="itemValue.image.alt || itemValue.title"
                                     class="w-full h-full mix-blend-plus-lighter" />
                             </div>
