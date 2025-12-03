@@ -226,7 +226,7 @@
 }
 
 .paginate-item {
-    @apply relative text-white;
+    @apply relative text-white block;
     .glass-circle {
         @apply w-10 h-10 border-t border-b border-white/20 -rotate-45 rounded-full flex items-center justify-center bg-[#585858]/20 duration-300 ease-in-out;
     }

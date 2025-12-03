@@ -24,7 +24,7 @@
                                 :key="indexCommit"
                                 class="md:space-y-8 space-y-6 xl:space-y-12 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:p-4 p-3 xl:py-8 xl:px-6 text-center"
                             >
-                                <div class="w-max h-[48px] md:h-[72px] mx-auto">
+                                <div class="w-12 h-12 md:h-[72px] md:w-[72px] mx-auto">
                                     <JPicture
                                         :src="itemCommit.icon"
                                         :alt="itemCommit.title"
@@ -48,7 +48,7 @@
                                 :key="indexReason"
                                 class="space-y-3 text-white pt-4 md:pt-8 pb-4 md:px-6 flex items-start gap-3 md:gap-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out"
                             >
-                                <div class="w-max h-[48px] md:h-[72px] max-md:mt-3">
+                                <div class="w-12 h-12 md:w-[72px] md:h-[72px] max-md:mt-3">
                                     <JPicture
                                         :src="itemReason.image"
                                         :alt="itemReason.title"

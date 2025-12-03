@@ -87,11 +87,11 @@
                                 :isContact="true"
                             />
                         </div>
-                        <div class="grid grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-3 gap-8">
                             <div class="col-span-2">
                                 <h3 class="headline-3 font-extrabold text-white uppercase mb-6">{{ tt('Dịch vụ') }}</h3>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div v-for="(service, index) in services" :key="index" class="flex items-start">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div v-for="(service, index) in services" :key="index" class="flex items-start max-md:w-full">
                                         <div class="checkbox">
                                             <input
                                                 type="checkbox"
