@@ -23,7 +23,7 @@ class HomeController extends Controller
             $projects = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_PROJECT)
-                ->take(9)
+                ->take(10)
                 ->get()
                 ->map(fn($item) => $item->transform());
 
