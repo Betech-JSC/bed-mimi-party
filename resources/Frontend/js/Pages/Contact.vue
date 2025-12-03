@@ -1,23 +1,6 @@
 <template>
     <main class="bg-primary-900">
-        <section class="relative z-10 h-[252px]">
-            <div class="absolute inset-0">
-                <JPicture
-                    src="/assets/images/contact/bg-banner.jpg"
-                    loading="eager"
-                    class="object-fit h-full w-full object-cover"
-                    alt="image demo"
-                />
-            </div>
-            <div class="absolute inset-0 w-full h-full bg-[#010A1C] bg-opacity-[56%]"></div>
-            <div class="relative pb-12 h-full">
-                <div class="container flex items-end mt-auto h-full">
-                    <h2 class="title-linear display-2 uppercase font-extrabold">Liên hệ ngay</h2>
-                </div>
-            </div>
-        </section>
-
-        <section class="pt-12 md:pb-16 pb-12 xl:pb-20 relative overflow-hidden">
+        <section class="pt-[100px] lg:pt-[138px] md:pb-16 pb-12 xl:pb-20 relative overflow-hidden">
             <div class="absolute inset-0">
                 <JPicture
                     src="/assets/images/contact/bg-contact.jpg"
@@ -27,96 +10,108 @@
                 />
             </div>
             <div class="relative z-10">
-                <div class="container space-y-8 py-6">
-                    <h3 class="headline-3 font-extrabold text-white uppercase">{{ tt('Thông tin cá nhân') }}</h3>
-                    <div class="grid grid-cols-2 gap-x-12 gap-y-6 body-1">
-                        <JamFieldSet
-                            v-model="form.contact.data.Name"
-                            :field="{
-                                rules: rules,
-                                errors: errors,
-                                type: 'text',
-                                placeholder: tt('Name'),
-                                name: 'Họ và tên',
-                                fieldName: 'Name',
-                                errorText: tt('Họ tên không hợp lệ'),
-                            }"
-                            :isSubmit="isSubmit"
-                            @setIsSubmit="setIsSubmit"
-                            :isContact="true"
-                        />
-                        <JamFieldSet
-                            v-model="form.contact.data.Email"
-                            :field="{
-                                rules: rules,
-                                errors: errors,
-                                type: 'email',
-                                placeholder: tt('Email'),
-                                name: 'Email',
-                                fieldName: 'Email',
-                                errorText: tt('Email không hợp lệ'),
-                            }"
-                            :isSubmit="isSubmit"
-                            @setIsSubmit="setIsSubmit"
-                            :isContact="true"
-                        />
-                        <JamFieldSet
-                            v-model="form.contact.data.Phone"
-                            :field="{
-                                rules: rules,
-                                errors: errors,
-                                type: 'number',
-                                placeholder: tt('Số điện thoại'),
-                                name: 'Số điện thoại',
-                                fieldName: 'Phone',
-                                errorText: tt('Số điện thoại không hợp lệ'),
-                            }"
-                            :isSubmit="isSubmit"
-                            @setIsSubmit="setIsSubmit"
-                            :isContact="true"
-                        />
-                        <JamFieldSet
-                            v-model="form.contact.data['Nội dung yêu cầu']"
-                            :field="{
-                                rules: rules,
-                                errors: errors,
-                                type: 'text',
-                                placeholder: tt('Lời nhắn'),
-                                name: 'Nội dung yêu cầu',
-                                fieldName: 'note',
-                                errorText: tt('Họ tên không hợp lệ'),
-                            }"
-                            :isSubmit="isSubmit"
-                            @setIsSubmit="setIsSubmit"
-                            :isContact="true"
-                        />
+                <div class="container spoace-y-8 md:space-y-16 xl:space-y-20">
+                    <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-5 md:space-y-10 items-center justify-between">
+                        <h2 class="title-linear display-2 uppercase font-extrabold">Liên hệ ngay</h2>
+
+                        <div class="grid md:grid-cols-2 gap-6 max-w-[584px] w-full">
+                            <div v-for="indexInfo in 2" :key="indexInfo" class="text-white">
+                                <div class="title-2 font-bold">Tên người liên hệ</div>
+                                <a href="tel:0123456789" class="title-2 !font-normal block w-full">012 345 6789</a>
+                                <a href="mailto:emailaddress@gmail.com" class="title-2 !font-normal block w-full">emailaddress@gmail.com</a>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="grid grid-cols-3 gap-8">
-                        <div class="col-span-2">
-                            <h3 class="headline-3 font-extrabold text-white uppercase mb-6">{{ tt('Dịch vụ') }}</h3>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div 
-                                    v-for="(service, index) in services" 
-                                    :key="index"
-                                    class="flex items-start"
-                                >
-                                    <div class="checkbox">
-                                        <input
-                                            type="checkbox"
-                                            :id="`service_${index}`"
-                                            :name="`service_${index}`"
-                                            v-model="selectedServices[index]"
-                                        />
-                                        <span></span>
-                                        <label :for="`service_${index}`" class="text-white">
-                                            {{ service }}
-                                        </label>                                        
+                    <div class="space-y-8 py-6">
+                        <h3 class="headline-3 font-extrabold text-white uppercase">{{ tt('Thông tin cá nhân') }}</h3>
+                        <div class="grid grid-cols-2 gap-x-12 gap-y-6 body-1">
+                            <JamFieldSet
+                                v-model="form.contact.data.Name"
+                                :field="{
+                                    rules: rules,
+                                    errors: errors,
+                                    type: 'text',
+                                    placeholder: tt('Name'),
+                                    name: 'Họ và tên',
+                                    fieldName: 'Name',
+                                    errorText: tt('Họ tên không hợp lệ'),
+                                }"
+                                :isSubmit="isSubmit"
+                                @setIsSubmit="setIsSubmit"
+                                :isContact="true"
+                            />
+                            <JamFieldSet
+                                v-model="form.contact.data.Email"
+                                :field="{
+                                    rules: rules,
+                                    errors: errors,
+                                    type: 'email',
+                                    placeholder: tt('Email'),
+                                    name: 'Email',
+                                    fieldName: 'Email',
+                                    errorText: tt('Email không hợp lệ'),
+                                }"
+                                :isSubmit="isSubmit"
+                                @setIsSubmit="setIsSubmit"
+                                :isContact="true"
+                            />
+                            <JamFieldSet
+                                v-model="form.contact.data.Phone"
+                                :field="{
+                                    rules: rules,
+                                    errors: errors,
+                                    type: 'number',
+                                    placeholder: tt('Số điện thoại'),
+                                    name: 'Số điện thoại',
+                                    fieldName: 'Phone',
+                                    errorText: tt('Số điện thoại không hợp lệ'),
+                                }"
+                                :isSubmit="isSubmit"
+                                @setIsSubmit="setIsSubmit"
+                                :isContact="true"
+                            />
+                            <JamFieldSet
+                                v-model="form.contact.data['Nội dung yêu cầu']"
+                                :field="{
+                                    rules: rules,
+                                    errors: errors,
+                                    type: 'text',
+                                    placeholder: tt('Lời nhắn'),
+                                    name: 'Nội dung yêu cầu',
+                                    fieldName: 'note',
+                                    errorText: tt('Họ tên không hợp lệ'),
+                                }"
+                                :isSubmit="isSubmit"
+                                @setIsSubmit="setIsSubmit"
+                                :isContact="true"
+                            />
+                        </div>
+                        <div class="grid grid-cols-3 gap-8">
+                            <div class="col-span-2">
+                                <h3 class="headline-3 font-extrabold text-white uppercase mb-6">{{ tt('Dịch vụ') }}</h3>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div v-for="(service, index) in services" :key="index" class="flex items-start">
+                                        <div class="checkbox">
+                                            <input
+                                                type="checkbox"
+                                                :id="`service_${index}`"
+                                                :name="`service_${index}`"
+                                                v-model="selectedServices[index]"
+                                            />
+                                            <span></span>
+                                            <label :for="`service_${index}`" class="text-white">
+                                                {{ service }}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="flex items-end justify-end">
-                            <button class="btn btn-primary !w-full !justify-center" @click="contact">{{ tt('Gửi yêu cầu') }}</button>
+                            <div class="flex items-end justify-end">
+                                <button class="btn btn-primary !w-full !justify-center" @click="contact">
+                                    {{ tt('Gửi yêu cầu') }}
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -234,9 +229,9 @@ export default {
                 'Gói giải trí trọn gói',
                 'Decor sinh nhật & concept',
                 'Dịch vụ chụp ảnh, quay phim',
-                'DJ & MC Hype'
+                'DJ & MC Hype',
             ],
-            selectedServices: []
+            selectedServices: [],
         }
     },
     mounted() {
@@ -252,15 +247,15 @@ export default {
             if (Object.keys(this.errors).length > 0) {
                 return false
             }
-            
+
             // Lấy danh sách dịch vụ được chọn
             const selectedServicesList = this.services.filter((service, index) => this.selectedServices[index])
-            
+
             // Thêm vào form data
             if (selectedServicesList.length > 0) {
                 this.form.contact.data['Dịch vụ'] = selectedServicesList.join(', ')
             }
-            
+
             this.isLoading = true
 
             this.$inertia.post('contacts', this.form, {
@@ -373,7 +368,7 @@ export default {
     user-select: none;
 }
 
-.checkbox input[type="checkbox"] {
+.checkbox input[type='checkbox'] {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -391,13 +386,13 @@ export default {
     transition: all 0.2s ease;
 }
 
-.checkbox input[type="checkbox"]:checked ~ span {
+.checkbox input[type='checkbox']:checked ~ span {
     background-color: #3b82f6;
     border-color: #3b82f6;
 }
 
 .checkbox span:after {
-    content: "";
+    content: '';
     position: absolute;
     display: none;
     left: 6px;
@@ -409,7 +404,7 @@ export default {
     transform: rotate(45deg);
 }
 
-.checkbox input[type="checkbox"]:checked ~ span:after {
+.checkbox input[type='checkbox']:checked ~ span:after {
     display: block;
 }
 
