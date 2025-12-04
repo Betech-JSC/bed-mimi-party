@@ -87,7 +87,7 @@ export default {
                 {
                     icon: '/assets/images/image-footer-website.png',
                     content: this.tt('mimiparty.com'),
-                    href: this.tt('https://miniparty.com'),
+                    href: this.tt('https://mimiparty.com'),
                     target: '_blank',
                 },
             ],
