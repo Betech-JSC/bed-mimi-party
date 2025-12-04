@@ -8,13 +8,13 @@
                     <div
                         v-for="(itemProject, indexProject) in projects.data"
                         :key="indexProject"
-                        class="border-b-8 border-primary-500 relative aspect-w-2 aspect-h-1 cursor-pointer"
+                        class="border-b-8 border-primary-500 relative aspect-w-2 aspect-h-1 cursor-pointer group overflow-hidden"
                         @click="openModal(indexProject)"
                     >
                         <div class="absolute inset-0 w-full h-full">
                             <JPicture
                                 :src="itemProject.image?.url || '/assets/images/projects/bg-banner.jpg'"
-                                class="w-full h-full object-cover"
+                                class="w-full h-full object-cover lg:group-hover:scale-110 duration-300 ease-in-out"
                                 :alt="itemProject.image?.alt || 'Project image'"
                             />
                         </div>
