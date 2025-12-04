@@ -2,6 +2,7 @@
     <header class="fixed inset-x-0 top-0 z-[1000]" @mouseleave="menuSelected = null">
         <div
             class="relative bg-header md:h-[var(--header-height-md)] h-[var(--header-height-sm)] lg:h-[var(--header-height-lg)] xl:h-[var(--header-height-xl)] flex items-center justify-center"
+            :class="isToggleMenu ? 'bg-header-active' : ''"
         >
             <div class="container flex items-center justify-between w-full">
                 <Logo />
@@ -642,9 +643,16 @@ body {
 }
 </style>
 <style lang="scss" scoped>
-.bg-header {
- background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+.bg-header {   
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+  transition: background 3s ease-in-out;
+  transition-delay: 1s; 
 }
+
+.bg-header.bg-header-active {
+ background: linear-gradient(180deg, #000000 100%, rgba(0, 0, 0, 0) 100%);
+}
+
 .header-shadow {
     box-shadow: 0 0 3px #1018280f, 0 1px 2px #1018280f;
 }
