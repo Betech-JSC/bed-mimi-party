@@ -14,13 +14,13 @@
                     <div class="flex lg:flex-row flex-col lg:space-y-0 space-y-5 md:space-y-10 items-center justify-between">
                         <h2 class="title-linear display-2 uppercase font-extrabold">Liên hệ ngay</h2>
 
-                        <div class="grid md:grid-cols-2 gap-6 max-w-[584px] w-full">
+                        <!-- <div class="grid md:grid-cols-2 gap-6 max-w-[584px] w-full">
                             <div v-for="indexInfo in 2" :key="indexInfo" class="text-white">
                                 <div class="title-2 font-bold">Tên người liên hệ</div>
                                 <a href="tel:0123456789" class="title-2 !font-normal block w-full">012 345 6789</a>
                                 <a href="mailto:emailaddress@gmail.com" class="title-2 !font-normal block w-full">emailaddress@gmail.com</a>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                     <div class="space-y-8 py-6">
@@ -222,7 +222,8 @@ export default {
             screenWidth: 0,
             services: [
                 'Decor Tiệc theo yêu cầu',
-                'Dancer Feel & Performace',
+                'Múa cổ trang',
+                'Dancer feel sexy',
                 'Decor quán mùa lễ',
                 'Liveband',
                 'Decor trang trí bong bóng nghệ thuật',
