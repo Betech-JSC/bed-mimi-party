@@ -142,30 +142,6 @@
                                 label: 'the_venue_content',
                             }"
                         />
-                        <Field
-                            v-model="form.experience_content"
-                            :field="{
-                                type: 'richtext',
-                                name: 'experience',
-                                label: 'experience_content',
-                            }"
-                        />
-                        <Field
-                            v-model="form.private_room_content"
-                            :field="{
-                                type: 'richtext',
-                                name: 'private_room_content',
-                                label: 'private_room_content',
-                            }"
-                        />
-                        <Field
-                            v-model="form.special_show_content"
-                            :field="{
-                                type: 'richtext',
-                                name: 'special_show_content',
-                                label: 'special_show_content',
-                            }"
-                        />
                     </div>
                 </div>
                 <SeoFields
