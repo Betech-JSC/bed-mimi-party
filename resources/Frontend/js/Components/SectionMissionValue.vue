@@ -34,7 +34,7 @@
                <div>
                 <div v-if="$page.props.global.the_homepage_content || $page.props.global.the_about_content" class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto" v-html="isHome ? $page.props.global.the_homepage_content : $page.props.global.the_about_content"></div>
                 <div v-else class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto">
-                    hững giá trị này không chỉ là tiêu chí hoạt động mà còn là <br /> phương châm sống của mỗi thành
+                    Những giá trị này không chỉ là tiêu chí hoạt động mà còn là <br /> phương châm sống của mỗi thành
                     viên trong đội ngũ của chúng tôi.
                 </div>
                </div>
