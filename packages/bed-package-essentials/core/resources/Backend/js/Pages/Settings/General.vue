@@ -119,19 +119,19 @@
                 <div class="card">
                     <div class="card-body">
                         <Field
-                            v-model="form.the_homepage_90s_content"
+                            v-model="form.the_homepage_content"
                             :field="{
                                 type: 'richtext',
-                                name: 'the_homepage_90s_content',
-                                label: 'the_homepage_90s_content',
+                                name: 'the_homepage_content',
+                                label: 'the_homepage_content',
                             }"
                         />
                         <Field
-                            v-model="form.the_about_90s_content"
+                            v-model="form.the_about_content"
                             :field="{
                                 type: 'richtext',
-                                name: 'the_about_90s_content',
-                                label: 'the_about_90s_content',
+                                name: 'the_about_content',
+                                label: 'the_about_content',
                             }"
                         />
                         <Field

@@ -19,7 +19,7 @@
                             buổi tiệc cá nhân, doanh nghiệp và thương hiệu cao cấp.
                         </div>
                     </div>
-                    <div class="grid md:grid-cols-3 xl:px-20">
+                    <div v-if="!isHome" class="grid md:grid-cols-3 xl:px-20">
                         <div v-for="(itemValue, indexValue) in values" :key="indexValue"
                             class="space-y-3 p-3 md:p-4 xl:p-6 lg:hover:bg-white/5 border border-transparent lg:hover:border-white/50 duration-300 ease-in-out md:min-h-[332px]">
                             <div class="h-11" :class="indexValue === 0 ? 'w-14' : 'w-11'">
@@ -31,10 +31,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto">
+               <div>
+                <div v-if="$page.props.global.the_homepage_content || $page.props.global.the_about_content" class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto" v-html="isHome ? $page.props.global.the_homepage_content : $page.props.global.the_about_content"></div>
+                <div v-else class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto">
                     Những giá trị này không chỉ là tiêu chí hoạt động mà còn là <br /> phương châm sống của mỗi thành
                     viên trong đội ngũ của chúng tôi.
                 </div>
+               </div>
                 <div class="max-w-[574px] w-full mx-auto">
                     <JPicture :src="isHome ? '/assets/images/home/image-what-we-do.png' : '/assets/images/about/image-core-value.png'" alt="image what we do"
                         class="picture-cover mix-blend-plus-lighter" />

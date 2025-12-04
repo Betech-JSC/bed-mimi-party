@@ -34,8 +34,8 @@ class Setting extends Model
                 'link_website' => 'nullable',
                 'address' => 'nullable',
 
-                'the_homepage_90s_content' => 'nullable',
-                'the_about_90s_content' => 'nullable',
+                'the_homepage_content' => 'nullable',
+                'the_about_content' => 'nullable',
                 'the_venue_content' => 'nullable',
                 'experience_content' => 'nullable',
                 'private_room_content' => 'nullable',
