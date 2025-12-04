@@ -12,7 +12,7 @@
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
                                 class="w-full h-full mix-blend-plus-lighter" />
                         </div>
-                        <div class="title-4 text-white text-center" v-html="$page.props.global.the_about_content">
+                        <div class="title-4 text-white text-center" v-html="$page.props.global.the_venue_content">
                         </div>
                     </div>
                     <div v-if="!isHome" class="grid md:grid-cols-3 xl:px-20">
