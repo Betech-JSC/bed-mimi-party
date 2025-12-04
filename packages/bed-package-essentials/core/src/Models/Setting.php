@@ -27,6 +27,7 @@ class Setting extends Model
                 'general_linkedin_link' => 'nullable',
                 'general_zalo_link' => 'nullable',
                 'general_message_fb_link' => 'nullable',
+                'general_tiktok_link' => 'nullable',
 
                 'mail_marketing' => 'nullable',
                 'mail_sale' => 'nullable',

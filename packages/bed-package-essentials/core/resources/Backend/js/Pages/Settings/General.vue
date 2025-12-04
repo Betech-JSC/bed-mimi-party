@@ -79,6 +79,13 @@
                                 label: 'Twitter Link',
                             }"
                         />
+                            <Field
+                            v-model="form.general_tiktok_link"
+                            :field="{
+                                name: 'general_tiktok_link',
+                                label: 'Tiktok Link',
+                            }"
+                        />
                         <Field
                             v-model="form.mail_marketing"
                             :field="{
