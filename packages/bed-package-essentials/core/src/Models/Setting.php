@@ -29,6 +29,9 @@ class Setting extends Model
                 'general_message_fb_link' => 'nullable',
                 'general_tiktok_link' => 'nullable',
 
+                'the_homepage_content' => 'nullable',
+                'the_homepage_desciption' => 'nullable',
+
                 "section_service_description" => 'nullable',
                 "section_service_card_1_title" => 'nullable',
                 "section_service_card_1_description" => 'nullable',
@@ -62,13 +65,6 @@ class Setting extends Model
                 'mail_sale' => 'nullable',
                 'link_website' => 'nullable',
                 'address' => 'nullable',
-
-                'the_homepage_content' => 'nullable',
-                'the_about_content' => 'nullable',
-                'the_venue_content' => 'nullable',
-                'experience_content' => 'nullable',
-                'private_room_content' => 'nullable',
-                'special_show_content' => 'nullable',
 
                 'seo_title_separator' => 'nullable',
                 'seo_meta_title' => 'nullable|max:170',

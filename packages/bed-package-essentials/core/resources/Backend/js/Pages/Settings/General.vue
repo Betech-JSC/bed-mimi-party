@@ -77,11 +77,12 @@
                             name: 'the_homepage_content',
                             label: 'Homepage Content',
                         }" />
-                        <Field v-model="form.the_about_content" :field="{
+                        <Field v-model="form.the_homepage_desciption" :field="{
                             type: 'richtext',
-                            name: 'the_about_content',
-                            label: 'About Content',
+                            name: 'the_homepage_desciption',
+                            label: 'Homepage Description',
                         }" />
+                        
                     </div>
                     <div class="card-body">
                         <div class="card-body">
