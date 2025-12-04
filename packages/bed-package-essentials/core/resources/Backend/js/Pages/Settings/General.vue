@@ -139,7 +139,7 @@
                             :field="{
                                 type: 'richtext',
                                 name: 'the_venue_content',
-                                label: 'the_venue_content',
+                                label: 'MiMi Party Content',
                             }"
                         />
                     </div>

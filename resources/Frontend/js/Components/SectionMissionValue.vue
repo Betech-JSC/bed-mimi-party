@@ -12,11 +12,7 @@
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
                                 class="w-full h-full mix-blend-plus-lighter" />
                         </div>
-                        <div class="title-4 text-white text-center">
-                            MIMI PARTY là agency tổ chức tiệc “All in One”, cung cấp trọn gói từ concept, décor, biểu
-                            diễn đến sản xuất hình ảnh.<br />
-                            Với đội ngũ sáng tạo và vận hành chuyên nghiệp, chúng tôi mang đến giải pháp tối ưu cho các
-                            buổi tiệc cá nhân, doanh nghiệp và thương hiệu cao cấp.
+                        <div class="title-4 text-white text-center" v-html="$page.props.global.the_about_content">
                         </div>
                     </div>
                     <div v-if="!isHome" class="grid md:grid-cols-3 xl:px-20">

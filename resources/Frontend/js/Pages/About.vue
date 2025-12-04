@@ -11,7 +11,7 @@
                     <div class="md:space-y-6 space-y-4 xl:space-y-8">
                         <div class="space-y-3 text-center">
                             <h2 class="title-linear display-2 uppercase font-extrabold">Chúng tôi cam kết</h2>
-                            <div class="body-1 text-white">
+                            <div class="body-1 text-white" >
                                 Tại MIMI PARTY, mỗi buổi tiệc không chỉ là một dự án – mà là lời hứa về sự hoàn hảo
                                 trong từng khoảnh khắc. <br />
                                 Chúng tôi cam kết mang đến trải nghiệm trọn vẹn, cảm xúc thật và dịch vụ đẳng cấp, từ
