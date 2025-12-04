@@ -11,7 +11,9 @@
                     </div>
                     <div class="flex items-center gap-[18px]">
                         <div v-for="(itemSocial, indexSocial) in socials" :key="indexSocial">
-                            <JPicture :src="itemSocial.icon" :alt="itemSocial.alt" class="w-full h-full object-cover" />
+                            <a :href="itemSocial.link" target="_blank" rel="noopener noreferrer nofollow" class="block">
+                                <JPicture :src="itemSocial.icon" :alt="itemSocial.alt" class="w-full h-full object-cover" />
+                            </a>
                         </div>
                     </div>
                 </div>
