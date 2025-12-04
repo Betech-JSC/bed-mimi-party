@@ -15,4 +15,4 @@ Disallow: /*.php$
 Disallow: /storage/
 Disallow: /vendor/
 
-Sitemap: http://90shouse.vn/sitemap.xml
+Sitemap: https://mimiparty.com/sitemap.xml
