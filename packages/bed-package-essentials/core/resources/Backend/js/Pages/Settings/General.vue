@@ -123,7 +123,7 @@
                             :field="{
                                 type: 'richtext',
                                 name: 'the_homepage_content',
-                                label: 'the_homepage_content',
+                                label: 'Homepage Content',
                             }"
                         />
                         <Field
@@ -131,7 +131,7 @@
                             :field="{
                                 type: 'richtext',
                                 name: 'the_about_content',
-                                label: 'the_about_content',
+                                label: 'About Content',
                             }"
                         />
                         <Field
