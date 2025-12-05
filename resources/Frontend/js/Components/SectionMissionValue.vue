@@ -12,7 +12,8 @@
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
                                 class="w-full h-full mix-blend-plus-lighter" />
                         </div>
-                        <div class="title-4 text-white text-center" v-html="isHome ? $page.props.global.the_homepage_desciption : $page.props.global.section_service_description">
+                        <div class="title-4 text-white text-center"
+                            v-html="isHome ? $page.props.global.the_homepage_desciption : $page.props.global.section_service_description">
                         </div>
                     </div>
                     <div v-if="!isHome" class="grid md:grid-cols-3 xl:px-20">
@@ -27,12 +28,15 @@
                         </div>
                     </div>
                 </div>
-               <div>
-                <div class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto" v-html="isHome ? $page.props.global.the_homepage_content : $page.props.global.the_about_content"></div>
-               </div>
+                <div>
+                    <div class="title-1 font-bold text-white text-center max-w-[726px] w-full mx-auto"
+                        v-html="isHome ? $page.props.global.the_homepage_content : $page.props.global.the_about_content">
+                    </div>
+                </div>
                 <div class="max-w-[574px] w-full mx-auto">
-                    <JPicture :src="isHome ? '/assets/images/home/image-what-we-do.png' : '/assets/images/about/image-core-value.png'" alt="image what we do"
-                        class="picture-cover mix-blend-plus-lighter" />
+                    <JPicture
+                        :src="isHome ? '/assets/images/home/image-what-we-do.png' : '/assets/images/about/image-core-value.png'"
+                        alt="image what we do" class="picture-cover mix-blend-plus-lighter" />
                 </div>
             </div>
         </div>

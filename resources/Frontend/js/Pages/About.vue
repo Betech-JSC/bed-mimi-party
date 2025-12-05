@@ -71,48 +71,37 @@ export default {
                         url: '/assets/images/home/image-value-1.png',
                         alt: 'image value 1',
                     },
-                    title: this.$page.props.global.section_service_card_1_title ?? 'Tầm nhìn',
-                    description:
-                        this.$page.props.global.section_service_card_1_description ??
-                        'MIMI PARTY hướng đến trở thành đơn vị tổ chức tiệc cá nhân và doanh nghiệp hàng đầu, nơi mỗi sự kiện không chỉ là một buổi tiệc – mà là một trải nghiệm mang dấu ấn riêng biệt, chuẩn mực và đáng nhớ. Chúng tôi không chạy theo xu hướng, chúng tôi tạo nên chuẩn mực mới cho nghệ thuật tổ chức tiệc riêng tư.',
+                    title: this.$page.props.global.section_service_card_1_title,
+                    description: this.$page.props.global.section_service_card_1_description,
                 },
                 {
                     image: {
                         url: '/assets/images/home/image-value-2.png',
                         alt: 'image value 2',
                     },
-                    title: this.$page.props.global.section_service_card_2_title ?? 'Sứ mệnh',
-                    description:
-                        this.$page.props.global.section_service_card_2_description ??
-                        'Tại MIMI PARTY, chúng tôi tin rằng mọi khoảnh khắc đáng nhớ đều xứng đáng được tôn vinh bằng sự chỉn chu và cảm xúc chân thật. Bằng đội ngũ sáng tạo và chuyên nghiệp, MIMI PARTY mang đến những bữa tiệc mang đậm cá tính, trọn vẹn trải nghiệm, và phản ánh đúng giá trị của khách hàng – dù đó là cá nhân, doanh nghiệp hay thương hiệu.',
+                    title: this.$page.props.global.section_service_card_2_title,
+                    description: this.$page.props.global.section_service_card_2_description,
                 },
                 {
                     image: {
                         url: '/assets/images/home/image-value-3.png',
                         alt: 'image value 3',
                     },
-                    title: this.$page.props.global.section_service_card_3_title ?? 'Mục tiêu',
-                    description:
-                        this.$page.props.global.section_service_card_3_description ??
-                        `
-                        Xây dựng hệ sinh thái dịch vụ tiệc “All in One”: từ ý tưởng, thiết kế, trang trí, âm nhạc, biểu diễn cho đến vận hành. Đặt Minh bạch – Chất lượng – Riêng tư làm nền tảng trong mọi hoạt động.  Không ngừng hoàn thiện quy trình để mang đến sự hài lòng tuyệt đối – nơi tiêu chuẩn duy nhất mà chúng tôi hướng đến, chính là tiêu chuẩn của khách hàng.
-                    `,
+                    title: this.$page.props.global.section_service_card_3_title,
+                    description: this.$page.props.global.section_service_card_3_description,
                 },
             ],
             commits: [
                 {
                     icon: '/assets/images/about/image-commit-1.png',
-                    title: this.$page.props.global.section_commit_card_1_title ?? 'Chất lượng & Sự chỉn chu',
-                    description:
-                        this.$page.props.global.section_commit_card_1_description ??
-                        'Mỗi hạng mục – từ décor, biểu diễn đến kỹ thuật – đều được kiểm soát tỉ mỉ, đảm bảo chuẩn mực cao nhất trong ngành tổ chức tiệc.',
+                    title: this.$page.props.global.section_commit_card_1_title,
+                    description: this.$page.props.global.section_commit_card_1_description,
                 },
                 {
                     icon: '/assets/images/about/image-commit-2.png',
-                    title: this.$page.props.global.section_commit_card_2_title ?? 'Minh bạch & Uy tín',
+                    title: this.$page.props.global.section_commit_card_2_title,
                     description:
-                        this.$page.props.global.section_commit_card_2_description ??
-                        'Mọi chi phí, quy trình và hạng mục đều rõ ràng – giúp khách hàng an tâm và tin tưởng tuyệt đối.',
+                        this.$page.props.global.section_commit_card_2_description,
                 },
                 {
                     icon: '/assets/images/about/image-commit-3.png',
@@ -133,25 +122,22 @@ export default {
             reasons: [
                 {
                     image: '/assets/images/about/image-m.png',
-                    title: this.$page.props.global.section_reasons_card_1_title ?? 'Trọn gói – Đồng bộ – Tiện lợi',
-                    description: this.$page.props.global.section_reasons_card_1_description ?? 'Mimi Party mang đến giải pháp tổ chức tiệc toàn diện (All in One) – nơi mọi yếu tố từ décor, biểu diễn, âm nhạc đến hình ảnh đều được kết nối trong một tổng thể thống nhất. Chúng tôi không chỉ giúp khách hàng tiết kiệm thời gian và chi phí, mà còn biến quá trình chuẩn bị tiệc thành một trải nghiệm đầy cảm hứng.',
-                },
+                    title: this.$page.props.global.section_reasons_card_1_title,
+                    description: this.$page.props.global.section_reasons_card_1_description,
                 {
                     image: '/assets/images/about/image-i.png',
-                    title: this.$page.props.global.section_reasons_card_2_title ?? 'Đội ngũ chuyên nghiệp & tận tâm',
-                    description: this.$page.props.global.section_reasons_card_2_description ?? 'Mỗi thành viên của Mimi Party đều có kinh nghiệm sâu trong lĩnh vực décor, performance và event management. Chúng tôi làm việc bằng trách nhiệm, đam mê và sự chỉn chu, để mọi khoảnh khắc trong buổi tiệc đều diễn ra hoàn hảo – đúng chuẩn mực mà khách hàng mong đợi.',
+                    title: this.$page.props.global.section_reasons_card_2_title,
+                    description: this.$page.props.global.section_reasons_card_2_description,
                 },
                 {
                     image: '/assets/images/about/image-m.png',
-                    title: this.$page.props.global.section_reasons_card_3_title ?? 'Kinh nghiệm đa dạng',
-                    description: this.$page.props.global.section_reasons_card_3_description ?? 'Chúng tôi đã thực hiện nhiều loại hình tiệc: cá nhân, doanh nghiệp, thương hiệu, nhà hàng – lounge – KTV VIP. Chính kinh nghiệm thực chiến này giúp Mimi Party luôn linh hoạt sáng tạo concept và giải pháp phù hợp với từng ngân sách, không gian và đối tượng khách hàng.',
+                    title: this.$page.props.global.section_reasons_card_3_title,
+                    description: this.$page.props.global.section_reasons_card_3_description,
                 },
                 {
                     image: '/assets/images/about/image-i.png',
-                    title: this.$page.props.global.section_reasons_card_4_title ?? 'Quản lý & Giám sát chuyên nghiệp',
-                    description:
-                        this.$page.props.global.section_reasons_card_4_description ??
-                        'Không chỉ lên ý tưởng, chúng tôi đi cùng khách hàng đến phút cuối của buổi tiệc. Từ setup, vận hành, điều phối nhân sự, kiểm soát tiến độ đến tổng kết – mọi quy trình đều được giám sát chặt chẽ để đảm bảo một sự kiện trọn vẹn, trơn tru và đẳng cấp.',
+                    title: this.$page.props.global.section_reasons_card_4_title,
+                    description: this.$page.props.global.section_reasons_card_4_description,
                 },
             ],
         }
