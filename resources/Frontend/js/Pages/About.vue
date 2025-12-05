@@ -1,7 +1,7 @@
 <template>
     <main class="bg-black">
         <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
-        <SectionMissionValue :values="values" />
+        <SectionMissionValue :isHome="false" :values="values" />
         <section class="md:py-16 py-12 xl:py-20 relative">
             <div class="absolute inset-0">
                 <JPicture src="/assets/images/about/bg-commit.jpg" alt="background commit" class="w-full h-full" />
@@ -54,6 +54,7 @@
         </section>
     </main>
 </template>
+
 <script>
 import SectionMissionValue from '@/Components/SectionMissionValue.vue'
 
@@ -100,22 +101,18 @@ export default {
                 {
                     icon: '/assets/images/about/image-commit-2.png',
                     title: this.$page.props.global.section_commit_card_2_title,
-                    description:
-                        this.$page.props.global.section_commit_card_2_description,
+                    description: this.$page.props.global.section_commit_card_2_description,
                 },
                 {
                     icon: '/assets/images/about/image-commit-3.png',
-                    title:
-                        this.$page.props.global.section_commit_card_3_title ?? 'Đúng hẹn – Đúng chuẩn – Đúng cảm xúc',
-                    description:
-                        this.$page.props.global.section_commit_card_3_description ??
+                    title: this.$page.props.global.section_commit_card_3_title ?? 'Đúng hẹn – Đúng chuẩn – Đúng cảm xúc',
+                    description: this.$page.props.global.section_commit_card_3_description ??
                         'Từ khâu setup, vận hành đến biểu diễn, chúng tôi cam kết mang lại sự trọn vẹn và đúng kỳ vọng đã đặt ra.',
                 },
                 {
                     icon: '/assets/images/about/image-commit-4.png',
                     title: this.$page.props.global.section_commit_card_4_title ?? 'Cá nhân hoá trải nghiệm',
-                    description:
-                        this.$page.props.global.section_commit_card_4_description ??
+                    description: this.$page.props.global.section_commit_card_4_description ??
                         'Mỗi bữa tiệc mang dấu ấn riêng, được thiết kế theo gu thẩm mỹ, tính cách và thông điệp của khách hàng.',
                 },
             ],
@@ -124,6 +121,7 @@ export default {
                     image: '/assets/images/about/image-m.png',
                     title: this.$page.props.global.section_reasons_card_1_title,
                     description: this.$page.props.global.section_reasons_card_1_description,
+                },
                 {
                     image: '/assets/images/about/image-i.png',
                     title: this.$page.props.global.section_reasons_card_2_title,

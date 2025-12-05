@@ -184,7 +184,6 @@ export default {
             currentLan: null,
             isToggleLanBox: false,
             isToggleMenu: false,
-            isToggleSubMenu: false,
             currentType: '',
             currentSubMenu: [],
             languageList: [
@@ -260,32 +259,6 @@ export default {
         },
     },
     watch: {
-        '$attrs.keyword'(newVal) {
-            if (this.isShowroomPage) return
-            if (!newVal) {
-                this.searchText = ''
-            } else {
-                this.searchText = newVal
-            }
-        },
-        searchText(newVal) {
-            if (
-                newVal &&
-                (this.recently_search.includes(newVal) || this.keywords.includes(newVal)) &&
-                !this.isShowPopupSearch
-            ) {
-                return
-            }
-
-            this.searchProduct()
-        },
-        isShowPopupSearch(newVal) {
-            if (newVal) {
-                window.addEventListener('click', this.closePopupSearch)
-            } else {
-                window.removeEventListener('click', this.closePopupSearch)
-            }
-        },
         '$page.url': function (newURL) {
             this.instantSearch = []
             this.isShowPopupSearch = false
@@ -293,89 +266,8 @@ export default {
                 this.searchText = ''
             }
         },
-        quantity(newVal, oldVal) {
-            if (this.isLoading) return
-            if (newVal === 0) {
-                this.deleteCart()
-            } else {
-                if (newVal > oldVal) {
-                    this.tracking(newVal - oldVal)
-                }
-                this.updateCart()
-            }
-        },
-        cart(newVal) {
-            if (newVal && newVal.qty) {
-                this.quantity = Number(newVal.qty)
-            }
-        },
     },
     methods: {
-        handleSearch() {
-            if (this.searchText.trim() === '' || this.isLoading) return
-            this.instantSearch = []
-            this.isShowPopupSearch = false
-            this.isOpenSearch = false
-            this.isToggleMenu = false
-            this.isLoading = true
-
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Search', {
-                    search_string: this.searchText,
-                })
-            }
-            if (typeof ttq !== 'undefined') {
-                ttq.track('Search', {
-                    search_string: this.searchText,
-                })
-            }
-            const BASE_URL = this.route('search')
-            this.$inertia.visit(BASE_URL, {
-                preserveScroll: true,
-                data: {
-                    keyword: this.searchText,
-                },
-                onFinish: () => {
-                    this.isLoading = false
-                },
-            })
-        },
-        async searchProduct() {
-            if (this.isLoading) {
-                this.instantSearch = []
-                return
-            }
-
-            if (this.isLoadingSearch) return
-            this.isLoadingSearch = true
-
-            if (this.searchText.trim() === '') {
-                this.instantSearch = []
-            } else {
-                const { data } = await axios.get(this.route('instant_search', { keyword: this.searchText }))
-                this.instantSearch = data?.data?.products || []
-            }
-
-            this.isLoadingSearch = false
-        },
-        onOpenSearch() {
-            this.isOpenSearch = !this.isOpenSearch
-        },
-        setMenuSelected(item) {
-            this.menuSelected = item
-        },
-        setFirstSubMenu() {
-            if (this.menuSelected.subMenu && this.menuSelected.subMenu.length > 0) {
-                this.subMenuSelected = this.menuSelected.subMenu[0]
-            }
-        },
-        setBackgroundHover(type) {
-            console.log('type', type)
-            type === 'enter' ? (this.hoverBackground = true) : (this.hoverBackground = false)
-        },
-        setSubMenuSelected(item) {
-            this.subMenuSelected = item
-        },
         activeMenu(slug) {
             const splitPath = this.fullPath.split('/')
             return slug === splitPath[splitPath.length - 1]
@@ -383,91 +275,14 @@ export default {
         toggleLanBox() {
             this.isToggleLanBox = !this.isToggleLanBox
         },
-        hideBox() {
-            this.isToggleLanBox = false
-        },
         onToggleMenu() {
             this.isToggleMenu = !this.isToggleMenu
             this.isCartMenuOpen = false
-        },
-        onToggleCartMenu() {
-            if (this.isToggleMenu === false) {
-                this.isCartMenuOpen = !this.isCartMenuOpen
-            }
         },
         closeMenu() {
             const el = document.body
             el.classList.remove('overflow-hidden', 'menu-is-opened')
             this.isToggleMenu = false
-            this.isToggleSubMenu = false
-        },
-        toggleSubMenu(arr, type) {
-            this.isToggleSubMenu = !this.isToggleSubMenu
-            this.currentSubMenu = arr
-            this.currentType = type
-        },
-        closeSubMenu() {
-            this.isToggleSubMenu = false
-        },
-        async updateCart() {
-            if (this.isLoading) return
-            this.isLoading = true
-
-            let cartOrder = null
-
-            const { data } = await axios.put(
-                this.route('checkout.cart.update', {
-                    rowId: this.cart.rowId,
-                    quantity: this.quantity,
-                })
-            )
-
-            cartOrder = data
-
-            if (this.locationID) {
-                const base_url = this.route('checkout.shipping')
-                const { data } = await axios.get(base_url, {
-                    params: {
-                        region: this.locationID,
-                    },
-                })
-                // TODO
-                if (data?.data) cartOrder = data.data
-            }
-
-            this.appStore.$patch({
-                cart: cartOrder,
-            })
-            this.isLoading = false
-        },
-        async deleteCart(rowId) {
-            if (this.isLoading) return
-            this.isLoading = true
-
-            let cartOrder = null
-
-            const { data } = await axios.put(
-                this.route('checkout.cart.destroy', {
-                    rowId: rowId,
-                })
-            )
-
-            cartOrder = data
-
-            if (this.locationID) {
-                const base_url = this.route('checkout.shipping')
-                const { data } = await axios.get(base_url, {
-                    params: {
-                        region: this.locationID,
-                    },
-                })
-                // TODO
-                if (data?.data) cartOrder = data.data
-            }
-            this.appStore.$patch({
-                cart: cartOrder,
-            })
-            this.isLoading = false
         },
 
         switchLang(lang) {
