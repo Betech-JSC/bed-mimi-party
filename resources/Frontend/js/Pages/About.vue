@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="space-y-3">
                                     <h3 class="title-2 font-bold text-white">{{ itemCommit.title }}</h3>
-                                    <div class="title-4 text-white">{{ itemCommit.description }}</div>
+                                    <div class="title-4 text-white" v-html="itemCommit.description"></div>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="space-y-3 flex-1 w-full">
                                     <div class="title-2">{{ itemReason.title }}</div>
-                                    <div class="body-2">{{ itemReason.description }}</div>
+                                    <div class="body-2" v-html="itemReason.description"></div>
                                 </div>
                             </div>
                         </div>
