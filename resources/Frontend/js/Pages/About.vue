@@ -105,15 +105,13 @@ export default {
                 },
                 {
                     icon: '/assets/images/about/image-commit-3.png',
-                    title: this.$page.props.global.section_commit_card_3_title ?? 'Đúng hẹn – Đúng chuẩn – Đúng cảm xúc',
-                    description: this.$page.props.global.section_commit_card_3_description ??
-                        'Từ khâu setup, vận hành đến biểu diễn, chúng tôi cam kết mang lại sự trọn vẹn và đúng kỳ vọng đã đặt ra.',
+                    title: this.$page.props.global.section_commit_card_3_title,
+                    description: this.$page.props.global.section_commit_card_3_description,
                 },
                 {
                     icon: '/assets/images/about/image-commit-4.png',
-                    title: this.$page.props.global.section_commit_card_4_title ?? 'Cá nhân hoá trải nghiệm',
-                    description: this.$page.props.global.section_commit_card_4_description ??
-                        'Mỗi bữa tiệc mang dấu ấn riêng, được thiết kế theo gu thẩm mỹ, tính cách và thông điệp của khách hàng.',
+                    title: this.$page.props.global.section_commit_card_4_title,
+                    description: this.$page.props.global.section_commit_card_4_description,
                 },
             ],
             reasons: [
