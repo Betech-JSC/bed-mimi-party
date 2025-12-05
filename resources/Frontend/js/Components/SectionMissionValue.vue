@@ -12,7 +12,7 @@
                             <JPicture src="/assets/images/logo-mini-party-effect.png" alt="logo"
                                 class="w-full h-full mix-blend-plus-lighter" />
                         </div>
-                        <div class="title-4 text-white text-center" v-html="$page.props.global.the_venue_content">
+                        <div class="title-4 text-white text-center" v-html="isHome ? $page.props.global.the_venue_content : section_service_description">
                         </div>
                     </div>
                     <div v-if="!isHome" class="grid md:grid-cols-3 xl:px-20">
@@ -23,7 +23,7 @@
                                     class="w-full h-full mix-blend-plus-lighter" />
                             </div>
                             <h3 class="title-2 font-bold uppercase text-white">{{ itemValue.title }}</h3>
-                            <div class="title-4 text-white text-justify">{{ itemValue.description }}</div>
+                            <div class="title-4 text-white text-justify" v-html="itemValue.description"></div>
                         </div>
                     </div>
                 </div>
