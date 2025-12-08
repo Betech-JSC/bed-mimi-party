@@ -33,7 +33,9 @@
                     </div>
                     <div class="flex lg:flex-row flex-col items-start gap-6 md:gap-8 xl:gap-12">
                         <div class="max-w-[282px] w-full">
-                            <h2 class="title-linear display-3 uppercase font-extrabold">Vì sao chọn Mini Party?</h2>
+                            <h2 class="title-linear display-3 uppercase font-extrabold">
+                                {{  $page.props.global.section_reasons_title ?? 'Vì sao chọn MiMi Party?'}}
+                            </h2>
                         </div>
                         <div class="flex-1 w-full">
                             <div v-for="(itemReason, indexReason) in reasons" :key="indexReason"
