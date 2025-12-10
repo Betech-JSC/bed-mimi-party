@@ -44,13 +44,13 @@
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
-                <div class="grid grid-cols-12 gap-6">
+                <div class="grid grid-cols-12 gap-4 md:gap-6">
                     <div class="col-span-full lg:col-span-7">
                         <div class="modal-body">
                             <ThumbnailModal :product="selectedItem"  />
                         </div>
                     </div>
-                    <div class="col-span-full lg:col-span-5 space-y-8">
+                    <div class="col-span-full lg:col-span-5 md:space-y-6 space-y-4 xl:space-y-8">
                             <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
                             <p class="body-2 text-white">{{ selectedItem.description }}</p>
                             <div class="prose" v-html="selectedItem.content"></div>
