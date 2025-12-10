@@ -45,6 +45,7 @@
                     <div class="col-span-full lg:col-span-5 space-y-8">
                         <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
                         <p class="body-2 text-white">{{ selectedItem.description }}</p>
+                        <div class="prose" v-html="selectedItem.content"></div>
                     </div>
                 </div>
             </div>

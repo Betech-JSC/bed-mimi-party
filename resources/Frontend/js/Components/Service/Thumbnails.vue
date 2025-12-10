@@ -138,7 +138,7 @@ defineExpose({
 }
 
 .thumbnail-swiper-container {
-    @apply relative max-w-[550px] lg:max-w-[720px] mx-auto;
+    @apply relative max-w-[550px] lg:max-w-[600px] mx-auto;
 }
 
 .thumbnail-swiper {
