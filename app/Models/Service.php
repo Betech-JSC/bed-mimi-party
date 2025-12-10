@@ -130,6 +130,7 @@ class Service extends BaseModel
             'title' => $this->title,
             'slug' => $this->seo_slug ?? $this->slug,
             'description' => transform_richtext($this->description),
+            'content' => transform_richtext($this->content),
             'image' => $this->getImageDetail($this->image),
             'sliders' => $sliders,
         ];
