@@ -129,7 +129,7 @@ class Service extends BaseModel
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->seo_slug ?? $this->slug,
-            'description' => $this->description,
+            'description' => transform_richtext($this->description),
             'image' => $this->getImageDetail($this->image),
             'sliders' => $sliders,
         ];
@@ -149,7 +149,7 @@ class Service extends BaseModel
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->seo_slug ?? $this->slug,
-            'description' => $this->description,
+            'description' => transform_richtext($this->description),
             'content' => transform_richtext($this->content),
             'sliders' => $sliders,
         ];

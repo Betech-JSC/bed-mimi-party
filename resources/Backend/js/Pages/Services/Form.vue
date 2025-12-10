@@ -21,8 +21,8 @@
                     <Field
                         v-model="form.description"
                         :field="{
-                            type: 'textarea',
-                            name: 'description',
+                            type: 'richtext',
+                            name: 'content',
                             label: 'Mô tả',
                         }"
                     />
