@@ -33,7 +33,7 @@
                     </div>
                     <div class="flex lg:flex-row flex-col items-start gap-6 md:gap-8 xl:gap-12">
                         <div class="max-w-[282px] w-full">
-                            <h2 class="title-linear display-3 uppercase font-extrabold">
+                            <h2 class="title-linear display-3 !leading-[150%] uppercase font-extrabold">
                                 {{  $page.props.global.section_reasons_title ?? 'Vì sao chọn MiMi Party?'}}
                             </h2>
                         </div>

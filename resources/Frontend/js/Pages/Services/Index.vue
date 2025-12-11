@@ -10,7 +10,7 @@
                     class="card-service grid grid-cols-12 gap-6 border border-white/50"
                 >
                     <div class="col-span-full xl:col-span-4 w-full space-y-8" :class="index % 2 === 0 ? 'order-1' : 'order-1 xl:order-2'">
-                        <h2 class="title-linear display-3 uppercase font-extrabold">{{ item.title }}</h2>
+                        <h2 class="title-linear display-3 !leading-[150%] uppercase font-extrabold">{{ item.title }}</h2>
                         <button class="btn btn-primary" @click="openModal(index)">Xem thêm</button>
                     </div>
                     <div class="col-span-full xl:col-span-8" :class="index % 2 === 0 ? 'order-2' : 'order-2 xl:order-1'">

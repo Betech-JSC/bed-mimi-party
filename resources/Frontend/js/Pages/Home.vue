@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="col-span-full lg:col-span-5 md:space-y-6 space-y-4 xl:space-y-8">
-                        <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
+                        <h3 class="title-linear display-3 !leading-[150%] uppercase font-extrabold">{{ selectedItem.title }}</h3>
                         <div class="overflow-y-auto md:space-y-6 space-y-4 xl:space-y-8 h-full max-h-[200px] md:max-h-[480px]">
                                 <p class="body-2 text-white" v-html="selectedItem.description"></p>
                                 <div class="prose" v-html="selectedItem.content"></div>
