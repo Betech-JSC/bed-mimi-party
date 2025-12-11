@@ -132,17 +132,16 @@ defineExpose({
 })
 </script>
 
-<style scoped>
-.product-gallery {
-    @apply max-w-[816px] mx-auto;
-}
-
+<style scoped lang="scss">
 .thumbnail-swiper-container {
     @apply relative max-w-[550px] lg:max-w-[600px] mx-auto;
 }
 
-.thumbnail-swiper {
-    @apply py-3;
+:deep(.product-gallery) {
+    @apply max-w-[816px] mx-auto;
+    .thumbnail-swiper {
+        @apply py-3;
+    }
 }
 
 .thumbnail-prev,

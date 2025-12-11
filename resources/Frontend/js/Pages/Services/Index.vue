@@ -26,7 +26,7 @@
                 class="relative max-w-[90vw] w-full max-h-[90vh] flex flex-col border border-white/20 bg-linear-modal md:p-6 p-3 xl:p-8"
             >
                 <button
-                    class="absolute -top-14 -right-4 w-10 h-10 rounded-lg bg-white lg:hover:bg-primary-500 lg:hover:text-white duration-300 ease-in-out text-black flex items-center justify-center"
+                    class="absolute -top-11 md:-top-14 right-0 md:-right-4 w-10 h-10 rounded-lg bg-white lg:hover:bg-primary-500 lg:hover:text-white duration-300 ease-in-out text-black flex items-center justify-center"
                     @click="closeModal"
                 >
                     <svg
@@ -44,7 +44,7 @@
                         <line x1="6" y1="6" x2="18" y2="18"></line>
                     </svg>
                 </button>
-                <div class="grid grid-cols-12 gap-4 md:gap-6">
+                <div class="grid grid-cols-12 md:gap-6">
                     <div class="col-span-full lg:col-span-7">
                         <div class="modal-body">
                             <ThumbnailModal :product="selectedItem"  />
@@ -52,8 +52,10 @@
                     </div>
                     <div class="col-span-full lg:col-span-5 md:space-y-6 space-y-4 xl:space-y-8">
                             <h3 class="title-linear display-3 uppercase font-extrabold">{{ selectedItem.title }}</h3>
-                            <p class="body-2 text-white">{{ selectedItem.description }}</p>
-                            <div class="prose" v-html="selectedItem.content"></div>
+                            <div class="overflow-y-auto md:space-y-6 space-y-4 xl:space-y-8 h-full max-h-[200px] md:max-h-[480px]">
+                                <p class="body-2 text-white" v-html="selectedItem.description"></p>
+                                <div class="prose" v-html="selectedItem.content"></div>
+                            </div>
                     </div>
                 </div>
             </div>
