@@ -50,7 +50,7 @@
                             </div>
 
                             <h1 class="display-3 font-extrabold uppercase text-white">
-                                TỔ CHỨC SỰ KIỆN ĐƯỢC HIỆU MỘT CÁCH ĐƠN GIẢN LÀ QUÁ TRÌNH LÊN Ý TƯỞNG SỰ KIỆN
+                                {{ post.title }}
                             </h1>
 
                             <div class="flex md:hidden items-center gap-3">
@@ -83,11 +83,7 @@
                                 </div>
                             </div>
 
-                            <p class="title-2 font-bold text-white">
-                                Gala dinner là một trong những sự kiện quan trọng được tổ chức để tri ân nhân viên, đối
-                                tác và khách hàng. Đây chính là cơ hội để mọi người có thời gian thực sự trò chuyện và
-                                gắn kết với nhau. Tuy nhiên, để một gala dinner thực sự nổi bật và để lại dấu ấn khó
-                                quên, bạn cần chuẩn bị những ý tưởng sáng tạo, độc đáo...
+                            <p class="title-2 font-bold text-white" v-html="post.description">
                             </p>
                         </div>
                         <div class="aspect-w-8 aspect-h-5">
