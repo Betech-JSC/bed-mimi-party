@@ -25,8 +25,7 @@
                             <h3 class="title-2 uppercase font-bold">
                                 {{ itemProject.title }}
                             </h3>
-                            <div class="body-1">
-                                {{ itemProject.description }}
+                            <div class="body-1" v-html="itemProject.description">
                             </div>
                         </div>
                     </div>

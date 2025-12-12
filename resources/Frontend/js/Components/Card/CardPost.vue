@@ -38,8 +38,7 @@
                 >
                     {{ item.title }}
                 </Link>
-                <p class="body-1 text-white line-clamp-2 md:line-clamp-3">
-                    {{ item.description }}
+                <p class="body-1 text-white line-clamp-2 md:line-clamp-3" v-html="item.description">
                 </p>
             </div>
         </div>
