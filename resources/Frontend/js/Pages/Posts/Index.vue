@@ -24,7 +24,7 @@
                             {{ posts.data[0].title }}
                         </Link>
                         <div class="flex items-center gap-3">
-                            <div class="title-2">Tên tác giả</div>
+                            <div class="title-2">{{ posts.data[0].author || "Tên tác giả" }}</div>
                             <div>|</div>
                             <div class="body-1">{{ formatDate(posts.data[0].published_at) }}</div>
                         </div>

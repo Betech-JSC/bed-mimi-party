@@ -13,7 +13,7 @@
                                         <span>Tin tức</span>
                                     </div>
                                     <div class="flex items-center gap-3 text-white">
-                                        <span class="title-1">Tên tác giả</span>
+                                        <span class="title-1">{{ post.author || "Tên tác giả" }}</span>
                                         <span>|</span>
                                         <span class="button-1 font-semibold">{{ formatDate(post.published_at) }}</span>
                                     </div>
