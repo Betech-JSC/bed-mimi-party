@@ -3,10 +3,10 @@
         <section v-if="posts.data && posts.data.length > 0" class="relative z-10 h-[500px] xl:h-[720px]">
             <div class="absolute inset-0">
                 <JPicture
-                    src="/assets/images/demo/image-blog-demo.jpg"
+                    :src="posts.data[0].image.url || '/cover.jpg'"
                     loading="eager"
                     class="object-fit h-full w-full object-cover"
-                    alt="image demo"
+                     :alt="posts.data[0].image.alt || posts.data[0].title || 'image card post'"
                 />
             </div>
             <div class="absolute inset-0 w-full h-full bg-[#010A1C] bg-opacity-[56%]"></div>
@@ -28,8 +28,7 @@
                             <div>|</div>
                             <div class="body-1">{{ formatDate(posts.data[0].published_at) }}</div>
                         </div>
-                        <div class="title-2 !font-normal line-clamp-2 md:line-clamp-3">
-                            {{ posts.data[0].description }}
+                        <div class="title-2 !font-normal line-clamp-2 md:line-clamp-3" v-html="posts.data[0].description ">
                         </div>
                         <Link
                             :href="
