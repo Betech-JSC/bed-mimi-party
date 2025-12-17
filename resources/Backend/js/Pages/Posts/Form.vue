@@ -140,7 +140,7 @@ export default {
                 images: this.item.images ?? [],
                 view_count: 0,
                 ...this.item,
-                type: 'PROJECT',
+                type: 'POST',
             }
         },
     },

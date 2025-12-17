@@ -18,7 +18,6 @@ class PostController extends Controller
             $posts = Post::query()
                 ->active()
                 ->where('type', Post::TYPE_POST)
-                ->filter(request()->all())
                 ->paginate(12)
                 ->onEachSide(0)
                 ->through(function ($item) {
