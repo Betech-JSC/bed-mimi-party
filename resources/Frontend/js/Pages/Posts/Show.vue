@@ -88,8 +88,8 @@
                         </div>
                         <div class="aspect-w-8 aspect-h-5">
                             <JPicture
-                                src="/assets/images/demo/image-blog-demo.jpg"
-                                alt="image blog"
+                                :src="post.image?.url || '/cover.jpg'"
+                                :alt="post.image?.alt || post.title || 'image blog'"
                                 wrapperClass="picture-cover"
                                 class="w-full h-full object-cover"
                             />
