@@ -12,11 +12,11 @@
                             label: 'Tiêu đề',
                         }"
                     />
-                 <Field
+                    <Field
                         v-model="form.description"
                         :field="{
                             type: 'richtext',
-                            name: 'content',
+                            name: 'description',
                             label: 'Mô tả',
                         }"
                     />
@@ -73,7 +73,7 @@
                         v-model="form.images"
                         :field="{
                             type: 'file_upload',
-                            name: 'image',
+                            name: 'images',
                             multiple: true,
                             label: 'Danh sách ảnh',
                         }"
@@ -103,8 +103,10 @@ export default {
                 image: this.item.image ?? null,
                 images: this.item.images ?? [],
                 banner: this.item.banner ?? null,
+                description: this.item.description ?? '',
+                content: this.item.content ?? '',
                 type: 'PROJECT',
-                view_count: 0,
+                view_count: this.item.view_count ?? 0,
             },
         }
     },
@@ -116,8 +118,10 @@ export default {
                 image: this.item.image ?? null,
                 images: this.item.images ?? [],
                 banner: this.item.banner ?? null,
+                description: this.item.description ?? '',
+                content: this.item.content ?? '',
                 type: 'PROJECT',
-                view_count: 0,
+                view_count: this.item.view_count ?? 0,
             }
         },
     },

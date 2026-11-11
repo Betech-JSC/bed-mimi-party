@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'partners' => 'Khách hàng tiêu biểu',
+    'projects' => 'Dự án',
     'actions' => [
         'create' => 'Tạo mới',
     ],
@@ -58,6 +60,10 @@ return [
         'dashboard' => 'Thống kê',
         'Flash-sales' => 'Flash Sale',
         'flash-sales' => 'Flash Sale',
+        'partners' => 'Khách hàng tiêu biểu',
+        'Partners' => 'Khách hàng tiêu biểu',
+        'projects' => 'Dự án',
+        'Projects' => 'Dự án',
 
     ],
     'common' => [

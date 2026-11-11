@@ -281,7 +281,7 @@ class Post extends BaseModel
             ->values()
             ->map(fn($item) => $item->transform());
 
-        $images = $variant['images'] ?? collect($this->images)
+        $images = collect($this->images)
             ->map(function ($item) {
                 return [
                     'url' => static_url($item['path']) ?? null,
@@ -299,6 +299,8 @@ class Post extends BaseModel
             'category' => $this->category,
             'categories' => $categories,
             'image' => $this->getImageDetail($this->image),
+            'banner' => $this->getImageDetail($this->banner),
+            'banner_mobile' => $this->getImageDetail($this->banner_mobile),
             'images' => $images,
             'url' => $this->current_url,
             'link' => $this->link,

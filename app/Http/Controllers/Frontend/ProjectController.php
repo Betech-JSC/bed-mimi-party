@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Post\Post;
+use App\Models\Slider\Slider;
 use Inertia\Inertia;
 use Illuminate\Routing\Controller;
 
@@ -23,8 +24,11 @@ class ProjectController extends Controller
                 })
                 ->withQueryString();
 
+            $banner = Slider::getByPosition('BANNER_PROJECT');
+
             $data = [
                 'projects' => $projects,
+                'banner' => $banner,
             ];
 
             if (request()->wantsJson()) {

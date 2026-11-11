@@ -9,8 +9,9 @@
 
 <script>
 import templates from '@Core/templates'
+import { compressImageToWebp } from '@Core/Utils/imageCompressor'
 import Tiny from '@tinymce/tinymce-vue'
-const MAX_FILE_SIZE = 5
+const MAX_FILE_SIZE = 50 // 50MB ceiling (nâng từ 5MB cũ lên 50MB)
 
 export default {
     components: {
@@ -85,17 +86,27 @@ export default {
                 images_dataimg_filter: function (img) {
                     return !img.hasAttribute('internal-blob')
                 },
-                images_upload_handler(blobInfo, progress) {
+                async images_upload_handler(blobInfo, progress) {
+                    const rawBlob = blobInfo.blob()
+                    if (rawBlob && rawBlob.size > MAX_FILE_SIZE * 1024 * 1024) {
+                        const errMsg = `Dung lượng ảnh vượt quá ${MAX_FILE_SIZE}MB. Vui lòng chọn ảnh nhỏ hơn.`
+                        alert(errMsg)
+                        return Promise.reject(errMsg)
+                    }
                     const data = new FormData()
-                    const file = new File([blobInfo.blob()], blobInfo.filename())
-                    data.append('files[]', file)
+                    const file = new File([rawBlob], blobInfo.filename(), {
+                        type: rawBlob.type || 'image/png',
+                    })
+                    const compressedFile = await compressImageToWebp(file)
+                    data.append('files[]', compressedFile)
                     data.append('folder', window.location.pathname.split('/')[1])
 
-                    return $axios.post(route('admin.files.store'), data).then((response) => {
+                    return (window.$axios || $axios).post(route('admin.files.store'), data).then((response) => {
                         if (response.status === 200) {
                             let path = response.data.successFiles[0]
                             return path.includes('/static/') ? path : '/static' + path
                         }
+                        return Promise.reject('Upload failed')
                     })
                 },
 

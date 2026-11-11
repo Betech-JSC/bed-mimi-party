@@ -15,6 +15,8 @@ class Slider extends BaseModel
     const STATUS_ACTIVE = 'ACTIVE';
     const STATUS_INACTIVE = 'INACTIVE';
 
+    public const BANNER_PROJECT = 'BANNER_PROJECT';
+
     public const STATUS_LIST = [
         self::STATUS_ACTIVE => 'Hiển thị',
         self::STATUS_INACTIVE => 'Ẩn',

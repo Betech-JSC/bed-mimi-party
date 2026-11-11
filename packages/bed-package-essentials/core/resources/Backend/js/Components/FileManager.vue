@@ -267,10 +267,11 @@
 <script>
 import Pagination from '@Core/Components/Pagination.vue'
 import Thumbnail from '@Core/Components/Thumbnail.vue'
+import { compressImageToWebp, toWebpFileName, isConvertibleRasterImage } from '@Core/Utils/imageCompressor'
 import { onMounted, onUnmounted } from 'vue'
 
-const MAX_SIZE_OF_IMAGE = 999999 // No limit
-const MAX_SIZE_OF_VIDEO = 999999 // No limit
+const MAX_SIZE_OF_IMAGE = 50 // 50MB (nâng từ 5MB cũ lên 50MB cho phép chọn ảnh chất lượng cao để nén WebP)
+const MAX_SIZE_OF_VIDEO = 100 // 100MB
 
 export default {
     components: { Thumbnail, Pagination },
@@ -630,7 +631,7 @@ export default {
 
             // prepare uploadingFiles UI list
             this.uploadingFiles = filesArray.map((f) => ({
-                filename: f.name,
+                filename: isConvertibleRasterImage(f) ? toWebpFileName(f.name) : f.name,
                 size: f.size,
             }))
 
@@ -644,29 +645,44 @@ export default {
 
             // upload sequentially to avoid concurrent heavy memory usage
             const uploadSequence = async () => {
-                let totalBytes = filesArray.reduce((s, f) => s + f.size, 0)
+                // Compress raster images (PNG/JPG/BMP/large WebP) to WebP on client before uploading
+                const compressedFiles = []
+                for (let i = 0; i < filesArray.length; i++) {
+                    const compressed = await compressImageToWebp(filesArray[i])
+                    compressedFiles.push(compressed)
+                    this.uploadingFiles[i] = {
+                        filename: compressed.name,
+                        size: compressed.size,
+                    }
+                }
+
+                let totalBytes = Math.max(
+                    1,
+                    compressedFiles.reduce((s, f) => s + f.size, 0)
+                )
                 let uploadedBytesSoFar = 0
 
-                for (let i = 0; i < filesArray.length; i++) {
-                    const file = filesArray[i]
+                for (let i = 0; i < compressedFiles.length; i++) {
+                    const file = compressedFiles[i]
+                    const fileSize = Math.max(1, file.size)
                     try {
                         await this.uploadSingleFile(file, (progressEvent) => {
                             // progressEvent.loaded is bytes for this file
-                            const p = Math.round((progressEvent.loaded * 100) / file.size)
+                            const p = Math.min(100, Math.round((progressEvent.loaded * 100) / fileSize))
                             this.$set
                                 ? this.$set(this.uploadProgress, file.name, p)
                                 : (this.uploadProgress[file.name] = p)
 
                             // update global progress based on bytes
                             const approxUploaded = uploadedBytesSoFar + (progressEvent.loaded || 0)
-                            this.globalProgress = Math.round((approxUploaded * 100) / totalBytes)
+                            this.globalProgress = Math.min(100, Math.round((approxUploaded * 100) / totalBytes))
                         })
                         uploadedBytesSoFar += file.size
                         // ensure file reached 100%
                         this.$set
                             ? this.$set(this.uploadProgress, file.name, 100)
                             : (this.uploadProgress[file.name] = 100)
-                        this.globalProgress = Math.round((uploadedBytesSoFar * 100) / totalBytes)
+                        this.globalProgress = Math.min(100, Math.round((uploadedBytesSoFar * 100) / totalBytes))
                     } catch (err) {
                         console.error('Upload failed for', file.name, err)
                         // mark error as 0 or special value
@@ -694,9 +710,10 @@ export default {
          * Upload a single file via axios with progress callback
          * returns Promise
          */
-        uploadSingleFile(file, onProgress) {
+        async uploadSingleFile(file, onProgress) {
+            const compressedFile = await compressImageToWebp(file)
             const formData = new FormData()
-            formData.append('files[0]', file)
+            formData.append('files[0]', compressedFile)
             formData.append('path', this.currentPath)
 
             return new Promise((resolve, reject) => {
@@ -736,8 +753,10 @@ export default {
             return imageExts.includes(ext)
         },
         fileCheck(file) {
-            // Bỏ giới hạn upload - luôn return valid
-            return { valid: true, maxSize: 'unlimited' }
+            const maxSize = this.isImage(file.name) ? MAX_SIZE_OF_IMAGE : MAX_SIZE_OF_VIDEO
+            const fileSize = file.size / 1024 / 1024
+
+            return { valid: fileSize <= maxSize, maxSize: `${maxSize}MB` }
         },
         onChange(event) {
             if (this.timer) {

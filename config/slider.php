@@ -27,5 +27,10 @@ return [
             'value' => 'BANNER_SERVICE',
             'banner' => true,
         ],
+        'BANNER_PROJECT' => [
+            'title' => 'Banner dự án',
+            'value' => 'BANNER_PROJECT',
+            'banner' => true,
+        ],
     ]
 ];

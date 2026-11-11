@@ -1,6 +1,6 @@
 <template>
     <main class="bg-primary-900">
-        <BannerImage :banner="banner" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
+        <BannerImage :banner="bannerData" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
         <section class="py-[60px]">
             <div class="container space-y-10">
                 <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dự án</h2>
@@ -90,13 +90,10 @@ import Pagination from '@/Components/Paginate.vue'
 export default {
     components: { Thumbnails, Pagination },
 
-    props: ['projects'],
+    props: ['projects', 'banner'],
 
     data() {
         return {
-            banner: {
-                image: '/assets/images/projects/bg-banner.jpg',
-            },
             isModalOpen: false,
             selectedItem: null,
             staticImages: [
@@ -108,17 +105,40 @@ export default {
     },
 
     computed: {
+        bannerData() {
+            return {
+                title: this.banner?.title || 'Dự án',
+                image: this.banner?.image?.url || this.banner?.image || '/assets/images/projects/bg-banner.jpg',
+            }
+        },
+
         modalProduct() {
             if (!this.selectedItem) return { images: [] }
 
-            // Nếu selectedItem có images thì dùng images đó
+            // Nếu selectedItem có images thật từ CMS thì dùng images đó
             if (this.selectedItem.images && this.selectedItem.images.length > 0) {
-                return {
-                    images: this.selectedItem.images,
+                const validImages = this.selectedItem.images.filter((img) => img && (img.url || typeof img === 'string'))
+                if (validImages.length > 0) {
+                    return {
+                        images: validImages.map((img) =>
+                            typeof img === 'string' ? { url: img, alt: this.selectedItem.title } : img
+                        ),
+                    }
                 }
             }
 
-            // Nếu không có images, dùng staticImages
+            // Nếu có ảnh đại diện chính (image) thì đưa vào gallery
+            if (this.selectedItem.image && (this.selectedItem.image.url || typeof this.selectedItem.image === 'string')) {
+                return {
+                    images: [
+                        typeof this.selectedItem.image === 'string'
+                            ? { url: this.selectedItem.image, alt: this.selectedItem.title }
+                            : this.selectedItem.image,
+                    ],
+                }
+            }
+
+            // Fallback sang staticImages nếu chưa có ảnh
             return {
                 images: this.staticImages,
             }
@@ -126,8 +146,12 @@ export default {
     },
 
     methods: {
-        openModal(index) {
-            this.selectedItem = this.projects.data[index]
+        openModal(indexOrItem) {
+            if (typeof indexOrItem === 'number') {
+                this.selectedItem = this.projects.data[indexOrItem]
+            } else {
+                this.selectedItem = indexOrItem
+            }
             this.isModalOpen = true
             document.body.style.overflow = 'hidden'
         },

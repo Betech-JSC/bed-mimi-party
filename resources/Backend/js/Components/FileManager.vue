@@ -23,7 +23,7 @@
                 </div>
                 {{ tt('models.files.file_manager') }}
             </h1>
-            <div class="flex ml-auto space-x-3">
+            <div class="flex ml-auto space-x-3 items-center">
                 <input
                     type="text"
                     :placeholder="tt('models.files.input_file')"
@@ -34,7 +34,31 @@
                     <ph-plus-circle-light />
                     <span> {{ tt('models.files.add_folder') }} </span>
                 </Button>
-                <Button @click.prevent="browse" class="space-x-2 btn-primary">
+
+                <!-- Spinner / progress indicator -->
+                <div v-if="uploading" class="flex items-center space-x-3">
+                    <svg
+                        class="animate-spin h-5 w-5 text-gray-700"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <circle
+                            class="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            stroke-width="4"
+                        ></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                    </svg>
+                    <div class="text-sm text-gray-700">
+                        Đang tải... <span v-if="globalProgress !== null">{{ globalProgress }}%</span>
+                    </div>
+                </div>
+
+                <Button @click.prevent="browse" class="space-x-2 btn-primary" :disabled="uploading">
                     <ph:upload-simple />
                     <span> {{ tt('models.files.select_file') }} </span>
                 </Button>
@@ -49,7 +73,7 @@
                         : 'z-0 border-transparent before:invisible invisible'
                 "
                 @dragleave.prevent="isDragging = false"
-                @drop.prevent=";(isDragging = false), (dragCounter = 0), drop($event)"
+                @drop.prevent=";(isDragging = false), drop($event)"
             ></div>
 
             <!-- Details sidebar -->
@@ -94,12 +118,54 @@
                         <span> {{ tt('models.files.delete_folder') }} </span>
                     </Button>
                 </div>
+                <!-- Loading indicator -->
+                <div v-if="loading" class="flex items-center justify-center h-full min-h-[400px]">
+                    <div class="flex flex-col items-center space-y-4">
+                        <svg
+                            class="animate-spin h-12 w-12 text-gray-700"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <circle
+                                class="opacity-25"
+                                cx="12"
+                                cy="12"
+                                r="10"
+                                stroke="currentColor"
+                                stroke-width="4"
+                            ></circle>
+                            <path
+                                class="opacity-75"
+                                fill="currentColor"
+                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                            ></path>
+                        </svg>
+                        <p class="text-sm text-gray-600">{{ tt('models.files.loading') || 'Đang tải...' }}</p>
+                    </div>
+                </div>
+
+                <!-- Empty state -->
                 <div
-                    v-if="Object.keys(searchFiles).length"
+                    v-else-if="!loading && (!searchFiles || (Array.isArray(searchFiles) ? searchFiles.length === 0 : Object.keys(searchFiles).length === 0))"
+                    class="flex items-center justify-center h-full min-h-[400px]"
+                >
+                    <div class="text-center">
+                        <p class="text-gray-500 text-lg">{{ tt('models.files.no_files') || 'Không có file nào' }}</p>
+                        <Button @click="browse" class="mt-4 space-x-2 btn-primary">
+                            <ph:upload-simple />
+                            <span>{{ tt('models.files.select_file') }}</span>
+                        </Button>
+                    </div>
+                </div>
+
+                <!-- Files list -->
+                <div
+                    v-else-if="!loading && searchFiles && (Array.isArray(searchFiles) ? searchFiles.length > 0 : Object.keys(searchFiles).length > 0)"
                     class="px-4 pt-8 pb-16 mx-auto space-y-4 max-w-7xl sm:px-6 lg:px-8"
                 >
                     <ul role="list" class="grid grid-cols-3 gap-4 lg:grid-cols-4 2xl:grid-cols-6">
-                        <li class="relative" v-if="data" v-for="(file, index) in searchFiles" :key="file.static_url">
+                        <li class="relative" v-for="(file, index) in searchFiles" :key="file.static_url || file.path || index">
                             <div
                                 class="group w-full rounded bg-gray-100 overflow-hidden aspect-[1/1] flex cursor-pointer justify-center items-center border border-transparent hover:border-gray-400 relative outline outline-offset-2 outline-2"
                                 :class="selectedFiles.includes(file) ? 'outline-black' : 'outline-transparent'"
@@ -131,8 +197,43 @@
             class="absolute bottom-0 left-0 right-0 flex items-center justify-center w-full h-16 space-x-2 bg-white border-t"
         >
             <Button @click="selectedFiles = []"> {{ tt('models.files.unchecked') }} </Button>
-            <Button class="btn-primary" @click="submitFileSelect()"> {{ tt('models.files.select') }} ({{ selectedFiles.length }}) </Button>
+            <Button class="btn-primary" @click="submitFileSelect()">
+                {{ tt('models.files.select') }} ({{ selectedFiles.length }})
+            </Button>
         </div>
+
+        <!-- Upload progress panel (fixed above bottom action bar) -->
+        <div
+            v-if="uploadingFiles.length && uploading"
+            class="fixed left-0 right-0 bottom-16 z-50 flex flex-col items-center space-y-2 p-4 pointer-events-none"
+        >
+            <div class="w-full max-w-3xl space-y-2 pointer-events-auto">
+                <div
+                    v-for="(file, idx) in uploadingFiles"
+                    :key="file.filename"
+                    class="bg-white border rounded p-3 shadow-sm"
+                >
+                    <div class="flex items-center justify-between">
+                        <div class="text-sm font-medium text-gray-800 truncate max-w-[70%]">
+                            {{ file.filename }}
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <span v-if="uploadProgress[file.filename] !== undefined"
+                                >{{ uploadProgress[file.filename] }}%</span
+                            >
+                            <span v-else>0%</span>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded h-2 mt-3 overflow-hidden">
+                        <div
+                            class="h-2 rounded bg-blue-600 transition-all duration-200"
+                            :style="{ width: (uploadProgress[file.filename] || 0) + '%' }"
+                        ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <Dialog
             header="Folder"
             v-model:visible="showFolderModal"
@@ -162,13 +263,15 @@
         </Dialog>
     </div>
 </template>
+
 <script>
 import Pagination from '@Core/Components/Pagination.vue'
 import Thumbnail from '@Core/Components/Thumbnail.vue'
+import { compressImageToWebp, toWebpFileName, isConvertibleRasterImage } from '@Core/Utils/imageCompressor'
 import { onMounted, onUnmounted } from 'vue'
 
-const MAX_SIZE_OF_IMAGE = 5
-const MAX_SIZE_OF_VIDEO = 50
+const MAX_SIZE_OF_IMAGE = 50 // 50MB (nâng từ 5MB cũ lên 50MB cho phép chọn ảnh chất lượng cao để nén WebP)
+const MAX_SIZE_OF_VIDEO = 100 // 100MB
 
 export default {
     components: { Thumbnail, Pagination },
@@ -207,7 +310,7 @@ export default {
 
     data() {
         return {
-            uploadingFiles: [],
+            uploadingFiles: [], // files currently uploading (for UI)
             selectedFiles: [],
             isDragging: false,
             timer: null,
@@ -229,10 +332,20 @@ export default {
             limit: 50,
             page: 1,
             fetchData: true,
+
+            // upload states
+            uploading: false,
+            uploadProgress: {}, // filename => percent
+            globalProgress: null,
+            
+            // loading state
+            loading: false,
         }
     },
 
     created() {
+        // Initialize loading state
+        this.loading = true
         this.getFiles()
     },
 
@@ -243,16 +356,18 @@ export default {
 
         let images = document.querySelector('.group-image-admin')
 
-        images.addEventListener('scroll', () => {
-            if (this.timerScoll) {
-                clearTimeout(this.timerScoll)
-                this.timerScoll = null
-            }
+        if (images) {
+            images.addEventListener('scroll', () => {
+                if (this.timerScoll) {
+                    clearTimeout(this.timerScoll)
+                    this.timerScoll = null
+                }
 
-            if (this.fetchData) {
-                this.timerScoll = setTimeout(this.scrollImage, 300)
-            }
-        })
+                if (this.fetchData) {
+                    this.timerScoll = setTimeout(this.scrollImage, 300)
+                }
+            })
+        }
     },
 
     unmounted() {
@@ -269,28 +384,55 @@ export default {
 
     watch: {
         show(value) {
-            if (value && this.data === null) {
+            if (value && (!this.data || !this.data.files)) {
+                this.page = 1
+                this.fetchData = true
                 this.getFiles()
+            }
+        },
+        search(newVal, oldVal) {
+            // When search changes, reset page and fetch data
+            if (newVal !== oldVal) {
+                this.page = 1
+                this.fetchData = true
+                if (newVal) {
+                    // If searching, fetch with keyword
+                    this.getFiles({ keyword: newVal })
+                } else {
+                    // If clearing search, fetch all
+                    this.getFiles()
+                }
             }
         },
     },
 
     computed: {
         searchFiles() {
+            // Ensure data exists
             if (!this.data || !this.data.files) {
-                if (!this.search) {
-                    this.getFiles()
-                    return this.data.files
-                }
                 return []
             }
-            if (!this.search) return this.data.files
+            
+            // Convert to array if needed
+            let files = this.data.files
+            if (!Array.isArray(files)) {
+                files = Object.values(files || {})
+            }
+            
+            // If no search, return all files
+            if (!this.search) {
+                return files
+            }
 
-            this.getFiles({ keyword: this.search })
-
-            this.fetchData = false
-
-            return this.data.files
+            // If searching, filter files
+            const keyword = this.search.toLowerCase()
+            
+            return files.filter((file) => {
+                if (!file) return false
+                const searchName = (file.search_name || file.filename || '').toLowerCase()
+                const filename = (file.filename || '').toLowerCase()
+                return searchName.includes(keyword) || filename.includes(keyword)
+            })
         },
         canDeleteFolder() {
             if (!this.data) return false
@@ -308,40 +450,64 @@ export default {
             this.getFiles({ page: this.page })
         },
         selectedItem(item) {
+            // Set loading immediately when tree item is clicked
+            this.loading = true
             this.currentPath = item.path
             this.data.files = []
             this.search = null
-            this.getFiles()
             this.page = 1
             this.fetchData = true
+            this.getFiles()
         },
         getFiles(params = {}, loadTree = false) {
+            // Set loading state before checking fetchData to ensure UI shows loading immediately
             if (this.fetchData) {
+                this.loading = true
+                
                 this.$axios
                     .get(
                         this.route('admin.files.index', {
-                            page: 1,
+                            page: params.page || this.page,
                             limit: this.limit,
-                            search: null,
+                            search: params.keyword || this.search || null,
                             path: this.currentPath,
                             ...params,
                         })
                     )
                     .then((res) => {
-                        let files = this.data.files
+                        let files = this.data.files || []
                         let new_files = res.data.files ? res.data.files : null
+
+                        // Ensure new_files is an array
+                        if (new_files && !Array.isArray(new_files)) {
+                            // Convert object to array if needed
+                            new_files = Object.values(new_files)
+                        }
 
                         if (Array.isArray(new_files) && new_files.length == 0) {
                             this.fetchData = false
                         } else {
-                            if (this.page == 1) {
-                                files = new_files
+                            if (this.page == 1 || params.page == 1) {
+                                files = Array.isArray(new_files) ? new_files : []
                             } else {
-                                files = { ...files, ...new_files }
+                                // Fix: Use array concat instead of object spread
+                                if (Array.isArray(files) && Array.isArray(new_files)) {
+                                    files = [...files, ...new_files]
+                                } else if (Array.isArray(new_files)) {
+                                    files = new_files
+                                } else {
+                                    files = Array.isArray(files) ? files : []
+                                }
                             }
+                            
+                            // Ensure files is always an array
+                            if (!Array.isArray(files)) {
+                                files = Object.values(files)
+                            }
+                            
                             this.data = {
                                 tree: res.data.tree,
-                                directories: res.data.directories,
+                                directories: res.data.directories || [],
                                 files: files,
                             }
 
@@ -349,6 +515,21 @@ export default {
                                 this.tree = res.data.tree
                             }
                         }
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching files:', error)
+                        // Show error message
+                        alert(this.tt('models.files.load_error') || 'Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại.')
+                        // Reset data to empty array on error
+                        this.data = {
+                            tree: this.data.tree,
+                            directories: this.data.directories || [],
+                            files: [],
+                        }
+                    })
+                    .finally(() => {
+                        // Always set loading to false when done
+                        this.loading = false
                     })
             }
         },
@@ -423,10 +604,18 @@ export default {
         fileChange() {
             this.uploadFiles(this.$refs.file.files)
         },
-        uploadFiles(images) {
-            if (images.length === 0) return
 
-            for (const image of images) {
+        /**
+         * Upload handling: validate -> build uploadingFiles list -> upload each file separately
+         */
+        uploadFiles(images) {
+            if (!images || images.length === 0) return
+
+            // convert FileList to Array
+            const filesArray = Array.from(images)
+
+            // validate all first
+            for (const image of filesArray) {
                 const fileCheck = this.fileCheck(image)
                 if (!fileCheck.valid) {
                     alert(
@@ -440,39 +629,112 @@ export default {
                 }
             }
 
-            var formData = new FormData()
-            for (let index = 0; index < images.length; index++) {
-                const image = images[index]
+            // prepare uploadingFiles UI list
+            this.uploadingFiles = filesArray.map((f) => ({
+                filename: isConvertibleRasterImage(f) ? toWebpFileName(f.name) : f.name,
+                size: f.size,
+            }))
 
-                if (this.isImage(image.name)) {
-                    const reader = new FileReader()
-                    reader.onload = (e) => {
-                        this.uploadingFiles.push({
-                            filename: image.name,
-                            base64_code: e.target.result,
-                        })
-                    }
-                    reader.readAsDataURL(image)
-                } else {
-                    this.uploadingFiles.push({
-                        filename: image.name,
-                        base64_code: null,
-                        size: image.size,
-                    })
-                }
-                formData.append('files[' + index + ']', image)
-                formData.append('path', this.currentPath)
-            }
+            // clear file input
             this.$refs.file.value = ''
-            this.postFiles(formData)
-        },
-        postFiles(formData) {
-            this.$axios.post(this.route('admin.files.store'), formData).then((response) => {
-                if (response.status === 200) {
-                    this.getFiles()
+
+            // start uploading (one by one for accurate progress)
+            this.uploading = true
+            this.uploadProgress = {}
+            this.globalProgress = 0
+
+            // upload sequentially to avoid concurrent heavy memory usage
+            const uploadSequence = async () => {
+                // Compress raster images (PNG/JPG/BMP/large WebP) to WebP on client before uploading
+                const compressedFiles = []
+                for (let i = 0; i < filesArray.length; i++) {
+                    const compressed = await compressImageToWebp(filesArray[i])
+                    compressedFiles.push(compressed)
+                    this.uploadingFiles[i] = {
+                        filename: compressed.name,
+                        size: compressed.size,
+                    }
                 }
+
+                let totalBytes = Math.max(
+                    1,
+                    compressedFiles.reduce((s, f) => s + f.size, 0)
+                )
+                let uploadedBytesSoFar = 0
+
+                for (let i = 0; i < compressedFiles.length; i++) {
+                    const file = compressedFiles[i]
+                    const fileSize = Math.max(1, file.size)
+                    try {
+                        await this.uploadSingleFile(file, (progressEvent) => {
+                            // progressEvent.loaded is bytes for this file
+                            const p = Math.min(100, Math.round((progressEvent.loaded * 100) / fileSize))
+                            this.$set
+                                ? this.$set(this.uploadProgress, file.name, p)
+                                : (this.uploadProgress[file.name] = p)
+
+                            // update global progress based on bytes
+                            const approxUploaded = uploadedBytesSoFar + (progressEvent.loaded || 0)
+                            this.globalProgress = Math.min(100, Math.round((approxUploaded * 100) / totalBytes))
+                        })
+                        uploadedBytesSoFar += file.size
+                        // ensure file reached 100%
+                        this.$set
+                            ? this.$set(this.uploadProgress, file.name, 100)
+                            : (this.uploadProgress[file.name] = 100)
+                        this.globalProgress = Math.min(100, Math.round((uploadedBytesSoFar * 100) / totalBytes))
+                    } catch (err) {
+                        console.error('Upload failed for', file.name, err)
+                        // mark error as 0 or special value
+                        this.$set ? this.$set(this.uploadProgress, file.name, 0) : (this.uploadProgress[file.name] = 0)
+                        // optionally show a message
+                        alert(this.tt('models.files.upload_failed') || `Upload failed: ${file.name}`)
+                    }
+                }
+
+                // finalize
+                setTimeout(() => {
+                    this.uploading = false
+                    this.uploadingFiles = []
+                    this.uploadProgress = {}
+                    this.globalProgress = null
+                    // refresh list after uploads
+                    this.getFiles()
+                }, 600)
+            }
+
+            uploadSequence()
+        },
+
+        /**
+         * Upload a single file via axios with progress callback
+         * returns Promise
+         */
+        async uploadSingleFile(file, onProgress) {
+            const compressedFile = await compressImageToWebp(file)
+            const formData = new FormData()
+            formData.append('files[0]', compressedFile)
+            formData.append('path', this.currentPath)
+
+            return new Promise((resolve, reject) => {
+                this.$axios
+                    .post(this.route('admin.files.store'), formData, {
+                        headers: { 'Content-Type': 'multipart/form-data' },
+                        onUploadProgress: onProgress,
+                    })
+                    .then((res) => {
+                        if (res.status === 200) {
+                            resolve(res)
+                        } else {
+                            reject(res)
+                        }
+                    })
+                    .catch((err) => {
+                        reject(err)
+                    })
             })
         },
+
         onRemove(file) {
             this.$axios
                 .post(this.route('admin.files.destroy', { id: 0 }), {
@@ -484,11 +746,17 @@ export default {
                     }
                 })
         },
+        isImage(fileName) {
+            if (!fileName) return false
+            const ext = fileName.toLowerCase().split('.').pop()
+            const imageExts = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'bmp', 'ico']
+            return imageExts.includes(ext)
+        },
         fileCheck(file) {
             const maxSize = this.isImage(file.name) ? MAX_SIZE_OF_IMAGE : MAX_SIZE_OF_VIDEO
             const fileSize = file.size / 1024 / 1024
 
-            return { valid: fileSize <= maxSize, maxSize }
+            return { valid: fileSize <= maxSize, maxSize: `${maxSize}MB` }
         },
         onChange(event) {
             if (this.timer) {
@@ -500,6 +768,10 @@ export default {
                 this.search = event.target.value
                 this.page = 1
                 this.fetchData = true
+                // Reset files when searching to show loading
+                if (this.search) {
+                    this.data.files = []
+                }
             }, 500)
         },
         createFolder(name) {
@@ -530,6 +802,7 @@ export default {
     },
 }
 </script>
+
 <style lang="scss" scoped>
 .left-from-sidebar {
     left: var(--sidebar-width);
@@ -546,3 +819,4 @@ export default {
     left: var(--sidebar-width);
 }
 </style>
+

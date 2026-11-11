@@ -20,6 +20,18 @@ class ProjectController extends Controller
         return 'Projects';
     }
 
+    private function beforeStore($request, $rules)
+    {
+        $request->merge(['type' => Post::TYPE_PROJECT]);
+        return $rules;
+    }
+
+    private function beforeUpdate($request, $rules)
+    {
+        $request->merge(['type' => Post::TYPE_PROJECT]);
+        return $rules;
+    }
+
     private function beforeIndex($query)
     {
         return $query->where('type', Post::TYPE_PROJECT)

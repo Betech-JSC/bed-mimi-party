@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Support\Str;
+use Illuminate\Http\UploadedFile;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
 use Illuminate\Support\Facades\Storage;
@@ -157,15 +158,91 @@ class File
         $successFiles = [];
         $failureFiles = [];
 
+        if (!is_array($files) && !($files instanceof \Traversable)) {
+            $files = [$files];
+        }
+
         foreach ($files as $file) {
+            if (!$file) continue;
+
             $fileName = $file->getClientOriginalName();
 
             if ($this->fileValidation($file)) {
-                $filePath = $this->storage->putFileAs(
-                    $this->path,
-                    $file,
-                    $fileName
-                );
+                $mimeType = $file->getMimeType();
+                $extension = strtolower($file->getClientOriginalExtension());
+                $convertibleMimes = ['image/jpeg', 'image/png', 'image/bmp', 'image/x-ms-bmp', 'image/jpg'];
+                $convertibleExts = ['jpg', 'jpeg', 'png', 'bmp'];
+
+                $shouldConvertToWebp = in_array($mimeType, $convertibleMimes) || in_array($extension, $convertibleExts);
+
+                if ($shouldConvertToWebp) {
+                    try {
+                        $image = Image::make($file->getRealPath());
+
+                        $maxDimension = 3000;
+                        if ($image->width() > $maxDimension || $image->height() > $maxDimension) {
+                            $image->resize($maxDimension, $maxDimension, function ($constraint) {
+                                $constraint->aspectRatio();
+                                $constraint->upsize();
+                            });
+                        }
+
+                        $targetBytes = 300 * 1024; // 300 KB
+                        $quality = 90;
+                        $minQuality = 20;
+                        $attempts = 0;
+                        $maxAttempts = 8;
+
+                        $contents = (string) $image->encode('webp', $quality);
+
+                        while (strlen($contents) > $targetBytes && $quality > $minQuality && $attempts < $maxAttempts) {
+                            $attempts++;
+                            $quality = max($minQuality, $quality - 10);
+                            $contents = (string) $image->encode('webp', $quality);
+
+                            if (strlen($contents) > $targetBytes && $quality <= $minQuality) {
+                                $image->resize(
+                                    intval($image->width() * 0.9),
+                                    intval($image->height() * 0.9),
+                                    function ($constraint) {
+                                        $constraint->aspectRatio();
+                                        $constraint->upsize();
+                                    }
+                                );
+                                $contents = (string) $image->encode('webp', $quality);
+                            }
+                        }
+
+                        $originalName = pathinfo($fileName, PATHINFO_FILENAME);
+                        $webpFileName = $originalName . '.webp';
+                        $targetPath = trim($this->path, '/') === '' ? $webpFileName : trim($this->path, '/') . '/' . $webpFileName;
+
+                        $stored = $this->storage->put($targetPath, $contents);
+                        if ($stored) {
+                            $filePath = $targetPath;
+                        } else {
+                            $filePath = $this->storage->putFileAs(
+                                $this->path,
+                                $file,
+                                $fileName
+                            );
+                        }
+                    } catch (\Throwable $e) {
+                        logger()->error('Convert to webp failed: ' . $e->getMessage());
+                        $filePath = $this->storage->putFileAs(
+                            $this->path,
+                            $file,
+                            $fileName
+                        );
+                    }
+                } else {
+                    $filePath = $this->storage->putFileAs(
+                        $this->path,
+                        $file,
+                        $fileName
+                    );
+                }
+
                 $successFiles[] = static_url($filePath, [], false);
 
                 if (!$filePath) {

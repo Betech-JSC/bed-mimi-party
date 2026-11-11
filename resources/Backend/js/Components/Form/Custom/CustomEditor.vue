@@ -1,5 +1,6 @@
 <template>
     <Tiny
+        api-key="kk8b71st8g7se8kra0do3fzsckuxv92i3y7p7onfzof65jwh"
         :init="{ ...initConfig, height: size }"
         :modelValue="modelValue"
         @update:modelValue="$emit('change', $event)"
@@ -7,7 +8,10 @@
 </template>
 
 <script>
+import templates from '@Core/templates'
+import { compressImageToWebp } from '@Core/Utils/imageCompressor'
 import Tiny from '@tinymce/tinymce-vue'
+const MAX_FILE_SIZE = 50 // 50MB ceiling (nâng từ 5MB cũ lên 50MB)
 
 export default {
     components: {
@@ -49,40 +53,64 @@ export default {
     data() {
         return {
             initConfig: {
-                base_url: '/tinymce', // Đường dẫn đến thư mục TinyMCE
-                suffix: '.min', // Hậu tố file
                 plugins:
                     'template importcss searchreplace autolink autosave save image link media table lists wordcount charmap quickbars code fullscreen codesample code',
+                quickbars_insert_toolbar: 'filemanager quicktable',
+                menubar: 'file edit view insert format tools table',
                 toolbar:
                     'undo redo formatselect bold italic forecolor template fullscreen link filemanager image alignleft aligncenter alignright alignjustify bullist numlist removeformat code',
-                menubar: 'file edit view insert format tools table',
-                skin: 'oxide', // Skin mặc định
-                content_css: 'default', // Giao diện mặc định
-                height: 600, // Chiều cao mặc định
-                quickbars_insert_toolbar: 'filemanager quicktable',
+
+                templates,
+                toolbar_sticky: this.field?.size === 'lg',
+                autosave_ask_before_unload: false,
+                autosave_interval: '30s',
+                autosave_prefix: '{path}{query}-{id}-',
+                autosave_restore_when_empty: false,
+                autosave_retention: '2m',
+                image_advtab: true,
+                height: 600,
+                image_caption: true,
                 quickbars_selection_toolbar: 'bold italic quicklink h2 h3 blockquote quickimage quicktable',
+                noneditable_noneditable_class: 'mceNonEditable',
                 toolbar_mode: 'sliding',
                 contextmenu: 'link image imagetools table',
+                skin: 'oxide',
+                content_css: 'default',
+                // content_style: "image { max-width: inherit; }",
+                // content_css:
+                //     "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css",
+                importcss_append: true,
+                content_style: 'img { max-width: 100%; }',
                 paste_data_images: true,
                 convert_urls: false,
                 images_dataimg_filter: function (img) {
                     return !img.hasAttribute('internal-blob')
                 },
-                images_upload_handler(blobInfo, progress) {
+                async images_upload_handler(blobInfo, progress) {
+                    const rawBlob = blobInfo.blob()
+                    if (rawBlob && rawBlob.size > MAX_FILE_SIZE * 1024 * 1024) {
+                        const errMsg = `Dung lượng ảnh vượt quá ${MAX_FILE_SIZE}MB. Vui lòng chọn ảnh nhỏ hơn.`
+                        alert(errMsg)
+                        return Promise.reject(errMsg)
+                    }
                     const data = new FormData()
-                    const file = new File([blobInfo.blob()], blobInfo.filename())
-                    data.append('files[]', file)
-
-                    // Upload file lên server
-                    return fetch('/upload', {
-                        method: 'POST',
-                        body: data,
+                    const file = new File([rawBlob], blobInfo.filename(), {
+                        type: rawBlob.type || 'image/png',
                     })
-                        .then((response) => response.json())
-                        .then((result) => result.url) // Trả về URL hình ảnh
+                    const compressedFile = await compressImageToWebp(file)
+                    data.append('files[]', compressedFile)
+                    data.append('folder', window.location.pathname.split('/')[1])
+
+                    return (window.$axios || $axios).post(route('admin.files.store'), data).then((response) => {
+                        if (response.status === 200) {
+                            let path = response.data.successFiles[0]
+                            return path.includes('/static/') ? path : '/static' + path
+                        }
+                        return Promise.reject('Upload failed')
+                    })
                 },
+
                 setup: function (editor) {
-                    // Thêm nút File Manager
                     editor.ui.registry.addButton('filemanager', {
                         icon: 'gallery',
                         tooltip: 'File Manager',
@@ -110,10 +138,6 @@ export default {
                     { text: 'Bash', value: 'bash' },
                 ],
                 codesample_global_prismjs: true,
-                content_style: 'img { max-width: 100%; }',
-                autosave_ask_before_unload: false,
-                autosave_interval: '30s',
-                autosave_retention: '2m',
             },
         }
     },

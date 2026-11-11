@@ -78,7 +78,7 @@ export default {
         MarqueeWhite,
         ThumbnailModal,
     },
-    props: ['posts', 'services', 'projects'],
+    props: ['posts', 'services', 'projects', 'partners'],
     data() {
         return {
             isModalOpen: false,
@@ -121,29 +121,6 @@ export default {
                         Xây dựng hệ sinh thái dịch vụ tiệc "All in One": từ ý tưởng, thiết kế, trang trí, âm nhạc, biểu diễn cho đến vận hành. Đặt Minh bạch – Chất lượng – Riêng tư làm nền tảng trong mọi hoạt động.  Không ngừng hoàn thiện quy trình để mang đến sự hài lòng tuyệt đối – nơi tiêu chuẩn duy nhất mà chúng tôi hướng đến, chính là tiêu chuẩn của khách hàng.
                     `,
                 },
-            ],
-            partners: [
-                '/assets/images/demo/image-partner-1.png',
-                '/assets/images/demo/image-partner-2.png',
-                '/assets/images/demo/image-partner-3.png',
-                '/assets/images/demo/image-partner-4.png',
-                '/assets/images/demo/image-partner-5.png',
-                '/assets/images/demo/image-partner-6.png',
-                '/assets/images/demo/image-partner-7.png',
-                '/assets/images/demo/image-partner-8.png',
-                '/assets/images/demo/image-partner-9.png',
-                '/assets/images/demo/image-partner-10.png',
-                '/assets/images/demo/image-partner-11.png',
-                '/assets/images/demo/image-partner-12.png',
-                '/assets/images/demo/image-partner-1.png',
-                '/assets/images/demo/image-partner-2.png',
-                '/assets/images/demo/image-partner-3.png',
-                '/assets/images/demo/image-partner-4.png',
-                '/assets/images/demo/image-partner-5.png',
-                '/assets/images/demo/image-partner-8.png',
-                '/assets/images/demo/image-partner-9.png',
-                '/assets/images/demo/image-partner-11.png',
-                '/assets/images/demo/image-partner-12.png',
             ],
         }
     },
