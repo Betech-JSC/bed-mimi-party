@@ -3,7 +3,7 @@
         <BannerImage :banner="bannerData" classBanner="md:h-[400px] h-[350px] xl:h-[574px]" />
         <section class="py-[60px]">
             <div class="container space-y-10">
-                <h2 class="title-linear display-2 uppercase font-extrabold text-center">Dự án</h2>
+                <h2 class="title-linear display-2 uppercase font-extrabold text-center">{{ bannerData.title || 'Dự án' }}</h2>
                 <div v-if="projects.data && projects.data.length > 0" class="grid md:grid-cols-2">
                     <div
                         v-for="(itemProject, indexProject) in projects.data"
@@ -109,6 +109,7 @@ export default {
             return {
                 title: this.banner?.title || 'Dự án',
                 image: this.banner?.image?.url || this.banner?.image || '/assets/images/projects/bg-banner.jpg',
+                image_mobile: this.banner?.image_mobile?.url || this.banner?.image_mobile || this.banner?.image?.url || this.banner?.image || '/assets/images/projects/bg-banner.jpg',
             }
         },
 

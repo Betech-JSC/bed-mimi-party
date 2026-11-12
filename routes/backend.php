@@ -52,6 +52,7 @@ Route::localized(function () {
         Route::module(RoomController::class);
         Route::module(PromotionController::class);
         Route::module(GalleryController::class);
+        Route::post('projects/banner', [ProjectController::class, 'saveBanner'])->name('projects.banner.save');
         Route::module(ProjectController::class);
         Route::module(PartnerController::class);
     });

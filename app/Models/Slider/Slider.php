@@ -103,7 +103,8 @@ class Slider extends BaseModel
     public function imageDetail($image)
     {
         return [
-            'url' => isset($image['path']) ? static_url($image['path']) : null,
+            'url' => isset($image['path']) ? static_url($image['path']) : (is_string($image) ? static_url($image) : null),
+            'path' => $image['path'] ?? (is_string($image) ? $image : null),
             'alt' => $image['alt'] ?? strip_tags($this->title),
         ];
     }

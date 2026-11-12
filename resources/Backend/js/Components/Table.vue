@@ -66,6 +66,7 @@
                                 )
                             "
                         />
+                        <slot name="actions"></slot>
                     </div>
                     <span v-if="sortByDate" class="w-1/2">
                         <div class="field-row">
