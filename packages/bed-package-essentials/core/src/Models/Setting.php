@@ -18,6 +18,8 @@ class Setting extends Model
                 'general_business_name' => 'required',
                 'general_site_name' => 'nullable',
                 'general_email' => 'nullable',
+                // Chiều cao logo mục "Khách hàng tiêu biểu" (px), đọc ở SectionPartner.vue
+                'partner_logo_height' => 'nullable',
 
                 'general_phone' => 'nullable',
                 'general_fb_link' => 'nullable',

@@ -10,7 +10,28 @@ if (!function_exists('package_path')) {
 if (!function_exists('static_url')) {
     function static_url($path, $parameters = [], $absolute = true)
     {
-        if (!$path || str_contains($path, 'http')) return $path;
+        if (!$path) return $path;
+
+        // Một số dữ liệu cũ lưu nguyên object { path, url } thay vì chuỗi path
+        if (is_array($path)) {
+            $path = $path['path'] ?? $path['url'] ?? null;
+            if (!$path) return null;
+        }
+
+        if (!is_string($path)) return null;
+
+        // URL tuyệt đối / protocol-relative: giữ nguyên
+        if (str_contains($path, 'http') || str_starts_with($path, '//')) return $path;
+
+        // File nằm trong public/assets được phục vụ trực tiếp, KHÔNG đi qua route files.show.
+        // (Admin đã xử lý trường hợp này trong staticUrl() phía JS, trước đây frontend bị thiếu nên
+        //  sinh ra URL /static/assets/... => 404 => ảnh bị vỡ)
+        if (preg_match('#^/?assets/#i', $path)) {
+            return '/' . ltrim($path, '/');
+        }
+
+        // Chuẩn hoá dữ liệu cũ đã lưu kèm tiền tố /static/ để tránh /static//static/...
+        $path = preg_replace('#^/?static/#i', '', $path);
 
         if (!empty($parameters)) {
             $url = route('files.show') . '/' . $path . '?' . http_build_query($parameters);

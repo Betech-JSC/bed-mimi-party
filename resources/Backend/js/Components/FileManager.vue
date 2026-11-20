@@ -688,7 +688,12 @@ export default {
                         // mark error as 0 or special value
                         this.$set ? this.$set(this.uploadProgress, file.name, 0) : (this.uploadProgress[file.name] = 0)
                         // optionally show a message
-                        alert(this.tt('models.files.upload_failed') || `Upload failed: ${file.name}`)
+                        const failedNames = (err?.failed || []).join(', ')
+                        alert(
+                            (this.tt('models.files.upload_failed') || 'Upload failed') +
+                                ': ' +
+                                (failedNames || file.name)
+                        )
                     }
                 }
 
@@ -723,10 +728,13 @@ export default {
                         onUploadProgress: onProgress,
                     })
                     .then((res) => {
-                        if (res.status === 200) {
+                        // Server có thể trả 200 nhưng không lưu được file (sai quyền ghi, hết dung lượng...).
+                        // Trước đây lỗi này bị bỏ qua nên CMS tưởng upload thành công nhưng ảnh không tồn tại.
+                        const failed = res?.data?.failureFiles || []
+                        if (res.status === 200 && failed.length === 0) {
                             resolve(res)
                         } else {
-                            reject(res)
+                            reject({ response: res, failed })
                         }
                     })
                     .catch((err) => {

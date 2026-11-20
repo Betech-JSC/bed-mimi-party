@@ -282,12 +282,7 @@ class Post extends BaseModel
             ->map(fn($item) => $item->transform());
 
         $images = collect($this->images)
-            ->map(function ($item) {
-                return [
-                    'url' => static_url($item['path']) ?? null,
-                    'alt' => $item['alt'] ?? $this->title
-                ];
-            });
+            ->map(fn($item) => $this->getImageDetail($item));
 
         $data = [
             'id' => $this->id,
@@ -327,21 +322,11 @@ class Post extends BaseModel
     public function transformDetails($conditions = ['tags' => false])
     {
 
-        $images =  collect($this->images)
-            ->map(function ($item) {
-                return [
-                    'url' => static_url($item['path']) ?? null,
-                    'alt' => $item['alt'] ?? $this->title
-                ];
-            });
+        $images = collect($this->images)
+            ->map(fn($item) => $this->getImageDetail($item));
 
         $images_banner = collect($this->images_banner)
-            ->map(function ($item) {
-                return [
-                    'url' => static_url($item['path']) ?? null,
-                    'alt' => $item['alt'] ?? $this->title
-                ];
-            });
+            ->map(fn($item) => $this->getImageDetail($item));
 
         $categories = $this->categories
             ->where('status', self::STATUS_ACTIVE)
@@ -384,9 +369,22 @@ class Post extends BaseModel
 
     public function getImageDetail($image)
     {
+        $path = null;
+        $url = null;
+        $alt = null;
+
+        if (is_array($image)) {
+            $path = $image['path'] ?? null;
+            $url = $image['url'] ?? null;
+            $alt = $image['alt'] ?? null;
+        } elseif (is_string($image)) {
+            $path = $image;
+        }
+
         return [
-            'url' => isset($image['path']) ? static_url($image['path']) : null,
-            'alt' => $image['alt'] ?? $this->title,
+            // path là nguồn chuẩn, url là fallback cho dữ liệu cũ/ảnh nhập từ URL
+            'url' => $path ? static_url($path) : ($url ?: null),
+            'alt' => $alt ?: $this->title,
         ];
     }
 

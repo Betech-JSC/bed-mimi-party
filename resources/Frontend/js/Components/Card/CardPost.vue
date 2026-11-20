@@ -9,10 +9,11 @@
             class="aspect-w-7 aspect-h-5 relative overflow-hidden block"
         >
             <JPicture
-                :src="item.image.url || '/cover.jpg'"
-                :alt="item.image.alt || item.title || 'image card post'"
+                :src="item?.image?.url || '/cover.jpg'"
+                :alt="item?.image?.alt || item?.title || 'image card post'"
                 wrapperClass="picture-cover"
                 class="w-full h-full object-cover lg:group-hover:scale-105 duration-300 ease-in-out"
+                @error="onImageError"
             />
         </Link>
 
@@ -49,6 +50,21 @@
 export default {
     props: ['item'],
     methods: {
+        onImageError(event) {
+            // Ảnh trong DB có thể trỏ tới file đã bị xoá/đổi tên: hiển thị ảnh cover thay vì icon ảnh vỡ
+            const img = event?.target
+            if (!img || img.dataset.fallbackApplied) return
+
+            img.dataset.fallbackApplied = 'true'
+
+            // Phải bỏ các <source> của thẻ <picture> (JPicture sinh ra), nếu không trình duyệt
+            // vẫn tiếp tục dùng srcset cũ (?w=...) và ảnh vẫn vỡ dù đã đổi img.src.
+            img.closest('picture')
+                ?.querySelectorAll('source')
+                .forEach((source) => source.remove())
+
+            img.src = '/cover.jpg'
+        },
         formatDate(dateString) {
             // Convert '2025-09-05' to '05.09.2025'
             if (!dateString) return ''
