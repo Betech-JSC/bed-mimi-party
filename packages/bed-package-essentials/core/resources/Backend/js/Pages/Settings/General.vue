@@ -15,6 +15,12 @@
                         <Field v-model="form.general_email" :field="{
                             name: 'general_email',
                         }" />
+                        <Field v-model="form.partner_logo_height" :field="{
+                            type: 'number',
+                            name: 'partner_logo_height',
+                            label: 'Chiều cao logo khách hàng tiêu biểu (px)',
+                            help: 'Áp dụng cho mục “Khách hàng tiêu biểu” ở trang chủ. Để trống = 72px (mặc định), tối thiểu 24px, tối đa 200px.',
+                        }" />
                         <Field v-model="form.general_phone" :field="{
                             name: 'general_phone',
                             label: 'Phone',
